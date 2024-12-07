@@ -148,7 +148,7 @@
 
         case "edit":
         include "../../database/koneksi.php";
-        $edit = mysqli_query($db, "SELECT * FROM tb_data_mou_moa WHERE id = '$_GET[id_data_mou_moa]'");
+        $edit = mysqli_query($db, "SELECT * FROM tb_mou_moa WHERE id = '$_GET[id_mou_moa]'");
         $data_mahasiswa = mysqli_fetch_array($edit);
     ?>
 
