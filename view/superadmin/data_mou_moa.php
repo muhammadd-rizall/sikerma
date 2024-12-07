@@ -45,14 +45,14 @@
          <div class="mb-3">
             <label for="jurusan-terkait">Jurusan Terkait</label>
             <select name="jurusan-terkait" id="">
-                <option value="">Pilih Keterangan</option>
-                <option value="1">Teknologi Informasi</option>
-                <option value="2">Teknik Mesin</option>
-                <option value="2">Teknik Sipil</option>
-                <option value="2">Teknik Elektro</option>
-                <option value="2">Administrasi Niaga</option>
-                <option value="2">Akuntasi</option>
-                <option value="2">Bahasa Inggris</option>
+                <option value="1">Pilih Keterangan</option>
+                <option value="2">Teknologi Informasi</option>
+                <option value="3">Teknik Mesin</option>
+                <option value="4">Teknik Sipil</option>
+                <option value="5">Teknik Elektro</option>
+                <option value="6">Administrasi Niaga</option>
+                <option value="7">Akuntasi</option>
+                <option value="8">Bahasa Inggris</option>
             </select>
         </div>
 
