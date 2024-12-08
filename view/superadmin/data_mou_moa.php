@@ -148,7 +148,7 @@
 
         case "edit":
         include "../../database/koneksi.php";
-        $edit = mysqli_query($db, "SELECT * FROM tb_mou_moa WHERE id_mou_moa = '$_GET[id_mou_moa]'");
+        $edit = mysqli_query($koneksi, "SELECT * FROM tb_mou_moa WHERE id_mou_moa = '$_GET[id_mou_moa]'");
         $data_mahasiswa = mysqli_fetch_array($edit);
     ?>
 
@@ -248,7 +248,7 @@
             </form>
 
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-            
+
         </div>
 
     <?php
