@@ -1,11 +1,14 @@
 <?php
+
+        include '../../database/koneksi.php';
+
       $aksi = isset($_POST['aksi']) ? $_GET['aksi'] : 'list';
       switch ($aksi) :
           case "list": 
             
             // Query untuk mengambil data dari tabel `usulan_kerjasama`
-            $sql = "SELECT * FROM usulan_kerjasama ORDER BY id_usulan DESC";
-            $result = $conn->query($sql);
+            $sql = "SELECT * FROM tb_usulan_kerjasama ORDER BY id_usulan DESC";
+            $result = $koneksi->query($sql);
 ?>
 
             <h2>Daftar Usulan</h2>
@@ -56,3 +59,8 @@
                     ?>
                 </tbody>
             </table>
+
+    <?php
+        break;
+                endswitch;
+    ?>

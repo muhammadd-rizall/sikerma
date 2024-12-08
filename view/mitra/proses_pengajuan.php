@@ -15,20 +15,20 @@
 
         // Proses upload file dokumen
         $dokumen_usulan = $_FILES['dokumen_usulan']['name'];
-        $target_dir = "uploads/documents/";
+        $target_dir = "upload/documents/";
         $target_file = $target_dir . basename($dokumen_usulan);
         move_uploaded_file($_FILES['dokumen_usulan']['tmp_name'], $target_file);
 
         // Query untuk menyimpan data ke database
-        $sql = "INSERT INTO daftar_usulan (nama_instansi, nama_penjabat, nama_jabatan, nama_kontak_person, nomor_kontak, email, alamat, dokumen_usulan, status_permohonan)
+        $sql = "INSERT INTO tb_usulan_kerjasama (nama_instansi, nama_penjabat, nama_jabatan, nama_kontak_person, nomor_kontak, email, alamat, dokumen_usulan, status_permohonan)
                 VALUES ('$nama_instansi', '$nama_penjabat', '$nama_jabatan', '$nama_kontak_person', '$nomor_kontak', '$email', '$alamat', '$dokumen_usulan', '$status_permohonan')";
 
-        if ($conn->query($sql) === TRUE) {
+        if ($koneksi->query($sql) === TRUE) {
             // Redirect ke halaman daftar_usulan.php
-            header("Location: daftar_usulan.php");
+            header("Location: ../superadmin/daftar_usulan.php");
             exit();
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>" . $koneksi->error;
         }
     }
 
