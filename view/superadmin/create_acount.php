@@ -35,7 +35,7 @@
                                 <td><?= $dataUser['level'] ?></td>
                                 <td>
                                     <a href="index.php?p=mhs&aksi=edit&id_edit=<?= $dataUser['id_user'] ?>" class="btn btn-warning">Edit</a>
-                                    <a href="proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataUser['id_user'] ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data?')">Hapus</a>
+                                    <a href="proses_acount.php?proses=delete&id_hapus=<?= $dataUser['id_user'] ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data?')">Hapus</a>
                                 </td>
                             </tr>
                    <?php
@@ -49,14 +49,14 @@
    <?php
         break;
 
-        case "input";
+        case "input":
    ?>
 
                 <!-- form user -->
                 <div class="container">
                 <h2 class="text-center">Form Create Akun</h2>
                 
-                <form action="proses_data_mou_moa.php?proses=insert" method="post">
+                <form action="proses_acount.php?proses=insert" method="post">
                         <!-- nama user -->
                         <div class="mb-3">
                                 <label for="nama-user">Nama User</label>
@@ -109,7 +109,7 @@
         <div class="container">
                 <h2 class="text-center">Form Create Akun</h2>
                 
-                <form action="proses_data_mou_moa.php?proses=insert" method="post">
+                <form action="proses_acount.php?proses=update" method="post">
                 <input type="number" name="id" id="id" class="form-control" value="<?=$dataUser['id_user'] ?>" hidden>
                         
                         <!-- nama user -->

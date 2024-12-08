@@ -56,7 +56,7 @@
         <?php
         break;
 
-        case "input";
+        case "input":
         ?>
                 <!-- form data mitra -->
                 <div class="container mt-5">
