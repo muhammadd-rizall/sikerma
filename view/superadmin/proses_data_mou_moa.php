@@ -25,6 +25,7 @@
                 echo "<script>window.location='index.php?p=matakuliah'</script>";
             }
         }
+    }
 
         else if ($_GET['proses'] == "update") {
             include "../../database/koneksi.php";

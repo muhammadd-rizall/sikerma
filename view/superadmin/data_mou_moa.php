@@ -50,7 +50,7 @@
                                 </td>
                                 <td>
                                     <a href="index.php?p=mhs&aksi=edit&id_edit=<?= $dataMouMoa['nim'] ?>" class="btn btn-warning">Edit</a>
-                                    <a href="proses_mahasiswa.php?proses=delete&id_hapus=<?= $dataMouMoa['nim'] ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data?')">Hapus</a>
+                                    <a href="proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataMouMoa['id_mou_moa'] ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data?')">Hapus</a>
                                 </td>
                             </tr>
                         <?php
@@ -70,7 +70,7 @@
         <!-- form tambah data Mou/moa -->
         <div class="conatiner mt-5">
             <h2 class="text-center">Form Mou / Moa</h2>
-            <form action="">
+            <form action="proses_data_mou_moa.php?proses=insert" method="post" enctype="multipart/form-data" >
                 <!-- nomor mou/moa -->
                 <div class="mb-3">
                     <label for="nomor-mou-moa"> Nomor Mou/Moa</label>
@@ -138,7 +138,7 @@
                         <input type="file" name="file" id="file" class="form-control"  accept=".pdf,.doc,.docx,.xls,.xlsx" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 
             </form>
         </div>
@@ -148,15 +148,15 @@
 
         case "edit":
         include "../../database/koneksi.php";
-        $edit = mysqli_query($db, "SELECT * FROM tb_mou_moa WHERE id = '$_GET[id_mou_moa]'");
+        $edit = mysqli_query($db, "SELECT * FROM tb_mou_moa WHERE id_mou_moa = '$_GET[id_mou_moa]'");
         $data_mahasiswa = mysqli_fetch_array($edit);
     ?>
 
 
         <!-- edit data mou/moa -->
         <div class="conatiner mt-5">
-            <h2 class="text-center">Form Mou / Moa</h2>
-            <form action="" method="post" enctype="multipart/form-data">
+            <h2 class="text-center">Edit Mou / Moa</h2>
+            <form action="proses_data_mou_moa.php?proses=update" method="post" enctype="multipart/form-data">
                         
                 <!-- ID -->
                 <input type="number" name="id" id="id" class="form-control" value="<?=$dataMouMoa['id'] ?>" hidden>
@@ -246,6 +246,9 @@
                 </div>
 
             </form>
+
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            
         </div>
 
     <?php
