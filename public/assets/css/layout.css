@@ -1,0 +1,138 @@
+/* Mengimpor Font */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+/* Atur ukuran font dasar */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+/* Atur area header dengan overlay */
+.header-area.overlay {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(0, #ff7e5f, #feb47b, #765285);
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+}
+
+/* Gaya navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease-in-out;
+  background-color: transparent;
+  
+}
+
+.navbar .navbar-brand {
+  font-family: 'Lobster', cursive;
+  font-size: 2.5rem;
+  color: #fff;
+  text-decoration: none;
+  
+}
+
+.navbar .navbar-nav .nav-link {
+  font-size: 1.6rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+  color: #351C4D;
+}
+
+/* Navbar responsif */
+.navbar-toggler {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.navbar-toggler .menu-icon-bar {
+  display: block;
+  width: 25px;
+  height: 2px;
+  margin: 5px auto;
+  background-color: #fff;
+  transition: transform 0.3s ease-in;
+}
+
+
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  height: 100%;
+  color: #fff;
+  padding: 10px;
+}
+
+.banner img.logopoli {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.banner h1 {
+  font-weight: 700;
+  font-size: 3.5rem;
+  margin: 10px 0;
+}
+
+.btn.btn-primary {
+  display: inline-block;
+  background-color: #351C4D;
+  color: #fff;
+  font-size: 1.6rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease-in;
+  margin-top: 5px;
+  border-radius: 20px;
+}
+
+.btn.btn-primary:hover {
+ background-color: #765285;
+}
+
+/* Media Queries untuk tampilan lebih responsif */
+@media screen and (max-width: 768px) {
+  .banner h1 {
+    font-size: 3rem;
+  }
+  .btn.btn-primary {
+    font-size: 1.4rem;
+  }
+  .navbar-nav {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .banner h1 {
+    font-size: 2.5rem;
+  }
+  .btn.btn-primary {
+    font-size: 1.2rem;
+  }
+}
