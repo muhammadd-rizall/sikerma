@@ -12,12 +12,12 @@
                     <th>No</th>
                     <th>Nomor Mou/Moa</th>
                     <th>Jenis Kerjasama</th>
+                    <th>Topik Kerjasama</th>
                     <th>Jangka Waktu</th>
                     <th>Awal Kerjasama</th>
                     <th>Akhir Kerjasama</th>
-                    <th>Keterangan</th>
                     <th>Jurusan Terkait</th>
-                    <th>Topik Kerjasama</th>
+                    <th>Keterangan</th>                   
                     <th>File Dokumen</th>
                     <th>Aksi</th>
                 </tr>
@@ -35,18 +35,15 @@
                                 <td><?= $no ?></td>
                                 <td><?= $dataMouMoa['no_mou_moa'] ?></td>
                                 <td><?= $dataMouMoa['jenis_kerjasama'] ?></td>
+                                <td><?= $dataMouMoa['topik_kerjasama'] ?></td>
                                 <td><?= $dataMouMoa['jangka_waktu'] ?></td>                       
                                 <td><?= $dataMouMoa['awal_kerjasama'] ?></td>
                                 <td><?= $dataMouMoa['akhir_kerjasama'] ?></td>
-                                <td><?= $dataMouMoa['keterangan'] ?></td>
                                 <td><?= $dataMouMoa['jurusan_terkait'] ?></td>
-                                <td><?= $dataMouMoa['topik_kerjasama'] ?></td>
+                                <td><?= $dataMouMoa['keterangan'] ?></td>          
                                 <td>
-                                    <?php if ($dataMouMoa['file_dokumen']): ?>
-                                    <a href="uploads/documents/<?= $dataMouMoa['file_dokumen'] ?>" target="_blank">Lihat Dokumen</a>
-                                    <?php else: ?>
-                                    Belum diunggah
-                                    <?php endif; ?>
+                                <a href="../../upload/document/<?php echo htmlspecialchars($dataMouMoa['file_dokumen']); ?>" target="_blank">Lihat</a>
+
                                 </td>
                                 <td>
                                     <a href="index.php?p=mhs&aksi=edit&id_edit=<?= $dataMouMoa['nim'] ?>" class="btn btn-warning">Edit</a>
@@ -83,6 +80,12 @@
                     <input type="text" name="Jenis kerjasama" id="Jenis kerjasama" class="from-control" required>
                 </div>
 
+                <!-- topik kerjasama -->
+                <div class="mb-3">
+                    <label for="topik-kerjasama">Topik Kerjasama</label>
+                    <input type="text" name="topik-kerjasama" id="topik-kerjasama" class="from-control" required>
+                </div>
+
                 <!-- jangaka  waktu -->
                 <div class="mb-3">
                     <label for="Jangka Waktu"> Jangka Waktu</label>
@@ -99,19 +102,6 @@
                 <div class="mb-3">
                     <label for="akhir kerjasama"> Akhir Kerjasama</label>
                     <input type="date" name="akhir kerjasama" id="akhir kerjasama" class="from-control" required>
-                </div>
-
-                <!-- keterangan -->
-                <div class="mb-3">
-                    <label for="Keterangan"> Keterangan</label>
-                    <select name="keteranagn" id="">
-                        <option value="">Pilih Keterangan</option>
-                        <option value="1">Aktif</option>
-                        <option value="2">Tidak Aktif</option>
-                        <option value="3">kadaluarsa</option>
-                        <option value="4">Di Perpanjang</option>
-                        <option value="4">Dalam Perpanjangan</option>
-                    </select>
                 </div>
 
                 <!-- jurusan terkait -->
@@ -147,10 +137,17 @@
                         </div>
                  </div>
 
-                <!-- topik kerjasama -->
+                <!-- keterangan -->
                 <div class="mb-3">
-                    <label for="topik-kerjasama">Topik Kerjasama</label>
-                    <input type="text" name="topik-kerjasama" id="topik-kerjasama" class="from-control" required>
+                    <label for="Keterangan"> Keterangan</label>
+                    <select name="keteranagn" id="">
+                        <option value="">Pilih Keterangan</option>
+                        <option value="1">Aktif</option>
+                        <option value="2">Tidak Aktif</option>
+                        <option value="3">kadaluarsa</option>
+                        <option value="4">Di Perpanjang</option>
+                        <option value="4">Dalam Perpanjangan</option>
+                    </select>
                 </div>
 
                 <!-- upload dokumen -->
@@ -195,6 +192,12 @@
                     <input type="text" name="Jenis kerjasama" id="Jenis kerjasama" class="from-control" value="<?=$dataMouMoa['jenis_kerjasama'] ?>" required>
                 </div>
 
+                <!-- topik kerjasama -->
+                <div class="mb-3">
+                    <label for="topik-kerjasama">Topik Kerjasama</label>
+                    <input type="text" name="topik-kerjasama" id="topik-kerjasama" class="from-control" value="<?=$dataMouMoa['topik_kerjasama'] ?>" required>
+                </div>
+
                 <!-- jangaka  waktu -->
                 <div class="mb-3">
                     <label for="Jangka Waktu">Jangka Waktu</label>
@@ -212,25 +215,6 @@
                     <label for="akhir kerjasama">Akhir Kerjasama</label>
                     <input type="date" name="akhir kerjasama" id="akhir kerjasama" class="from-control" value="<?=$dataMouMoa['akhir_kerjasama'] ?>" required>
                 </div>
-
-                <!-- keterangan -->
-                <div class="mb-3">
-                    <label for="Keterangan">Keterangan</label>
-                        <select name="keterangan" id="keterangan" class="form-control">
-                            <option value="">Pilih Keterangan</option>
-                                <?php
-                                    // Mengambil data dari database
-                                        include '../../database/koneksi.php';
-                                        $query = mysqli_query($koneksi, "SELECT keterangan FROM tb_mou_moa");
-                                        while ($row = mysqli_fetch_assoc($query)) {
-                                    ?>
-                                            <option value="<?= $row['id_mou_moa'] ?>"><?= $row['keterangan'] ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                        </select>
-                    </div>
-
 
                 <!-- jurusan terkait -->
                 <div class="mt-3 row">
@@ -269,12 +253,23 @@
                         </div>
                  </div>
 
-
-                <!-- topik kerjasama -->
+                <!-- keterangan -->
                 <div class="mb-3">
-                    <label for="topik-kerjasama">Topik Kerjasama</label>
-                    <input type="text" name="topik-kerjasama" id="topik-kerjasama" class="from-control" value="<?=$dataMouMoa['topik_kerjasama'] ?>" required>
-                </div>
+                    <label for="Keterangan">Keterangan</label>
+                        <select name="keterangan" id="keterangan" class="form-control">
+                            <option value="">Pilih Keterangan</option>
+                                <?php
+                                    // Mengambil data dari database
+                                        include '../../database/koneksi.php';
+                                        $query = mysqli_query($koneksi, "SELECT keterangan FROM tb_mou_moa");
+                                        while ($row = mysqli_fetch_assoc($query)) {
+                                    ?>
+                                            <option value="<?= $row['id_mou_moa'] ?>"><?= $row['keterangan'] ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                        </select>
+                    </div>
 
                 <!-- upload dokumen -->
                 <div class="mb-3">
