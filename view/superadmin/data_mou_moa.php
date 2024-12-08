@@ -92,13 +92,13 @@
                 <!-- awal kerejasama -->
                 <div class="mb-3">
                     <label for="awal kerjasama"> Awal Kerjasama</label>
-                    <input type="text" name="awal kerjasama" id="awal kerjasama" class="from-control" required>
+                    <input type="date" name="awal kerjasama" id="awal kerjasama" class="from-control" required>
                 </div>
 
                 <!-- akhir kerjasama -->
                 <div class="mb-3">
                     <label for="akhir kerjasama"> Akhir Kerjasama</label>
-                    <input type="text" name="akhir kerjasama" id="akhir kerjasama" class="from-control" required>
+                    <input type="date" name="akhir kerjasama" id="akhir kerjasama" class="from-control" required>
                 </div>
 
                 <!-- keterangan -->
@@ -108,23 +108,44 @@
                         <option value="">Pilih Keterangan</option>
                         <option value="1">Aktif</option>
                         <option value="2">Tidak Aktif</option>
+                        <option value="3">kadaluarsa</option>
+                        <option value="4">Di Perpanjang</option>
+                        <option value="4">Dalam Perpanjangan</option>
                     </select>
                 </div>
 
                 <!-- jurusan terkait -->
-                <div class="mb-3">
+                <div class="mt-3 row">
                     <label for="jurusan-terkait">Jurusan Terkait</label>
-                    <select name="jurusan-terkait" id="">
-                        <option value="">Pilih Keterangan</option>
-                        <option value="1">Teknologi Informasi</option>
-                        <option value="2">Teknik Mesin</option>
-                        <option value="3">Teknik Sipil</option>
-                        <option value="4">Teknik Elektro</option>
-                        <option value="5">Administrasi Niaga</option>
-                        <option value="6">Akuntasi</option>
-                        <option value="7">Bahasa Inggris</option>
-                    </select>
-                </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknologi-informasi" class="form-check-input" value="teknologi-informasi">
+                            <label for="teknologi-informasi" class="form-check-label">Teknologi Informasi</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknik-mesin" class="form-check-input" value="teknik-mesin">
+                            <label for="teknik-mesin" class="form-check-label">Teknik Mesin</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknik-sipil" class="form-check-input" value="teknik-sipil">
+                            <label for="teknik-sipil" class="form-check-label">Teknik Sipil</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknik-elektro" class="form-check-input" value="teknik-elektro">
+                            <label for="teknik-elektro" class="form-check-label">Teknik Elektro</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="administrasi-niaga" class="form-check-input" value="administrasi-niaga">
+                            <label for="administrasi-niaga" class="form-check-label">Administrasi Niaga</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="akuntasi" class="form-check-input" value="akuntasi">
+                            <label for="akuntasi" class="form-check-label">Akuntansi</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="general" class="form-check-input" value="general">
+                            <label for="general" class="form-check-label">General</label>
+                        </div>
+                 </div>
 
                 <!-- topik kerjasama -->
                 <div class="mb-3">
@@ -150,6 +171,7 @@
         include "../../database/koneksi.php";
         $edit = mysqli_query($koneksi, "SELECT * FROM tb_mou_moa WHERE id_mou_moa = '$_GET[id_mou_moa]'");
         $dataMouMoa = mysqli_fetch_array($edit);
+        $jurusan_terkait = explode(", ", $dataMouMoa['jurusan_terkait']);
     ?>
 
 
@@ -182,13 +204,13 @@
                 <!-- awal kerejasama -->
                 <div class="mb-3">
                     <label for="awal kerjasama">Awal Kerjasama</label>
-                    <input type="text" name="awal kerjasama" id="awal kerjasama" class="from-control" value="<?=$dataMouMoa['awal_kerjasama'] ?>" required>
+                    <input type="date" name="awal kerjasama" id="awal kerjasama" class="from-control" value="<?=$dataMouMoa['awal_kerjasama'] ?>" required>
                 </div>
 
                 <!-- akhir kerjasama -->
                 <div class="mb-3">
                     <label for="akhir kerjasama">Akhir Kerjasama</label>
-                    <input type="text" name="akhir kerjasama" id="akhir kerjasama" class="from-control" value="<?=$dataMouMoa['akhir_kerjasama'] ?>" required>
+                    <input type="date" name="akhir kerjasama" id="akhir kerjasama" class="from-control" value="<?=$dataMouMoa['akhir_kerjasama'] ?>" required>
                 </div>
 
                 <!-- keterangan -->
@@ -202,7 +224,7 @@
                                         $query = mysqli_query($koneksi, "SELECT keterangan FROM tb_mou_moa");
                                         while ($row = mysqli_fetch_assoc($query)) {
                                     ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['keterangan'] ?></option>
+                                            <option value="<?= $row['id_mou_moa'] ?>"><?= $row['keterangan'] ?></option>
                                         <?php
                                         }
                                         ?>
@@ -211,26 +233,41 @@
 
 
                 <!-- jurusan terkait -->
-                <div class="mb-3">
+                <div class="mt-3 row">
                     <label for="jurusan-terkait">Jurusan Terkait</label>
-                            <select name="jurusan-terkait" id="jurusan-terkait" class="form-control">
-                                <option value="">Pilih Jurusan</option>
-                                    <?php
-                                            // Sambungkan dengan database Anda
-                                                include '../../database/koneksi.php';
-                
-                                            // Query untuk mengambil data jurusan dari database
-                                                $query = mysqli_query($koneksi, "SELECT jurusan_terkait FROM tb_mou_moa");
-                                                
-                                            // Perulangan untuk menampilkan setiap opsi
-                                                while ($row = mysqli_fetch_assoc($query)) {
-                                        ?>
-                                                    <option value="<?= $row['id'] ?>"><?= $row['jurusan_terkait'] ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                </select>
-                    </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknologi-informasi" class="form-check-input" value="teknologi-informasi" <?php if (in_array("teknologi-informasi", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="teknologi-informasi" class="form-check-label">Teknologi Informasi</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknik-mesin" class="form-check-input" value="teknik-mesin" <?php if (in_array("teknik-mesin", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="teknik-mesin" class="form-check-label">Teknik Mesin</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknik-sipil" class="form-check-input" value="teknik-sipil" <?php if (in_array("teknik-sipil", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="teknik-sipil" class="form-check-label">Teknik Sipil</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="teknik-elektro" class="form-check-input" value="teknik-elektro" <?php if (in_array("teknik-elektro", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="teknik-elektro" class="form-check-label">Teknik Elektro</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="administrasi-niaga" class="form-check-input" value="administrasi-niaga" <?php if (in_array("administrasi-niaga", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="administrasi-niaga" class="form-check-label">Administrasi Niaga</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="akuntasi" class="form-check-input" value="akuntasi" <?php if (in_array("akuntasi", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="akuntasi" class="form-check-label">Akuntansi</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="bahasa-inggris" class="form-check-input" value="bahasa-inggris" <?php if (in_array("bahasa-inggris", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="bahasa-inggris" class="form-check-label">Bahasa Inggris</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" name="jurusan_terkait[]" id="general" class="form-check-input" value="general" <?php if (in_array("general", $jurusan_terkait)) echo "checked" ?>>
+                            <label for="general" class="form-check-label">General</label>
+                        </div>
+                 </div>
 
 
                 <!-- topik kerjasama -->
