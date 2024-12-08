@@ -11,7 +11,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kegiatan</th>
-                            <th>Deskripsi Kegiatan</th>
+                            <th>Deskripsimm Kegiatan</th>
                             <th>Dokumentasi</th>
                             <th>Aksi</th>
                         </tr>
