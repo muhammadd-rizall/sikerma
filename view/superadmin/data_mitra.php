@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
 
-                    <>
+                    <tbody>
                         <?php
                             $conn = include '../../database/koneksi.php';
                         
