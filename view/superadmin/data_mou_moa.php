@@ -149,7 +149,7 @@
         case "edit":
         include "../../database/koneksi.php";
         $edit = mysqli_query($koneksi, "SELECT * FROM tb_mou_moa WHERE id_mou_moa = '$_GET[id_mou_moa]'");
-        $data_mahasiswa = mysqli_fetch_array($edit);
+        $dataMouMoa = mysqli_fetch_array($edit);
     ?>
 
 
@@ -159,7 +159,7 @@
             <form action="proses_data_mou_moa.php?proses=update" method="post" enctype="multipart/form-data">
                         
                 <!-- ID -->
-                <input type="number" name="id" id="id" class="form-control" value="<?=$dataMouMoa['id'] ?>" hidden>
+                <input type="number" name="id" id="id" class="form-control" value="<?=$dataMouMoa['id_mou_moa'] ?>" hidden>
 
                 <!-- nomor mou/moa -->
                 <div class="mb-3">
