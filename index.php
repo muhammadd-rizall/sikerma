@@ -1,88 +1,99 @@
+<?php
+// Data simulasi
+$mou_count = 12;
+$moa_count = 8;
+$ia_count = 5;
+$statistik = [10, 20, 30, 40, 50, 60, 70];
+$bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/css/index.css">
-    <title>Improved Sidebar Layout</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard SIKERMA</title>
+  <link rel="stylesheet" href="../../public/assets/css/index.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
 
+  </style>
 </head>
 <body>
-<div id="viewport">
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <header>My App</header>
-        <ul class="nav">
-            <li>
-                <a href="#">
-                    <i class="material-icons">dashboard</i> Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="material-icons">link</i> Shortcuts
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="material-icons">widgets</i> Overview
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="material-icons">event</i> Events
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="material-icons">info</i> About
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="material-icons">settings</i> Services
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="material-icons">contact_mail</i> Contact
-                </a>
-            </li>
-        </ul>
+<div class="sidebar" id="sidebar">
+  <div class="logo d-flex align-items-center">
+    <img src="../../public/assets/img/pnp.png" alt="Logo" class="logo-img">
+    <div class="logo-text ms-2">
+      <h3>SIKERMA</h3>
+      <p>Sistem Manajemen Kerjasama</p>
     </div>
+  </div>
+  <hr style="border-color: rgba(255, 255, 255, 3.2);">
 
-    <!-- Content -->
-    <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" id="sidebarToggle">
-                <i class="material-icons">menu</i>
-            </button>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="material-icons text-danger">notifications</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Test User</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="container-fluid">
-            <h1>Welcome to My App</h1>
-            <p>Ensure all page content is within the <code>#content</code> section for proper layout.</p>
-        </div>
-    </div>
+  <!-- Menu Items -->
+  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+    <i class="fas fa-home me-2"></i> <span class="menu-text">Home</span>
+  </a>
+  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+    <i class="fas fa-database me-2"></i> <span class="menu-text">Mengelola Data</span>
+  </a>
+  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+    <i class="fas fa-list me-2"></i> <span class="menu-text">Daftar Usulan Kerja Sama</span>
+  </a>
+  <a href="#" class="menu-item text-white d-flex align-items-center mb-4">
+    <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Pengajuan Kerja Sama</span>
+  </a>
+
+  <hr style="border-color: rgba(255, 255, 255, 5.2); margin-top: 200px;">
+
+  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+    <i class="fas fa-envelope me-2"></i> <span class="menu-text">Message</span>
+  </a>
+  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+    <i class="fas fa-phone-alt me-2"></i> <span class="menu-text">Contact Us</span>
+  </a>
+  <a href="#" class="menu-item text-white d-flex align-items-center">
+    <i class="fas fa-cog me-2"></i> <span class="menu-text">Settings</span>
+  </a>
 </div>
 
+<!-- Main Content -->
+<div class="content" id="mainContent">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center">
+        <button class="btn-toggle-btn me-2" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h4 class="mb-0">Dashboard</h4>
+      </div>
+      <div class="d-flex align-items-center">
+        <!-- Username with Icon -->
+        <div class="me-3 d-flex align-items-center">
+          <i class="fas fa-user-circle fs-4 me-2"></i> <!-- Font Awesome Icon -->
+          <span>Username</span>
+        </div>
+        <!-- Logout Icon -->
+        <a href="#" class="btn btn-outline-danger btn-sm">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Your main content here -->
+</div>
+
+
 <script>
-    document.getElementById('sidebarToggle').addEventListener('click', function () {
-        document.getElementById('sidebar').classList.toggle('active');
-    });
+  // JavaScript untuk toggle sidebar
+  document.getElementById('toggleSidebar').addEventListener('click', function () {
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('collapsed');
+  });
 </script>
 </body>
 </html>
