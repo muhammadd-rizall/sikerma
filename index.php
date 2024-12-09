@@ -12,7 +12,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard SIKERMA</title>
-  <link rel="stylesheet" href="../../public/assets/css/index.css">
+  <link rel="stylesheet" href="public/assets/css/index.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
 <body>
 <div class="sidebar" id="sidebar">
   <div class="logo d-flex align-items-center">
-    <img src="../../public/assets/img/pnp.png" alt="Logo" class="logo-img">
+    <img src="public/assets/img/pnp.png" alt="Logo" class="logo-img">
     <div class="logo-text ms-2">
       <h3>SIKERMA</h3>
       <p>Sistem Manajemen Kerjasama</p>
@@ -32,10 +32,10 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   <hr style="border-color: rgba(255, 255, 255, 3.2);">
 
   <!-- Menu Items -->
-  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+  <a href="index.php?p=home" class="menu-item text-white d-flex align-items-center mb-2">
     <i class="fas fa-home me-2"></i> <span class="menu-text">Home</span>
   </a>
-  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+  <a href="index.php?p=dataMouMoa" class="menu-item text-white d-flex align-items-center mb-2">
   <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mou/Moa</span>
   </a>
   <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
@@ -86,7 +86,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         <?php
         $page = isset($_GET['p']) ? $_GET['p'] : "home";
         if ($page == "home") include "home.php";
-        if ($page == "dataMouMoa") include "../../view/superadmin/data_mou_moa.php";
+        if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
         if ($page == "prodi") include "prodi.php";
         if ($page == "dosen") include "dosen.php";
         if ($page == "matakuliah") include "matakuliah.php";

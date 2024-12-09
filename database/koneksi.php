@@ -5,15 +5,19 @@
         $pass = "";
         $db   = "sikerma";
 
-        $koneksi = mysqli_connect( $host, $user, $pass, $db );
+        $conn = mysqli_connect( $host, $user, $pass, $db );
 
-        if(!$koneksi)
-        {
-            echo "gagal koneksi";
+        if (!$conn) {
+            die('Koneksi ke database gagal: ' . mysqli_connect_error());
         }
-        else 
-        {
-            echo "koneksi berhasil";
+        
+
+        if ($conn) {
+            echo "Koneksi database berhasil.";
+        } else {
+            die("Koneksi database gagal.");
         }
+
+        
 
 ?>
