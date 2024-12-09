@@ -69,8 +69,7 @@ switch ($aksi):
         <!-- form tambah data Mou/moa -->
         <div class="container mt-5">
              <h2 class="text-center">Form Mou / Moa</h2>
-             <form action="proses_data_mou_moa.php?proses=insert" method="POST" enctype="multipart/form-data">
-
+                <form action="../view/superadmin/proses_data_mou_moa.php?proses=insert" method="POST" enctype="multipart/form-data">
                     <!-- nomor mou/moa -->
                     <div class="mb-3">
                         <label for="no_mou_moa"> Nomor Mou/Moa</label>
