@@ -20,10 +20,10 @@
                 </thead>
             <tbody>
                         <?php
-                        $conn = include '../../database/koneksi.php';
+                         include '../../database/koneksi.php';
                         
                         $no = 1;
-                        $ambil = mysqli_query($koneksi, "SELECT * FROM tb_user");
+                        $ambil = mysqli_query($conn, "SELECT * FROM tb_user");
                         while ($dataUser = mysqli_fetch_array($ambil)) :
                         ?>
                                <tr>

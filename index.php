@@ -1,4 +1,12 @@
 <?php
+  session_start();
+    if(!isset($_SESSION['login']) ){
+      header("Location: view/general/landing_page.php");
+      exit;
+    }
+?>
+
+<?php
 // Data simulasi
 $mou_count = 12;
 $moa_count = 8;
@@ -99,7 +107,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
           <span>Username</span>
         </div>
         <!-- Logout Icon -->
-        <a href="#" class="btn btn-outline-danger btn-sm">
+        <a href="view/auth/logout.php" class="btn btn-outline-danger btn-sm">
           <i class="fas fa-sign-out-alt"></i> Logout
         </a>
       </div>

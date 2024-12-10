@@ -40,7 +40,7 @@
                     <img src="../../public/assets/img/pnp.png" alt="pnp" class="logopoli">
                     <h1>Sistem Informasi Kerjasama</h1>
                     <h1>Politeknik Negeri Padang</h1>
-                    <a href="#content" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i> Masuk</a>
+                    <a href="../auth/login.php" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i> Masuk</a>
                 </div>
             </div>
         </header>

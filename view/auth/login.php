@@ -1,28 +1,24 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
-session_start();
+    session_start();
 
-if(isset($_POST["username"]) ){
-    include 'koneksi.php';
-    $username = $_POST["username"];
-    $password = md5($_POST["password"]);
+    if(isset($_POST["username"]) ){
+        include "../../database/koneksi.php";
+        $username = $_POST["username"];
+        $password =  md5($_POST["password"]);
 
-    $query = mysqli_query($db, "SELECT * FROM user WHERE username ='$username' AND password='$password'");
+        $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username ='$username' AND password='$password'");
 
-    if(mysqli_num_rows($query) == 1){
-        $_SESSION['login'] = true; 
-        $_SESSION['user'] = $username;
-        $_SESSION['pw'] = $password;
-        header("Location: index.php");
-        exit();
-    } else {
-        echo "<script>Swal.fire({
-            icon: 'error',
-            title: 'Login Gagal',
-            text: 'Username atau Password Salah'
-        });</script>";
+        if(mysqli_num_rows($query) == 1){
+            $_SESSION['login'] = true; 
+            $_SESSION['user'] = $username;
+            $_SESSION['pw'] = $password;
+            header("Location:/index.php");
+            exit();
+        }else{
+            echo "<script>alert('Login Gagal')</script>";
+        }
     }
-}
 ?>
 
 <!doctype html>
@@ -30,55 +26,73 @@ if(isset($_POST["username"]) ){
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Signin Sikerma</title>
+    <title>Login Page</title>
+
     <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
       body {
-        background: linear-gradient(0, #ff7e5f, #feb47b, #765285);
-        height: 100vh;
+        background: linear-gradient(0deg, #ff7e5f, #feb47b, #765285);
+        min-height: 100vh;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+      }
+      .card {
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      }
+      .form-floating input {
+        border-radius: 20px;
+        padding: 10px 20px;
+      }
+      .btn-gradient {
+        background: #ff7e5f;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn-gradient:hover {
+        background: #feb47b;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card shadow-lg border-0">
-            <div class="card-header bg-primary text-white text-center">
-              <h4>Login Sikerma</h4>
-            </div>
-            <div class="card-body">
-              <form method="POST" action="" class="needs-validation" novalidate>
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
-                  <label for="floatingInput">Username</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
-                  <label for="floatingPassword">Password</label>
-                </div>
-                <div class="form-check text-start mb-3">
-                  <input class="form-check-input" type="checkbox" value="remember-me" id="rememberMe">
-                  <label class="form-check-label" for="rememberMe">Remember me</label>
-                </div>
-                <button class="btn btn-success w-100 py-2" type="submit">Login</button>
-              </form>
-              <p class="mt-3 text-center">
-                Belum punya akun? <a href="Registrasi.php" class="text-decoration-none">Sign Up</a>
-              </p>
-            </div>
-            <div class="card-footer text-muted text-center">
-              &copy; <?= date("Y") ?> Sikerma
-            </div>
+    <main class="form-signin w-100 m-auto">
+      <div class="card" style="max-width: 400px; margin: auto;">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <img src="../../public/assets/img/pnp.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
           </div>
+          <h3 class="text-center mb-4">Welcome Back</h3>
+          <form method="POST" action="">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" placeholder="Username" name="username" required>
+              <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" placeholder="Password" name="password" required>
+              <label for="floatingPassword">Password</label>
+            </div>
+            <button class="btn btn-gradient w-100 btn-lg" type="submit">Sign in</button>
+            <p class="mt-3 text-center">
+              Belum punya akun? 
+              <a href="../auth/register.php" class="text-decoration-none">Sign Up</a>
+            </p>
+          </form>
         </div>
       </div>
-    </div>
-
-    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
