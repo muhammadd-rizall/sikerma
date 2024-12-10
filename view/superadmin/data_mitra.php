@@ -1,10 +1,10 @@
 <?php
-      $aksi = isset($_POST['aksi']) ? $_GET['aksi'] : 'list';
+      $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
       switch ($aksi) :
           case "list":  
 ?>
                 <h2>Data Mitra</h2>
-                <a href="" class="btn btn-primary mb-2">Tambah Data Mitra</a>
+                <a href="?p=dataMitra&aksi=input" class="btn btn-primary mb-2">Tambah Data Mitra</a>
                 <table id="tabel-mitra" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -24,10 +24,10 @@
 
                     <tbody>
                         <?php
-                            $conn = include '../../database/koneksi.php';
+                            include ("../sikerma/database/koneksi.php");
                         
                             $no = 1;
-                            $ambil = mysqli_query($koneksi, "SELECT * FROM tb_mitra");
+                            $ambil = mysqli_query($conn, "SELECT * FROM tb_mitra");
                             while ($dataMitra = mysqli_fetch_array($ambil)) :
                        ?>
                                 <tr>
@@ -42,8 +42,11 @@
                                     <td><?= $dataMitra['negara']?></td>
                                     <td><?= $dataMitra['website']?></td>
                                     <td>
-                                        <a href="edit.php?id=<?= $dataMitra['id_mitra']?>" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="hapus.php?id=<?= $dataMitra['id_mitra']?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
+                                    <a href="../../index.php?p=dataMitra&aksi=edit&id_edit=<?= $dataMitra['id_mitra'] ?>" class="btn btn-warning">Edit</a>
+                                    <a href="/view/superadmin/proses_data_mitra.php?proses=delete&id_hapus=<?= $dataMitra['id_mitra'] ?>"
+                                         class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                         class="bi bi-trash"></i>
+                                    </a>
                                     </td>
                                 </tr>
                              <?php
@@ -61,137 +64,139 @@
                 <!-- form data mitra -->
                 <div class="container mt-5">
                         <h2 class="text-center">Form Data Mitra</h2>
-                        <form action="proses_data_mitra.php?proses=insert" method="post" >
-                                <!-- nama instansi -->
+                        <form action="../view/superadmin/proses_data_mitra.php?proses=insert" method="POST">
+                                <!-- Nama Instansi -->
                                 <div class="mb-3">
-                                        <label for="nama-instansi">Nama Instansi</label>
-                                        <input type="text" name="nama-instansi" id="nama-instansi" class="from-control" required>
+                                <label for="nama_instansi" class="form-label">Nama Instansi</label>
+                                <input type="text" name="nama_instansi" id="nama_instansi" class="form-control" required>
                                 </div>
 
-                                <!-- email -->
+                                <!-- Email -->
                                 <div class="mb-3">
-                                        <label for="email-instansi">Email Instansi</label>
-                                        <input type="email" name="email-instansi" id="email-instansi" class="from-control" required>
+                                <label for="email_instansi" class="form-label">Email Instansi</label>
+                                <input type="email" name="email_instansi" id="email_instansi" class="form-control" required>
                                 </div>
 
-                                <!-- bidang usaha -->
+                                <!-- Bidang Usaha -->
                                 <div class="mb-3">
-                                        <label for="bidang-usaha">Bidang Usaha</label>
-                                        <input type="text" name="bidang-usaha" id="bidang-usaha" class="from-control" required>
+                                <label for="bidang_usaha" class="form-label">Bidang Usaha</label>
+                                <input type="text" name="bidang_usaha" id="bidang_usaha" class="form-control" required>
                                 </div>
 
-                                <!-- nomor-telphone -->
+                                <!-- Nomor Telepon -->
                                 <div class="mb-3">
-                                        <label for="no-tlp">Nomor Telphone</label>
-                                        <input type="tel" name="no-tlp" id="no-tlp" class="from-control" required>
+                                <label for="no_telp" class="form-label">Nomor Telepon</label>
+                                <input type="tel" name="no_telp" id="no_telp" class="form-control" required>
                                 </div>
 
-                                <!-- alamat -->
+                                <!-- Alamat Instansi -->
                                 <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Alamat Instansi</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamat-instansi"></textarea>
+                                <label for="alamat_instansi" class="form-label">Alamat Instansi</label>
+                                <textarea class="form-control" id="alamat_instansi" rows="3" name="alamat_instansi" required></textarea>
                                 </div>
 
-                                <!-- kota -->
+                                <!-- Kota -->
                                 <div class="mb-3">
-                                        <label for="kota">Kota</label>
-                                        <input type="text" name="kota" id="kota" class="from-control" required>
+                                <label for="kota" class="form-label">Kota</label>
+                                <input type="text" name="kota" id="kota" class="form-control" required>
                                 </div>
 
-                                <!-- provinsi -->
+                                <!-- Provinsi -->
                                 <div class="mb-3">
-                                        <label for="provinsi">Provinsi</label>
-                                        <input type="text" name="provinsi" id="provinsi" class="from-control" required>
+                                <label for="provinsi" class="form-label">Provinsi</label>
+                                <input type="text" name="provinsi" id="provinsi" class="form-control" required>
                                 </div>
 
-                                <!-- negara -->
+                                <!-- Negara -->
                                 <div class="mb-3">
-                                        <label for="negara">Negara</label>
-                                        <input type="text" name="negara" id="negara" class="from-control" >
+                                <label for="negara" class="form-label">Negara</label>
+                                <input type="text" name="negara" id="negara" class="form-control">
                                 </div>
 
-                                <!-- webiste -->
+                                <!-- Website -->
                                 <div class="mb-3">
-                                        <label for="website">Website</label>
-                                        <input type="text" name="website" id="website" class="from-control" >
+                                <label for="website" class="form-label">Website</label>
+                                <input type="url" name="website" id="website" class="form-control">
                                 </div>
-                                
-                                <!-- submit -->
-                                <button type="submit" class="btn btn-primary">Submit</button>
+
+                                <!-- Submit -->
+                                <button type="submit"  name="submit" class="btn btn-primary">Submit</button>
                         </form>
                 </div>
+
         <?php
         break;
 
         case "edit":
-                include "../../database/koneksi.php";
-                $edit = mysqli_query($koneksi, "SELECT * FROM tb_mitra WHERE id_mitra = '$_GET[id_mitra]'");
+                include '../sikerma/database/koneksi.php';
+                $edit = mysqli_query($conn, "SELECT * FROM tb_mitra WHERE id_mitra = '$_GET[id_edit]'");
                 $dataMitra = mysqli_fetch_array($edit);    
         ?>
 
                 <!-- edit data mitra -->
                 <div class="container mt-5">
-                        <h2 class="text-center">Form Data Mitra</h2>
-                        <form action="proses_data_mitra.php?proses=update" method="post" >
-                                <!-- ID -->
-                                <input type="number" name="id" id="id" class="form-control" value="<?=$dataMitra['id_mitra'] ?>" hidden>
-                                
-                                <!-- nama instansi -->
+                        <h2 class="text-center">Edit Data Mitra</h2>
+                        <form action="../view/superadmin/proses_data_mitra.php?proses=update" method="POST">
+
+                                <!-- id mitra -->
+                                <input type="number" name="id_mitra" id="id" class="form-control" value="<?=$dataMitra['id_mitra'] ?>" hidden>
+
+                                <!-- Nama Instansi -->
                                 <div class="mb-3">
-                                        <label for="nama-instansi">Nama Instansi</label>
-                                        <input type="text" name="nama-instansi" id="nama-instansi" class="from-control" value="<?=$dataMitra['nama_instansi'] ?>" required>
+                                        <label for="nama_instansi" class="form-label">Nama Instansi</label>
+                                        <input type="text" name="nama_instansi" id="nama_instansi" class="form-control" value="<?=$dataMitra['nama_instansi'] ?>" required>
                                 </div>
 
-                                <!-- email -->
+                                <!-- Email -->
                                 <div class="mb-3">
-                                        <label for="email-instansi">Email Instansi</label>
-                                        <input type="email" name="email-instansi" id="email-instansi" class="from-control" value="<?=$dataMitra['email_instansi'] ?>" required>
+                                        <label for="email_instansi" class="form-label">Email Instansi</label>
+                                        <input type="email" name="email_instansi" id="email_instansi" class="form-control" value="<?=$dataMitra['email_instansi'] ?>" required>
                                 </div>
 
-                                <!-- bidang usaha -->
+                                <!-- Bidang Usaha -->
                                 <div class="mb-3">
-                                        <label for="bidang-usaha">Bidang Usaha</label>
-                                        <input type="text" name="bidang-usaha" id="bidang-usaha" class="from-control" value="<?=$dataMitra['bidang_usaha'] ?>" required>
+                                        <label for="bidang_usaha" class="form-label">Bidang Usaha</label>
+                                        <input type="text" name="bidang_usaha" id="bidang_usaha" class="form-control" value="<?=$dataMitra['bidang_usaha'] ?>" required>
                                 </div>
 
-                                <!-- nomor-telphone -->
+                                <!-- Nomor Telepon -->
                                 <div class="mb-3">
-                                        <label for="no-tlp">Nomor Telphone</label>
-                                        <input type="tel" name="no-tlp" id="no-tlp" class="from-control" value="<?=$dataMitra['no_telp'] ?>" required>
+                                        <label for="no_telp" class="form-label">Nomor Telepon</label>
+                                        <input type="tel" name="no_telp" id="no_telp" class="form-control" value="<?=$dataMitra['no_telp'] ?>" required>
                                 </div>
 
-                                <!-- alamat -->
+                                <!-- Alamat Instansi -->
                                 <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Alamat Instansi</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamat-instansi" required>value="<?=$dataMitra['alamat_instansi'] ?>"</textarea>
+                                        <label for="alamat_instansi" class="form-label">Alamat Instansi</label>
+                                        <textarea class="form-control" id="alamat_instansi" rows="3" name="alamat_instansi" required><?=$dataMitra['alamat_instansi'] ?></textarea>
                                 </div>
 
-                                <!-- kota -->
+                                <!-- Kota -->
                                 <div class="mb-3">
-                                        <label for="kota">Kota</label>
-                                        <input type="text" name="kota" id="kota" class="from-control" value="<?=$dataMitra['kota'] ?>" required>
+                                        <label for="kota" class="form-label">Kota</label>
+                                        <input type="text" name="kota" id="kota" class="form-control" value="<?=$dataMitra['kota'] ?>" required>
                                 </div>
 
-                                <!-- provinsi -->
+                                <!-- Provinsi -->
                                 <div class="mb-3">
-                                        <label for="provinsi">Provinsi</label>
-                                        <input type="text" name="provinsi" id="provinsi" class="from-control" value="<?=$dataMitra['provinsi'] ?>" required>
+                                        <label for="provinsi" class="form-label">Provinsi</label>
+                                        <input type="text" name="provinsi" id="provinsi" class="form-control" value="<?=$dataMitra['provinsi'] ?>" required>
                                 </div>
 
-                                <!-- negara -->
+                                <!-- Negara -->
                                 <div class="mb-3">
-                                        <label for="negara">Negara</label>
-                                        <input type="text" name="negara" id="negara" class="from-control"  value="<?=$dataMitra['negara'] ?>">
+                                        <label for="negara" class="form-label">Negara</label>
+                                        <input type="text" name="negara" id="negara" class="form-control" value="<?=$dataMitra['negara'] ?>">
                                 </div>
 
-                                <!-- webiste -->
+                                <!-- Website -->
                                 <div class="mb-3">
-                                        <label for="website">Website</label>
-                                        <input type="text" name="website" id="website" class="from-control" value="<?=$dataMitra['website'] ?>">
+                                        <label for="website" class="form-label">Website</label>
+                                        <input type="url" name="website" id="website" class="form-control" value="<?=$dataMitra['website'] ?>">
                                 </div>
-                                
-                                <!-- submit -->
-                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
+                                <!-- Submit -->
+                                <button type="submit"  name="submit" class="btn btn-primary">Submit</button>
                         </form>
                 </div>
         <?php

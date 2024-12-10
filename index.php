@@ -90,7 +90,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         $page = isset($_GET['p']) ? $_GET['p'] : "home";
         if ($page == "home") include "home.php";
         if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
-        if ($page == "dataMitra") include "view/superadmin/data_mou_moa.php";
+        if ($page == "dataMitra") include "view/superadmin/data_mitra.php";
         if ($page == "dosen") include "dosen.php";
         if ($page == "matakuliah") include "matakuliah.php";
         ?>
