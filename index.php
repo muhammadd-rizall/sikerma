@@ -38,6 +38,9 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   <a href="index.php?p=dataMouMoa" class="menu-item text-white d-flex align-items-center mb-2">
   <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mou/Moa</span>
   </a>
+  <a href="index.php?p=dataMitra" class="menu-item text-white d-flex align-items-center mb-2">
+  <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mitra</span>
+  </a>
   <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
     <i class="fas fa-list me-2"></i> <span class="menu-text">Daftar Usulan Kerja Sama</span>
   </a>
@@ -87,7 +90,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         $page = isset($_GET['p']) ? $_GET['p'] : "home";
         if ($page == "home") include "home.php";
         if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
-        if ($page == "prodi") include "prodi.php";
+        if ($page == "dataMitra") include "view/superadmin/data_mou_moa.php";
         if ($page == "dosen") include "dosen.php";
         if ($page == "matakuliah") include "matakuliah.php";
         ?>
