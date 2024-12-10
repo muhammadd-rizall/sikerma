@@ -1,38 +1,41 @@
 <?php
-         $aksi = isset($_POST['aksi']) ? $_GET['aksi'] : 'list';
+         $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
          switch ($aksi) :
              case "list":  
 ?>
 
-        <h2>Tabel Kegiatan</h2>
-        <a href="" class="btn btn-primary mb-2">Tambah Kegiatan</a>
+        <h2 class="">Tabel Kegiatan</h2>
+        <a href="?p=dataKegiatan&aksi=input" class="btn btn-primary mb-3 mt-10">Tambah Kegiatan</a>
         <table id="tabel-user" class="table table-bordered table-striped">
                 <thead>
                         <tr>
                             <th>No</th>
                             <th>Kegiatan</th>
-                            <th>Deskripsimm Kegiatan</th>
+                            <th>Deskripsi Kegiatan</th>
                             <th>Dokumentasi</th>
                             <th>Aksi</th>
                         </tr>
                 </thead>
             <tbody>
                         <?php
-                        $conn = include '../../database/koneksi.php';
+                        include ("../sikerma/database/koneksi.php");
                         
                         $no = 1;
-                        $ambil = mysqli_query($koneksi, "SELECT * FROM tb_kegiatan_kerjasama");
+                        $ambil = mysqli_query($conn, "SELECT * FROM tb_kegiatan_kerjasama");
                         while ($dataKegiatan = mysqli_fetch_array($ambil)) :
                         ?>
                                <tr>
                                 <td><?= $no ?></td>
                                 <td><?= $dataKegiatan['kegiatan'] ?></td>
                                 <td><?= $dataKegiatan['deskripsi_kegiatan'] ?></td>
-                                <td><?= $dataKegiatan['dokumentasi'] ?></td>
                                 <td>
-                                    <a href="index.php?p=mhs&aksi=edit&id_edit=<?= $dataKegiatan['id_user'] ?>" class="btn btn-warning">Edit</a>
-                                    <a href="proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataKegiatan['id_user'] ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data?')">Hapus</a>
+                                <a href="/upload/img/<?php echo htmlspecialchars($dataKegiatan['dokumentasi']); ?>" target="_blank">Lihat Gambar</a>
                                 </td>
+                                <td>
+                                <a href="../../index.php?p=dataKegiatan&aksi=edit&id_edit=<?= $dataKegiatan['id_kegiatan'] ?>" class="btn btn-warning">Edit</a>
+                                    <a href="/view/superadmin/proses_kegiatan.php?proses=delete&id_hapus=<?= $dataKegiatan['id_kegiatan'] ?>"
+                                    class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                    class="bi bi-trash"></i></a>
                             </tr>
                    <?php
                         $no++;
@@ -46,48 +49,53 @@
         case "input":
     ?>          
             <!-- input kegiatan -->
-            <h2>form kegiatan</h2>
-              <form action="proses_data_mou_moa.php?aksi=add" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="nama">Kegiatan</label>
-                            <input type="text" class="form-control" id="nama" name="nama" required>
+           <div class="container mt-5">
+           <h2 class="text-center">form kegiatan</h2>
+              <form action="../view/superadmin/proses_kegiatan.php?proses=insert" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="kegiatan">Kegiatan</label>
+                            <input type="text" class="form-control" id="kegiatan" name="kegiatan" required>
                         </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi Kegiatan</label>
-                            <textarea class="form-control" id="deskripsi" name="deskripsi" required></textarea>
+                        <div class="mb-3">
+                            <label for="deskripsi_kegiatan">Deskripsi Kegiatan</label>
+                            <textarea class="form-control" id="deskripsi_kegiatan" name="deskripsi_kegiatan" required></textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="dokumentasi">Dokumentasi</label>
-                            <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi" required>
+                            <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi" accept="image/*" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </form>
+
+           </div>
+
 
         <?php
             break;
 
              case "edit":
+                include '../sikerma/database/koneksi.php';
                  $id_edit = $_GET['id_edit'];
-                 $ambil = mysqli_query($koneksi, "SELECT * FROM tb_kegiatan_kerjasama WHERE id_kegiatan = '$id_kegiatan'");
+                 $ambil = mysqli_query($conn, "SELECT * FROM tb_kegiatan_kerjasama WHERE id_kegiatan = '$id_edit'");
                  $dataKegiatan = mysqli_fetch_array($ambil);
         ?>
 
         <!-- edit kegiatan -->
-        <h2>Edit Kegiatan</h2>
-        <form action="proses_kegiatan.php?proses=update" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="nama">Kegiatan</label>
-                <input type="text" class="form-control" id="nama" name="nama" value="<?= $dataKegiatan['kegiatan'] ?>" required>
+        <h2 class="text-center">Edit Kegiatan</h2>
+        <form action="../view/superadmin/proses_kegiatan.php?proses=update" method="post" enctype="multipart/form-data">
+            <div class="form-group mb-3 mt-3">
+                <label for="kegiatan">Kegiatan</label>
+                <input type="text" class="form-control" id="kegiatan" name="kegiatan" value="<?= $dataKegiatan['kegiatan'] ?>" required>
             </div>
-            <div class="form-group">
-                <label for="deskripsi">Deskripsi Kegiatan</label>
-                <textarea class="form-control" id="deskripsi" name="deskripsi" required><?= $dataKegiatan['deskripsi_kegiatan'] ?></textarea>
+            <div class="form-group mb-3">
+                <label for="deskripsi_kegiatan">Deskripsi Kegiatan</label>
+                <textarea class="form-control" id="deskripsi_kegiatan" name="deskripsi_kegiatan" required><?= $dataKegiatan['deskripsi_kegiatan'] ?></textarea>
             </div>
             <div class="form-group">
                 <label for="dokumentasi">Dokumentasi</label>
-                <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi" <?= $dataKegiatan['dokumentasi'] ?> required>
+                <input type="file" class="form-control-file" id="dokumentasi" accept="image/*" name="dokumentasi" <?= $dataKegiatan['dokumentasi'] ?> required>
             </div>
-            <button type="submit" class="btn btn-primary">Tambah</button>
+            <button type="submit" name="submit" class="btn btn-primary">submit</button>
         </form>
 
      <?php
