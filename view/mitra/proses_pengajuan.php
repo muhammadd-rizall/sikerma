@@ -25,13 +25,30 @@
 
         if ($conn->query($sql) === TRUE) {
             // Redirect ke halaman daftar_usulan.php
-            echo "Redirect ke: /sikerma/view/superadmin/daftar_usulan.php";
-            exit();
+            echo"<script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'mengajukan data kerjasama Berhasil!',
+                    text: 'data anda akan diproses dalam 7 hari kerja dan kami akan menghubungi anda melalui email;'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '../view/mitra/form_pengajuan.php';
+                    }
+                });
+            </script>";
 
             
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+        } else{
+
+            echo "<script>
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'mengajukan data kerjasama Gagal!',
+                    text: 'Terjadi kesalahan saat menyimpan data.',
+                    });
+             </script>";
         }
+
     }
 
 ?>

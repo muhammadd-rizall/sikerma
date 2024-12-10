@@ -1,3 +1,7 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <div class="container mt-5">
     <h1 class="text-center mb-4">Form Pengajuan Kerjasama</h1>
     <form action="../view/mitra/proses_pengajuan.php" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
@@ -22,13 +26,13 @@
         <!-- nama kontak person -->
         <div class="form-group mb-3">
             <label>Nama Kontak Person:</label>
-            <input type="text" name="nomor_kontak" class="form-control" placeholder="Masukkan nama penjabat" required>
+            <input type="text" name="nama_kontak_person" class="form-control" placeholder="Masukkan nama kontak person" required>
         </div>
 
-        <!-- nomor kontak  -->
+            <!-- Nomor Kontak -->
         <div class="form-group mb-3">
-            <label>Nomor Kontak :</label>
-            <input type="tel" name="nama_kontak_person" class="form-control" placeholder="Masukkan nama penjabat" required>
+            <label>Nomor Kontak:</label>
+            <input type="tel" name="nomor_kontak" class="form-control" placeholder="Masukkan nomor kontak" required>
         </div>
 
         <!-- email -->
@@ -51,3 +55,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+
+

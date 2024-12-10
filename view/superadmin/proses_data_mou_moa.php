@@ -59,7 +59,15 @@
             if (isset($_POST['submit'])) {
                 include "../../database/koneksi.php";
 
-                $jurusan_terkait = implode(",", $_POST['jurusan_terkait']);
+                
+                // Periksa apakah $_POST['jurusan_terkait'] ada dan valid
+                if (isset($_POST['jurusan_terkait']) && is_array($_POST['jurusan_terkait'])) {
+                        $joined_jurusan = implode(',', $_POST['jurusan_terkait']);
+                    } else {
+                                $joined_jurusan = ''; // Set sebagai string kosong jika tidak valid
+                            }
+                            
+
                 
 
                  // Proses upload file dokumen
@@ -89,7 +97,7 @@
                                         awal_kerjasama = '$_POST[awal_kerjasama]',
                                         akhir_kerjasama = '$_POST[akhir_kerjasama]',
                                         keterangan = '$_POST[keterangan]',
-                                        jurusan_terkait = '$jurusan_terkait',
+                                        jurusan_terkait = '$joined_jurusan',
                                         topik_kerjasama = '$_POST[topik_kerjasama]',
                                         file_dokumen = '$file_dokumen'
                                         WHERE id_mou_moa = '$_POST[id_mou_moa]'");

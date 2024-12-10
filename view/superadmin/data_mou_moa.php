@@ -315,18 +315,24 @@ switch ($aksi):
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
                         <select name="keterangan" class="form-control" required>
-                            <option value="">Pilih Keterangan</option>
-                            <?php
-                            // Mengambil data dari database
-                            include '../sikerma/database/koneksi.php';
-                            $query = mysqli_query($conn, "SELECT id_mou_moa, keterangan FROM tb_mou_moa");
-                            while ($row = mysqli_fetch_assoc($query)) {
+                                <option value="">Pilih Keterangan</option>
+                                <?php
+                                include '../sikerma/database/koneksi.php';
+
+                                $query = mysqli_query($conn, "SELECT keterangan FROM tb_mou_moa");
+                                
+                                $unique_keterangan = [];
+                                while ($row = mysqli_fetch_assoc($query)) {
+                                    if (in_array($row['keterangan'], ['Aktif', 'Tidak Aktif', 'Kadaluarsa', 'Di Perpanjang', 'Dalam Perpanjangan']) &&
+                                        !in_array($row['keterangan'], $unique_keterangan)) {
+                                        $unique_keterangan[] = $row['keterangan'];
+                                        ?>
+                                        <option value="<?= htmlspecialchars($row['keterangan']) ?>"><?= htmlspecialchars($row['keterangan']) ?></option>
+                                        <?php
+                                    }
+                                }
                                 ?>
-                            <option value="<?= $row['id_mou_moa'] ?>"><?= $row['keterangan'] ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
+                            </select>
                     </div>
 
                     <!-- upload dokumen -->
