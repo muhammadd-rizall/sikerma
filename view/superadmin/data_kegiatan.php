@@ -6,7 +6,7 @@
 
         <h2 class="">Tabel Kegiatan</h2>
         <a href="?p=dataKegiatan&aksi=input" class="btn btn-primary mb-3 mt-10">Tambah Kegiatan</a>
-        <table id="tabel-user" class="table table-bordered table-striped">
+        <table id="tabel-kegiatan" class="table table-bordered table-striped">
                 <thead>
                         <tr>
                             <th>No</th>

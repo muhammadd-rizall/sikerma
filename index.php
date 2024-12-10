@@ -16,6 +16,13 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<!-- DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+  
   <style>
 
   </style>
@@ -115,6 +122,8 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
 </div>
 
 
+
+
 <script>
   // JavaScript untuk toggle sidebar
   document.getElementById('toggleSidebar').addEventListener('click', function () {
@@ -123,6 +132,66 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     sidebar.classList.toggle('collapsed');
     mainContent.classList.toggle('collapsed');
   });
+</script>
+
+  
+
+
+  <script>
+    $(document).ready(function () {
+        // Inisialisasi DataTable pada tabel daftar usulan
+        $('#daftar-usulan').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Inisialisasi DataTable pada tabel daftar usulan
+        $('#tabel-mou-moa').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Inisialisasi DataTable pada tabel daftar usulan
+        $('#tabel-kegiatan').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Inisialisasi DataTable pada tabel daftar usulan
+        $('#tabel-mitra').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+            }
+        });
+    });
 </script>
 </body>
 </html>
