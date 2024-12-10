@@ -52,7 +52,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   </a>
 
   <!-- menu daftar usulan kerjasama -->
-  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+  <a href="index.php?p=daftarUsulan" class="menu-item text-white d-flex align-items-center mb-2">
     <i class="fas fa-list me-2"></i> <span class="menu-text">Daftar Usulan Kerja Sama</span>
   </a>
 
@@ -107,6 +107,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         if ($page == "dataMitra") include "view/superadmin/data_mitra.php";
         if ($page == "dataKegiatan") include "view/superadmin/data_kegiatan.php";
         if ($page == "formUsulan") include "view/mitra/form_pengajuan.php";
+        if ($page == "daftarUsulan") include "view/superadmin/daftar_usulan.php";
         if ($page == "dosen") include "dosen.php";
         if ($page == "matakuliah") include "matakuliah.php";
         ?>

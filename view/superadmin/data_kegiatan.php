@@ -62,7 +62,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="dokumentasi">Dokumentasi</label>
-                            <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi" accept="image/*" required>
+                            <input type="file" class="form-control-file" id="dokumentasi" name="dokumentasi" accept="image/*" multiple required>
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -93,7 +93,7 @@
             </div>
             <div class="form-group">
                 <label for="dokumentasi">Dokumentasi</label>
-                <input type="file" class="form-control-file" id="dokumentasi" accept="image/*" name="dokumentasi" <?= $dataKegiatan['dokumentasi'] ?> required>
+                <input type="file" class="form-control-file" id="dokumentasi" accept="image/*" name="dokumentasi" <?= $dataKegiatan['dokumentasi'] ?> multiple required>
             </div>
             <button type="submit" name="submit" class="btn btn-primary">submit</button>
         </form>
