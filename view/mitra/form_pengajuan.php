@@ -1,38 +1,53 @@
-<div class="container">
-        <h1>Form Pengajuan Kerjasama</h1>
-        <form action="proses_pengajuan.php" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Nama Instansi: <span class="required">*</span></label>
-                <input type="text" name="nama_instansi" placeholder="Masukkan nama instansi" required>
-            </div>
-            <div class="form-group">
-                <label>Nama Penjabat: <span class="required">*</span></label>
-                <input type="text" name="nama_penjabat" placeholder="Masukkan nama penjabat" required>
-            </div>
-            <div class="form-group">
-                <label>Nama Jabatan: <span class="required">*</span></label>
-                <input type="text" name="nama_jabatan" placeholder="Masukkan nama jabatan" required>
-            </div>
-            <div class="form-group">
-                <label>Nama Kontak Person: <span class="required">*</span></label>
-                <input type="text" name="nama_kontak_person" placeholder="Masukkan nama kontak person" required>
-            </div>
-            <div class="form-group">
-                <label>Nomor Kontak: <span class="required">*</span></label>
-                <input type="text" name="nomor_kontak" placeholder="Masukkan nomor kontak" required>
-            </div>
-            <div class="form-group">
-                <label>Email: <span class="required">*</span></label>
-                <input type="email" name="email" placeholder="Masukkan email" required>
-            </div>
-            <div class="form-group">
-                <label>Alamat: <span class="required">*</span></label>
-                <textarea name="alamat" placeholder="Masukkan alamat lengkap" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>Dokumen (PDF): <span class="required">*</span></label>
-                <input type="file" name="dokumen_usulan" accept=".pdf" required>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Form Pengajuan Kerjasama</h1>
+    <form action="../view/mitra/proses_pengajuan.php" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <!-- nama instansi -->
+        <div class="form-group mb-3 mt-5">
+            <label>Nama Instansi:</label>
+            <input type="text" name="nama_instansi" class="form-control" placeholder="Masukkan nama instansi" required>
+        </div>
+
+        <!-- nama penjabat -->
+        <div class="form-group mb-3">
+            <label>Nama Penjabat:</label>
+            <input type="text" name="nama_penjabat" class="form-control" placeholder="Masukkan nama penjabat" required>
+        </div>
+
+        <!-- nama jabatan -->
+        <div class="form-group mb-3">
+            <label>Nama Jabatan:</label>
+            <input type="text" name="nama_jabatan" class="form-control" placeholder="Masukkan nama penjabat" required>
+        </div>
+
+        <!-- nama kontak person -->
+        <div class="form-group mb-3">
+            <label>Nama Kontak Person:</label>
+            <input type="text" name="nomor_kontak" class="form-control" placeholder="Masukkan nama penjabat" required>
+        </div>
+
+        <!-- nomor kontak  -->
+        <div class="form-group mb-3">
+            <label>Nomor Kontak :</label>
+            <input type="tel" name="nama_kontak_person" class="form-control" placeholder="Masukkan nama penjabat" required>
+        </div>
+
+        <!-- email -->
+        <div class="form-group mb-3">
+            <label>Email:</label>
+            <input type="email" name="email" class="form-control" placeholder="Masukkan email" required>
+        </div>
+
+        <!-- alamat -->
+         <div class="form-group mb-3">
+            <label>Alamat:</label>
+            <textarea name="alamat" class="form-control" placeholder="Masukkan alamat" required></textarea>
+        </div>
+
+        <!-- dokumen -->
+        <div class="form-group mb-3">
+            <label>Dokumen (PDF):</label>
+            <input type="file" name="dokumen_usulan" class="form-control-file" accept=".pdf" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

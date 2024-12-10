@@ -15,20 +15,22 @@
 
         // Proses upload file dokumen
         $dokumen_usulan = $_FILES['dokumen_usulan']['name'];
-        $target_dir = "upload/documents/";
+        $target_dir = __DIR__ . "/../../upload/documents/";
         $target_file = $target_dir . basename($dokumen_usulan);
         move_uploaded_file($_FILES['dokumen_usulan']['tmp_name'], $target_file);
 
         // Query untuk menyimpan data ke database
-        $sql = "INSERT INTO tb_usulan_kerjasama (nama_instansi, nama_penjabat, nama_jabatan, nama_kontak_person, nomor_kontak, email, alamat, dokumen_usulan, status_permohonan)
+        $sql = "INSERT INTO tb_usulan_kerjasama (nama_instansi, nama_penjabat, nama_jabatan, nama_kontak_person, nomor_kontak, email, alamat, dokumen, status_permohonan)
                 VALUES ('$nama_instansi', '$nama_penjabat', '$nama_jabatan', '$nama_kontak_person', '$nomor_kontak', '$email', '$alamat', '$dokumen_usulan', '$status_permohonan')";
 
-        if ($koneksi->query($sql) === TRUE) {
+        if ($conn->query($sql) === TRUE) {
             // Redirect ke halaman daftar_usulan.php
-            header("Location: ../superadmin/daftar_usulan.php");
+            echo "Redirect ke: /sikerma/view/superadmin/daftar_usulan.php";
             exit();
+
+            
         } else {
-            echo "Error: " . $sql . "<br>" . $koneksi->error;
+            echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
 
