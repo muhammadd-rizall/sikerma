@@ -1,25 +1,37 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
-    session_start();
+session_start();
 
-    if(isset($_POST["username"]) ){
-        include "../../database/koneksi.php";
-        $username = $_POST["username"];
-        $password =  md5($_POST["password"]);
+if (isset($_POST["username"])) {
+    include "../../database/koneksi.php";
+    $username = $_POST["username"];
+    $password = md5($_POST["password"]); // Menggunakan md5 untuk enkripsi password
+    $level_user = $_POST["level_user"] ?? null;
 
-        $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username ='$username' AND password='$password'");
+    // Query untuk mencari username dan password
+    $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' AND password = '$password'");
 
-        if(mysqli_num_rows($query) == 1){
-            $_SESSION['login'] = true; 
-            $_SESSION['user'] = $username;
-            $_SESSION['pw'] = $password;
-            header("Location:/index.php");
-            exit();
-        }else{
-            echo "<script>alert('Login Gagal')</script>";
-        }
+    // Mengecek apakah data ditemukan
+    if (mysqli_num_rows($query) == 1) {
+        $row = mysqli_fetch_assoc($query); // Mengambil data pengguna
+        $_SESSION['login'] = true; 
+        $_SESSION['user'] = $username;
+        $_SESSION['level_user'] = $row['level_user']; // Menyimpan level_user dari database
+        $_SESSION['pw'] = $password; // Menyimpan password untuk referensi, meskipun tidak terlalu aman
+
+        // Redireksi ke halaman dashboard atau halaman yang sesuai
+        header("Location: /index.php");
+        exit();
+    } else {
+        echo "<script>alert('Login Gagal')</script>"; // Menampilkan pesan jika login gagal
     }
+}
 ?>
+
+
+
+
+
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">

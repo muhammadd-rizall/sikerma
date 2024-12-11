@@ -3,6 +3,8 @@
       switch ($aksi) :
           case "list":  
 ?>
+
+        <div class="container">
                 <h2>Data Mitra</h2>
                 <a href="?p=dataMitra&aksi=input" class="btn btn-primary mb-2">Tambah Data Mitra</a>
                 <table id="tabel-mitra" class="table table-bordered table-striped">
@@ -55,6 +57,7 @@
                              ?>
                     </tbody>
                 </table>
+        </div>
         
         <?php
         break;

@@ -4,66 +4,67 @@ $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
 switch ($aksi):
     case "list":
         ?>
-
-                <h2>Data Mou/Moa</h2>
-                        <a href="?p=dataMouMoa&aksi=input" class="btn btn-primary mb-2">Tambah Data Mou/Moa</a>
-                        <table id="tabel-mou-moa" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nomor Mou/Moa</th>
-                                    <th>Jenis Kerjasama</th>
-                                    <th>Topik Kerjasama</th>
-                                    <th>Jangka Waktu</th>
-                                    <th>Awal Kerjasama</th>
-                                    <th>Akhir Kerjasama</th>
-                                    <th>Jurusan Terkait</th>
-                                    <th>Keterangan</th>
-                                    <th>File Dokumen</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <?php
-                            include ("../sikerma/database/koneksi.php");
-
-
-
-
-                                $no = 1;
-                                $ambil = mysqli_query($conn, "SELECT * FROM tb_mou_moa");
-                                while ($dataMouMoa = mysqli_fetch_array($ambil)):
-                                    ?>
+                
+                    <h2>Data Mou/Moa</h2>
+                            <a href="?p=dataMouMoa&aksi=input" class="btn btn-primary mb-2">Tambah Data Mou/Moa</a>
+                            <table id="tabel-mou-moa" class="table table-bordered table-striped mt-5">
+                                <thead>
                                     <tr>
-                                        <td><?= $no ?></td>
-                                        <td><?= $dataMouMoa['no_mou_moa'] ?></td>
-                                        <td><?= $dataMouMoa['jenis_kerjasama'] ?></td>
-                                        <td><?= $dataMouMoa['topik_kerjasama'] ?></td>
-                                        <td><?= $dataMouMoa['jangka_waktu'] ?></td>
-                                        <td><?= $dataMouMoa['awal_kerjasama'] ?></td>
-                                        <td><?= $dataMouMoa['akhir_kerjasama'] ?></td>
-                                        <td><?= $dataMouMoa['jurusan_terkait'] ?></td>
-                                        <td><?= $dataMouMoa['keterangan'] ?></td>
-                                        <td>
-                                            <a href="/upload/documents/<?php echo htmlspecialchars($dataMouMoa['file_dokumen']); ?>"
-                                                target="_blank">Lihat</a>
-
-                                        </td>
-                                        <td>
-                                            <a href="../../index.php?p=dataMouMoa&aksi=edit&id_edit=<?= $dataMouMoa['id_mou_moa'] ?>" class="btn btn-warning">Edit</a>
-                                            <a href="/view/superadmin/proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataMouMoa['id_mou_moa'] ?>"
-                                                class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
-                                                class="bi bi-trash"></i></a>
-
-                                        </td>
+                                        <th>No</th>
+                                        <th>Nomor Mou/Moa</th>
+                                        <th>Jenis Kerjasama</th>
+                                        <th>Topik Kerjasama</th>
+                                        <th>Jangka Waktu</th>
+                                        <th>Awal Kerjasama</th>
+                                        <th>Akhir Kerjasama</th>
+                                        <th>Jurusan Terkait</th>
+                                        <th>Keterangan</th>
+                                        <th>File Dokumen</th>
+                                        <th>Aksi</th>
                                     </tr>
+                                </thead>
+
+                                <tbody>
                                     <?php
-                                    $no++;
-                                endwhile;
-                                ?>
-                            </tbody>
-                        </table>
+                                include ("../sikerma/database/koneksi.php");
+
+
+
+
+                                    $no = 1;
+                                    $ambil = mysqli_query($conn, "SELECT * FROM tb_mou_moa");
+                                    while ($dataMouMoa = mysqli_fetch_array($ambil)):
+                                        ?>
+                                        <tr>
+                                            <td><?= $no ?></td>
+                                            <td><?= $dataMouMoa['no_mou_moa'] ?></td>
+                                            <td><?= $dataMouMoa['jenis_kerjasama'] ?></td>
+                                            <td><?= $dataMouMoa['topik_kerjasama'] ?></td>
+                                            <td><?= $dataMouMoa['jangka_waktu'] ?></td>
+                                            <td><?= $dataMouMoa['awal_kerjasama'] ?></td>
+                                            <td><?= $dataMouMoa['akhir_kerjasama'] ?></td>
+                                            <td><?= $dataMouMoa['jurusan_terkait'] ?></td>
+                                            <td><?= $dataMouMoa['keterangan'] ?></td>
+                                            <td>
+                                                <a href="/upload/documents/<?php echo htmlspecialchars($dataMouMoa['file_dokumen']); ?>"
+                                                    target="_blank">Lihat</a>
+
+                                            </td>
+                                            <td>
+                                                <a href="../../index.php?p=dataMouMoa&aksi=edit&id_edit=<?= $dataMouMoa['id_mou_moa'] ?>" class="btn btn-warning">Edit</a>
+                                                <a href="/view/superadmin/proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataMouMoa['id_mou_moa'] ?>"
+                                                    class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                                    class="bi bi-trash"></i></a>
+
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        $no++;
+                                    endwhile;
+                                    ?>
+                                </tbody>
+                            </table>
+                    
 
         <?php
         break;
@@ -73,7 +74,7 @@ switch ($aksi):
 
 
         <!-- form tambah data Mou/moa -->
-        <div class="container mt-5">
+        <div class="container" >
              <h2 class="text-center">Form Mou / Moa</h2>
                 <form action="../view/superadmin/proses_data_mou_moa.php?proses=insert" method="POST" enctype="multipart/form-data">
                     <!-- nomor mou/moa -->

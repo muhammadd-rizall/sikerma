@@ -1,9 +1,12 @@
 <?php
   session_start();
+  
     if(!isset($_SESSION['login']) ){
       header("Location: view/general/landing_page.php");
       exit;
     }
+    $level = $_SESSION['level_user'];
+    var_dump(value: $_SESSION['level_user']);
 ?>
 
 <?php
@@ -21,14 +24,14 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard SIKERMA</title>
   <link rel="stylesheet" href="public/assets/css/index.css">
+  <link rel="stylesheet" href="public/assets/css/component.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  DataTables CSS
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<!-- DataTables JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <!-- DataTables JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
   
   <style>
@@ -117,6 +120,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
 
   <div class="container">
         <?php
+        if ($level == 'superAdmin') {
         $page = isset($_GET['p']) ? $_GET['p'] : "home";
         if ($page == "home") include "home.php";
         if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
@@ -124,8 +128,19 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         if ($page == "dataKegiatan") include "view/superadmin/data_kegiatan.php";
         if ($page == "formUsulan") include "view/mitra/form_pengajuan.php";
         if ($page == "daftarUsulan") include "view/superadmin/daftar_usulan.php";
-        if ($page == "dosen") include "dosen.php";
-        if ($page == "matakuliah") include "matakuliah.php";
+        } elseif ($_SESSION['level_user'] == 'admin') {
+          if ($page == "home") include "home.php";
+          if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
+          if ($page == "dataMitra") include "view/superadmin/data_mitra.php";
+          if ($page == "dataKegiatan") include "view/superadmin/data_kegiatan.php";
+          if ($page == "formUsulan") include "view/mitra/form_pengajuan.php";
+          if ($page == "daftarUsulan") include "view/superadmin/daftar_usulan.php";
+
+        } elseif ($_SESSION['level_user'] == 'jurusan') {
+          if ($page == "home") include "home.php";
+          if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
+
+        }
         ?>
     </div>
 </div>
