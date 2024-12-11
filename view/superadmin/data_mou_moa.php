@@ -318,21 +318,15 @@ switch ($aksi):
                         <select name="keterangan" class="form-control" required>
                                 <option value="">Pilih Keterangan</option>
                                 <?php
-                                include '../sikerma/database/koneksi.php';
+                                        $pilihan = ["Aktif", "Tidak Aktif", "Kadaluarsa", "Di Perpanjang","Dalam Perpanjangan"];
+                                        $selected_pil = isset($dataMouMoa['keterangan']) ? $dataMouMoa['keterangan'] : '';
 
-                                $query = mysqli_query($conn, "SELECT keterangan FROM tb_mou_moa");
-                                
-                                $unique_keterangan = [];
-                                while ($row = mysqli_fetch_assoc($query)) {
-                                    if (in_array($row['keterangan'], ['Aktif', 'Tidak Aktif', 'Kadaluarsa', 'Di Perpanjang', 'Dalam Perpanjangan']) &&
-                                        !in_array($row['keterangan'], $unique_keterangan)) {
-                                        $unique_keterangan[] = $row['keterangan'];
-                                        ?>
-                                        <option value="<?= htmlspecialchars($row['keterangan']) ?>"><?= htmlspecialchars($row['keterangan']) ?></option>
-                                        <?php
-                                    }
-                                }
-                                ?>
+                                        foreach ($pilihan as $pil) {
+                                        $selected = ($pil === $selected_pil) ? "selected" : "";
+
+                                        echo "<option value='" . htmlspecialchars($pil) . "' $selected>" . htmlspecialchars($pil) . "</option>";
+                                        }
+                                            ?>
                             </select>
                     </div>
 
