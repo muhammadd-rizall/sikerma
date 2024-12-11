@@ -6,7 +6,6 @@
       exit;
     }
     $level = $_SESSION['level_user'];
-    var_dump(value: $_SESSION['level_user']);
 ?>
 
 <?php

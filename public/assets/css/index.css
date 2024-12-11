@@ -14,9 +14,15 @@ body, html {
   position: fixed;
   top: 0;
   left: 0;
-  overflow-y: auto;
+  overflow-y:scroll;
   padding: 20px 0;
   z-index: 1000;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Menyembunyikan scrollbar di Chrome, Edge, dan Safari */
 }
 
 .sidebar .logo {
@@ -26,8 +32,8 @@ body, html {
 }
 
 .sidebar .logo-img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -35,6 +41,11 @@ body, html {
 .sidebar .logo-text h3 {
   margin: 0;
   font-size: 18px;
+}
+
+.sidebar .logo-text p {
+  margin: 0;
+  font-size: 10px;
 }
 
 .sidebar .menu-item {
