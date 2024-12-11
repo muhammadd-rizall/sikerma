@@ -1,11 +1,11 @@
 <?php
-         $aksi = isset($_POST['aksi']) ? $_GET['aksi'] : 'list';
-         switch ($aksi) :
+         $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
+         switch ($aksi):
              case "list":  
 ?>
 
         <h2>Tabel Users</h2>
-        <a href="" class="btn btn-primary mb-2">Tambah User</a>
+        <a href="?p=user&aksi=input" class="btn btn-primary mb-2">Tambah User</a>
         <table id="tabel-user" class="table table-bordered table-striped">
                 <thead>
                         <tr>
@@ -20,7 +20,7 @@
                 </thead>
             <tbody>
                         <?php
-                         include '../../database/koneksi.php';
+                         include ("../sikerma/database/koneksi.php");
                         
                         $no = 1;
                         $ambil = mysqli_query($conn, "SELECT * FROM tb_user");
@@ -32,10 +32,12 @@
                                 <td><?= $dataUser['username'] ?></td>
                                 <td><?= $dataUser['email'] ?></td>
                                 <td><?= $dataUser['password'] ?></td>                       
-                                <td><?= $dataUser['level'] ?></td>
+                                <td><?= $dataUser['level_user'] ?></td>
                                 <td>
-                                    <a href="index.php?p=mhs&aksi=edit&id_edit=<?= $dataUser['id_user'] ?>" class="btn btn-warning">Edit</a>
-                                    <a href="proses_acount.php?proses=delete&id_hapus=<?= $dataUser['id_user'] ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data?')">Hapus</a>
+                                <a href="../../index.php?p=user&aksi=edit&id_edit=<?= $dataUser['id_user'] ?>" class="btn btn-warning">Edit</a>
+                                    <a href="/view/superadmin/proses_acount.php?proses=delete&id_hapus=<?= $dataUser['id_user'] ?>"
+                                         class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                         class="bi bi-trash"></i>
                                 </td>
                             </tr>
                    <?php
@@ -54,109 +56,111 @@
 
                 <!-- form user -->
                 <div class="container">
-                <h2 class="text-center">Form Create Akun</h2>
-                
-                <form action="proses_acount.php?proses=insert" method="post">
-                        <!-- nama user -->
-                        <div class="mb-3">
-                                <label for="nama-user">Nama User</label>
-                                <input type="text" name="nama-user" id="nama-user" class="from-control" required>
-                        </div>
+                        <h2 class="text-center">Form Create Akun</h2>
+                        
+                        <form action="../view/superadmin/proses_acount.php?proses=insert" method="post">
+                                <!-- nama user -->
+                                <div class="mb-3">
+                                <label for="nama_user">Nama User</label>
+                                <input type="text" name="nama" id="nama_user" class="form-control" required>
+                                </div>
 
-                        <!-- username -->
-                        <div class="mb-3">
+                                <!-- username -->
+                                <div class="mb-3">
                                 <label for="username">Username</label>
-                                <input type="text" name="username" id="username" class="from-control" required>
-                        </div>
-                        
-                        <!-- email -->
-                        <div class="mb-3">
+                                <input type="text" name="username" id="username" class="form-control" required>
+                                </div>
+                                
+                                <!-- email -->
+                                <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="from-control" required>
-                        </div>
-                        
-                        <!-- password -->
-                        <div class="mb-3">
+                                <input type="email" name="email" id="email" class="form-control" required>
+                                </div>
+                                
+                                <!-- password -->
+                                <div class="mb-3">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="from-control" required>
-                        </div>
+                                <input type="password" name="password" id="password" class="form-control" required>
+                                </div>
 
-                        <!-- role -->
-                        <div class="mb-3">
+                                <!-- role -->
+                                <div class="mb-3">
                                 <label for="role">Role</label>
-                                <select name="role" id="role" class="form-control" required>
+                                <select name="level_user" id="role" class="form-control" required>
                                         <option value="">Pilih Role</option>
-                                        <option value="1">superadmin</option>
-                                        <option value="2">admin</option>
-                                        <option value="3">mitra</option>
-                                        <option value="4">jurusan</option>
+                                        <option value="superAdmin">superAdmin</option>
+                                        <option value="admin">admin</option>
+                                        <option value="mitra">mitra</option>
+                                        <option value="jurusan">jurusan</option>
                                 </select>
-                        </div>
-                        
-                        <!-- submit -->
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                                </div>
+                                
+                                <!-- submit -->
+                                <button type="submit"  name="submit" class="btn btn-primary">Submit</button>
+                        </form>
                 </div>
+
         
         <?php
+        break;
                 case "edit":
-                include "../../database/koneksi.php";
-                $edit = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user = '$_GET[id_user]'");
+                        include '../sikerma/database/koneksi.php';
+                $edit = mysqli_query($conn, "SELECT * FROM tb_user WHERE id_user = '$_GET[id_edit]'");
                 $dataUser = mysqli_fetch_array($edit); 
         ?>
 
         <!-- edit user -->
         <div class="container">
-                <h2 class="text-center">Form Create Akun</h2>
-                
-                <form action="proses_acount.php?proses=update" method="post">
-                <input type="number" name="id" id="id" class="form-control" value="<?=$dataUser['id_user'] ?>" hidden>
+                        <h2 class="text-center"> Edit Akun</h2>
                         
-                        <!-- nama user -->
-                        <div class="mb-3">
-                                <label for="nama-user">Nama User</label>
-                                <input type="text" name="nama-user" id="nama-user" class="from-control" value="<?=$dataUser['nama'] ?>" required>
-                        </div>
+                        <form action="../view/superadmin/proses_acount.php?proses=update" method="post">
+                        <input type="number" name="id" id="id" class="form-control" value="<?=$dataUser['id_user'] ?>" hidden>
+                                <!-- nama user -->
+                                <div class="mb-3">
+                                <label for="nama_user">Nama User</label>
+                                <input type="text" name="nama" id="nama_user" class="form-control" value="<?=$dataUser['nama'] ?>" required>                               </div>
 
-                        <!-- username -->
-                        <div class="mb-3">
+                                <!-- username -->
+                                <div class="mb-3">
                                 <label for="username">Username</label>
-                                <input type="text" name="username" id="username" class="from-control" value="<?=$dataUser['username'] ?>" required>
-                        </div>
-                        
-                        <!-- email -->
-                        <div class="mb-3">
+                                <input type="text" name="username" id="username" class="form-control" value="<?=$dataUser['username'] ?>" required>
+                                </div>
+                                
+                                <!-- email -->
+                                <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="from-control" value="<?=$dataUser['email'] ?>" required>
-                        </div>
-                        
-                        <!-- password -->
-                        <div class="mb-3">
+                                <input type="email" name="email" id="email" class="form-control" value="<?=$dataUser['email'] ?>" required>
+                                </div>
+                                
+                                <!-- password -->
+                                <div class="mb-3">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="from-control" value="<?=$dataUser['password'] ?>" required>
-                        </div>
+                                <input type="password" name="password" id="password" class="form-control" value="<?=$dataUser['password'] ?>" required>
+                                </div>
 
-                        <!-- role -->
-                        <div class="mb-3">
-                                <label for="role">Role</label>
-                                <select name="role" id="role" class="form-control" required>
-                                        <?php
-                                        // Mengambil data dari database
-                                                include '../../database/koneksi.php';
-                                                $query = mysqli_query($koneksi, "SELECT level_user FROM tb_user");
-                                                while ($row = mysqli_fetch_assoc($query)) {
-                                        ?>
-                                            <option value="<?= $row['id_mou_moa'] ?>"><?= $row['keterangan'] ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                </select>
-                        </div>
-                        
-                        <!-- submit -->
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-        </div>
+                                <!-- role -->
+                                <div class="mb-3">
+                                        <label for="role">Role</label>
+                                                <select name="level_user" id="role" class="form-control" required>
+                                                        <option value="" disabled>-- Pilih Role --</option>
+                                                                <?php
+                                                                $roles = ["superAdmin", "admin", "mitra", "jurusan"];
+                                                                $selected_role = isset($dataUser['level_user']) ? $dataUser['level_user'] : '';
+
+                                                                foreach ($roles as $role) {
+                                                                        $selected = ($role === $selected_role) ? "selected" : "";
+
+                                                                        echo "<option value='" . htmlspecialchars($role) . "' $selected>" . htmlspecialchars($role) . "</option>";
+                                                                }
+                                                                ?>
+                                                </select>
+
+                                </div>
+                                
+                                <!-- submit -->
+                                <button type="submit"  name="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                </div>
 
 <?php
         break;

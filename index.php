@@ -80,6 +80,10 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Pengajuan Kerja Sama</span>
   </a>
 
+  <a href="index.php?p=user" class="menu-item text-white d-flex align-items-center mb-4">
+    <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Tabel User</span>
+  </a>
+
   <hr style="border-color: rgba(255, 255, 255, 5.2); margin-top: 200px;">
 
   <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
@@ -128,6 +132,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         if ($page == "dataKegiatan") include "view/superadmin/data_kegiatan.php";
         if ($page == "formUsulan") include "view/mitra/form_pengajuan.php";
         if ($page == "daftarUsulan") include "view/superadmin/daftar_usulan.php";
+        if ($page == "user") include "view/superadmin/create_acount.php";
         } elseif ($_SESSION['level_user'] == 'admin') {
           if ($page == "home") include "home.php";
           if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
