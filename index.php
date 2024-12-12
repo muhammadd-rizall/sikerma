@@ -125,7 +125,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
 
   <div class="container">
         <?php
-        if ($level == 'superAdmin') {
+        if ($level == 'superadmin') {
         $page = isset($_GET['p']) ? $_GET['p'] : "home";
         if ($page == "home") include "home.php";
         if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
@@ -217,6 +217,20 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     $(document).ready(function () {
         // Inisialisasi DataTable pada tabel daftar usulan
         $('#tabel-mitra').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Inisialisasi DataTable pada tabel daftar usulan
+        $('#daftar-dokumen').DataTable({
             "paging": true,
             "searching": true,
             "ordering": true,

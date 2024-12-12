@@ -34,7 +34,7 @@
                                 <td><?= $dataUser['password'] ?></td>                       
                                 <td><?= $dataUser['level_user'] ?></td>
                                 <td>
-                                <a href="../../index.php?p=user&aksi=edit&id_edit=<?= $dataUser['id_user'] ?>" class="btn btn-warning">Edit</a>
+                                <a href="../../index.php?p=user&aksi=edit&id_edit=<?= $dataUser['id_user'] ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
                                     <a href="/view/superadmin/proses_acount.php?proses=delete&id_hapus=<?= $dataUser['id_user'] ?>"
                                          class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
                                          class="bi bi-trash"></i>

@@ -1,4 +1,3 @@
-
 <?php
 $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
 switch ($aksi):
@@ -70,6 +69,8 @@ switch ($aksi):
         break;
 
          case "input":
+            include ("../sikerma/database/koneksi.php");
+            $mitraQuery = mysqli_query($conn, "SELECT id_mitra, nama_instansi FROM tb_mitra");
         ?>
 
 
@@ -77,6 +78,7 @@ switch ($aksi):
         <div class="container" >
              <h2 class="text-center">Form Mou / Moa</h2>
                 <form action="../view/superadmin/proses_data_mou_moa.php?proses=insert" method="POST" enctype="multipart/form-data">
+                    
                     <!-- nomor mou/moa -->
                     <div class="mb-3">
                         <label for="no_mou_moa"> Nomor Mou/Moa</label>
@@ -103,6 +105,15 @@ switch ($aksi):
                             </div>
                      </div>
 
+                     <div class="mb-3">
+                        <label for="id_mitra">Pilih Mitra</label>
+                        <select name="id_mitra" id="id_mitra" class="form-control" required>
+                            <option value="">--Pilih Mitra--</option>
+                            <?php while ($mitra = mysqli_fetch_array($mitraQuery)): ?>
+                                <option value="<?= $mitra['id_mitra'] ?>"><?= $mitra['nama_instansi'] ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
 
 
 
@@ -204,6 +215,8 @@ switch ($aksi):
         $edit = mysqli_query($conn, "SELECT * FROM tb_mou_moa WHERE id_mou_moa = '$_GET[id_edit]'");
         $dataMouMoa = mysqli_fetch_array($edit);
         $jurusan_terkait = explode(", ", $dataMouMoa['jurusan_terkait']);
+        $mitraQuery = mysqli_query($conn, "SELECT id_mitra, nama_instansi FROM tb_mitra");
+
         
         
 
@@ -244,6 +257,22 @@ switch ($aksi):
                                 <label for="IA" class="form-check-label">IA</label>
                             </div>
                      </div>
+
+                     <div class="mb-3">
+                        <label for="id_mitra">Pilih Mitra</label>
+                        <select name="id_mitra" id="id_mitra" class="form-control" required>
+                            <option value="">--Pilih Mitra--</option>
+                            <?php
+                                $mitraQuery = mysqli_query($conn, "SELECT id_mitra, nama_instansi FROM tb_mitra");
+                                while ($mitra = mysqli_fetch_array($mitraQuery)): 
+                            ?>
+                                <option value="<?= $mitra['id_mitra'] ?>" <?= $dataMouMoa['id_mitra'] == $mitra['id_mitra'] ? 'selected' : '' ?>>
+                                    <?= $mitra['nama_instansi'] ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+
 
                     <!-- topik kerjasama -->
                     <div class="mb-3">

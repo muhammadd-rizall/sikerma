@@ -24,10 +24,10 @@
             $sql = mysqli_query($conn, "INSERT INTO tb_kegiatan_kerjasama (
                                                         kegiatan,
                                                         deskripsi_kegiatan,
-                                                        dokumentasi) 
+                                                        dokumentasi,id_mou_moa) 
                                                         VALUES('$_POST[kegiatan]',
                                                         '$_POST[deskripsi_kegiatan]',
-                                                        '$file_temp')");
+                                                        '$file_temp','$_POST[id_mou_moa]')");
             if($sql) {
                 echo  "<script>window.location='../../../index.php?p=dataKegiatan'</script>";
 
@@ -62,7 +62,9 @@
                     $sql = mysqli_query($conn, "UPDATE  tb_kegiatan_kerjasama SET 
                                         kegiatan = '$_POST[kegiatan]',
                                         deskripsi_kegiatan = '$_POST[deskripsi_kegiatan]',
-                                        dokumentasi = '$file_temp'");
+                                        dokumentasi = '$file_temp',
+                                        id_mou_moa = '$_POST[id_mou_moa]' 
+                                        WHERE id_kegiatan = '$_POST[id_kegiatan]'");
                     
                     if($sql) {
                         echo  "<script>window.location='../../../index.php?p=dataKegiatan'</script>";

@@ -53,7 +53,7 @@ $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
 switch ($aksi) :
 case "list": 
     // Query untuk mengambil data dari tabel `usulan_kerjasama`
-    $sql = "SELECT * FROM tb_usulan_kerjasama ORDER BY id_usulan DESC";
+    $sql = "SELECT * FROM tb_mou_moa Join tb_mitra JOIN tb_kegiatan_kerjasama Where tb_mou_moa.id_mitra = tb_mitra.id_mitra AND tb_mou_moa.id_mou_moa = tb_kegiatan_kerjasama.id_mou_moa  ORDER BY tb_mou_moa.id_mou_moa DESC";
     $result = $conn->query($sql);
 ?>
 
@@ -63,45 +63,74 @@ case "list":
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Nama Mitra</th>
+                <th>Nama Instansi</th>
                 <th>Jenis Kerjasama</th>
                 <th>Judul Kerjasama</th>
                 <th>Tanggal Awal</th>
                 <th>Tanggal Akhir</th>
                 <th>Status</th>
                 <th>Detail</th>
+
             </tr>
         </thead>
+        
         <tbody>
             <?php
             if ($result->num_rows > 0) {
                 $no = 1;
                 while ($landingPage = $result->fetch_assoc()) {
                     // Validasi setiap array key sebelum ditampilkan
-                    $namaMitra = $landingPage['Nama Mitra'] ?? '-';
-                    $jenisKerjasama = $landingPage['Jenis Kerjasama'] ?? '-';
-                    $judulKerjasama = $landingPage['Judul Kerjasama'] ?? '-';
-                    $tanggalAwal = $landingPage['Tanggal Awal'] ?? '-';
-                    $tanggalAkhir = $landingPage['Tanggal Akhir'] ?? '-';
-                    $status = $landingPage['Status'] ?? '-';
-                    $detail = $landingPage['Detail'] ?? '-';
+                    $namaMitra = $landingPage['nama_instansi'] ?? '-';
+                    $jenisKerjasama = $landingPage['jenis_kerjasama'] ?? '-';
+                    $judulKerjasama = $landingPage['topik_kerjasama'] ?? '-';
+                    $tanggalAwal = $landingPage['awal_kerjasama'] ?? '-';
+                    $tanggalAkhir = $landingPage['akhir_kerjasama'] ?? '-';
+                    $status = $landingPage['keterangan'] ?? '-';
+                    $detail = $landingPage['kegiatan'] ?? '-';
 
                     echo "<tr>
-                            <td>{$no}</td>
-                            <td>{$namaMitra}</td>
-                            <td>{$jenisKerjasama}</td>
-                            <td>{$judulKerjasama}</td>
-                            <td>{$tanggalAwal}</td>
-                            <td>{$tanggalAkhir}</td>
-                            <td>{$status}</td>
-                            <td>{$detail}</td>
-                        </tr>";
-                    $no++;
-                }
-            } else {
-                echo "<tr><td colspan='8' style='text-align: center;'>Tidak ada data.</td></tr>";
-            }
-            ?>
+                    <td>{$no}</td>
+                    <td>{$namaMitra}</td>
+                    <td>{$jenisKerjasama}</td>
+                    <td>{$judulKerjasama}</td>
+                    <td>{$tanggalAwal}</td>
+                    <td>{$tanggalAkhir}</td>
+                    <td>{$status}</td>
+                    <td>
+                        <button type='button' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#detailModal{$landingPage['id_mou_moa']}'>
+                            Detail
+                        </button>
+                    </td>
+                </tr>";
+
+            // Modal untuk detail
+            echo "
+            <div class='modal fade' id='detailModal{$landingPage['id_mou_moa']}' tabindex='-1' aria-labelledby='detailModalLabel' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h5 class='modal-title' id='detailModalLabel'>Detail Kerjasama</h5>
+                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        </div>
+                        <div class='modal-body'>
+                            <p><strong>Nama Instansi:</strong> {$namaMitra}</p>
+                            <p><strong>Status:</strong> {$status}</p>
+                            <p><strong>Kegiatan:</strong> {$landingPage['kegiatan']}</p>
+                            <p><strong>Deskripsi Kegiatan:</strong> {$landingPage['deskripsi_kegiatan']}</p>
+                            <p><strong>Dokumentasi:</strong> {$landingPage['dokumentasi']}</p>
+                        </div>
+                        <div class='modal-footer'>
+                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>";
+            $no++;
+        }
+    } else {
+        echo "<tr><td colspan='8' style='text-align: center;'>Tidak ada data.</td></tr>";
+    }
+    ?>
         </tbody>
     </table>
 </div>
