@@ -1,5 +1,5 @@
 <?php
-    include("../sikerma/database/koneksi.php");
+    include"../sikerma/database/koneksi.php";
 
     $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
 
@@ -13,7 +13,7 @@
 
         <div class="container">
                 <h2>Daftar Usulan</h2>
-                <a href="?p=daftarUsulan&aksi=input" class="btn btn-primary mb-3">Tambah Usulan</a>
+                <a href="?p=daftarUsulan&aksi=input" class=""></a>
                 <table id="daftar-usulan" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -55,13 +55,13 @@
                                                 <?php
                                                 if ($daftarUsulan['status_permohonan'] == 'Pending') {
                                                     ?>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id=<?= $daftarUsulan['id_usulan']; ?>&action=progress" class="btn btn-warning">Next Progress</a>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger">Tolak</a>
+                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_progres=<?= $daftarUsulan['id_usulan']; ?>&action=progress" class="btn btn-warning">Next Progress</a>
+                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_reject=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger">Tolak</a>
                                                     <?php
                                                 } elseif ($daftarUsulan['status_permohonan'] == 'In Progress') {
                                                     ?>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id=<?= $daftarUsulan['id_usulan']; ?>&action=approve" class="btn btn-success">Approve</a>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger">Tolak</a>
+                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_approve=<?= $daftarUsulan['id_usulan']; ?>&action=approve" class="btn btn-success">Approve</a>
+                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_reject=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger">Tolak</a>
                                                     <?php
                                                 } elseif ($daftarUsulan['status_permohonan'] == 'Approved') {
                                                     ?>
@@ -69,25 +69,23 @@
                                                     <?php
                                                 }
                                                 ?>
-                                                <a href="delete_data.php?id=<?= $daftarUsulan['id_usulan'];?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data?')">Hapus</a>
+                                                <a href="/view/superadmin/proses_daftar_usulan.php?proses=delete&id_hapus=<?= $daftarUsulan['id_usulan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')">
+                                                    <i class="bi bi-trash"></i> Hapus
+                                                </a>
                                             </div>
                                         </div>
                                     </td>
+
                                 </tr>
                                 <?php
                                 $no++;
                             }
-                        } else {
-                            ?>
-                            <tr>
-                                <td colspan="11" style="text-align: center;">Tidak ada data.</td>
-                            </tr>
-                            <?php
-                        }
+                        } 
                         ?>
                     </tbody>
                 </table>
         </div>
+        
 
 <?php
         break;
