@@ -21,42 +21,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "INSERT INTO tb_usulan_kerjasama (nama_instansi, nama_penjabat, nama_jabatan, nama_kontak_person, nomor_kontak, email, alamat, dokumen, status_permohonan) 
                 VALUES ('$nama_instansi', '$nama_penjabat', '$nama_jabatan', '$nama_kontak_person', '$nomor_kontak', '$email', '$alamat', '$dokumen_usulan', '$status_permohonan')";
 
-        if ($conn->query($sql) === TRUE) {
-            // Jika berhasil, tampilkan SweetAlert
-            echo "<script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Pengajuan Berhasil!',
-                    text: 'Data Anda akan diproses dalam 7 hari kerja. Kami akan menghubungi Anda melalui email.'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '../view/mitra/form_pengajuan.php';
+            if ($conn->query($sql) === TRUE) {
+                    // Jika berhasil
+                    
+                    echo" 
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Pengajuan Berhasil!',
+                            text: 'Data Anda akan diproses dalam 7 hari kerja. Kami akan menghubungi Anda melalui email.',
+                            timer: 3000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = '../../index.php';
+                        });
+                    </script>";
+                } else {
+                    // Jika gagal menyimpan ke database
+                    echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Pengajuan Gagal!',
+                            text: 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.'
+                        }).then(() => {
+                            window.location.href = '../../index.php';
+                        });
+                    </script>";
                     }
-                });
-            </script>";
-        } else {
-            // Jika gagal menyimpan ke database
-            echo "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Pengajuan Gagal!',
-                    text: 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '../form_pengajuan.php';
-                    }
-                });
-            </script>";
-        }
-    } else {
-        // Jika gagal upload file
-        echo "<script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Upload Gagal!',
-                text: 'Dokumen tidak berhasil diupload. Pastikan file sesuai format yang diminta.'
-            });
-        </script>";
+
+            }
     }
-}
 ?>
