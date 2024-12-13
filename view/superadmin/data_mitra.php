@@ -43,12 +43,12 @@
                                     <td><?= $dataMitra['provinsi']?></td>
                                     <td><?= $dataMitra['negara']?></td>
                                     <td><?= $dataMitra['website']?></td>
-                                    <td>
-                                    <a href="../../index.php?p=dataMitra&aksi=edit&id_edit=<?= $dataMitra['id_mitra'] ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
-                                    <a href="/view/superadmin/proses_data_mitra.php?proses=delete&id_hapus=<?= $dataMitra['id_mitra'] ?>"
-                                         class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
-                                         class="bi bi-trash"></i>
-                                    </a>
+                                    <td class="text-nowrap">
+                                        <a href="../../index.php?p=dataMitra&aksi=edit&id_edit=<?= $dataMitra['id_mitra'] ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                        <a href="/view/superadmin/proses_data_mitra.php?proses=delete&id_hapus=<?= $dataMitra['id_mitra'] ?>"
+                                                class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                                class="bi bi-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                              <?php

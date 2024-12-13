@@ -33,7 +33,7 @@
                                                 <td>
                                                 <a href="/upload/img/<?php echo htmlspecialchars($dataKegiatan['dokumentasi']); ?>" target="_blank" download>Lihat Gambar</a>
                                                 </td>
-                                                <td>
+                                                <td class="text-nowrap">
                                                 <a href="../../index.php?p=dataKegiatan&aksi=edit&id_edit=<?= $dataKegiatan['id_kegiatan'] ?>" class="btn btn-warning">Edit</a>
                                                     <a href="/view/superadmin/proses_kegiatan.php?proses=delete&id_hapus=<?= $dataKegiatan['id_kegiatan'] ?>"
                                                     class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i

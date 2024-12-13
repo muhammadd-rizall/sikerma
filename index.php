@@ -55,15 +55,18 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     <i class="fas fa-home me-2"></i> <span class="menu-text">Home</span>
   </a>
 
+  
+   <!-- menu daftar mitra -->
+  <a href="index.php?p=dataMitra" class="menu-item text-white d-flex align-items-center mb-2">
+  <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mitra</span>
+  </a>
+
   <!-- menu data mouo moa -->
   <a href="index.php?p=dataMouMoa" class="menu-item text-white d-flex align-items-center mb-2">
   <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mou/Moa</span>
   </a>
 
-  <!-- menu daftar mitra -->
-  <a href="index.php?p=dataMitra" class="menu-item text-white d-flex align-items-center mb-2">
-  <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mitra</span>
-  </a>
+  
 
   <!-- menu data kegiatan -->
   <a href="index.php?p=dataKegiatan" class="menu-item text-white d-flex align-items-center mb-2">

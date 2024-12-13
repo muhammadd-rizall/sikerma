@@ -49,7 +49,7 @@ switch ($aksi):
                                                     target="_blank">Lihat</a>
 
                                             </td>
-                                            <td>
+                                            <td class="text-nowrap">
                                                 <a href="../../index.php?p=dataMouMoa&aksi=edit&id_edit=<?= $dataMouMoa['id_mou_moa'] ?>" class="btn btn-warning">Edit</a>
                                                 <a href="/view/superadmin/proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataMouMoa['id_mou_moa'] ?>"
                                                     class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i

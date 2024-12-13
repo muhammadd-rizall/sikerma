@@ -45,19 +45,30 @@
   include "database/koneksi.php";
 
   // Query untuk mengambil data jumlah berdasarkan jenis kerjasama
-  $sql = "SELECT mitra.negara, COUNT(mitra.negara) AS jumlah FROM tb_mou_moa AS mou_moa JOIN tb_mitra AS mitra ON mou_moa.id_mitra = mitra.id_mitra GROUP BY mitra.negara";
+  $sql = "SELECT mou_moa.jenis_kerjasama, 
+       CASE  
+           WHEN mitra.negara = 'Indonesia' THEN 'Nasional' 
+           ELSE 'Internasional' 
+       END AS kategori,
+       COUNT(*) AS jumlah 
+FROM tb_mou_moa AS mou_moa 
+JOIN tb_mitra AS mitra ON mou_moa.id_mitra = mitra.id_mitra 
+GROUP BY mou_moa.jenis_kerjasama, kategori;
+";
   $query = mysqli_query($conn, $sql);
 
   // Menyiapkan array untuk data
   $data = [
-      'MoA' => 0,
-      'MoU' => 0,
-      'IA' => 0
+     'MoU' => ['Nasional' => 0, 'Internasional' => 0],
+    'MoA' => ['Nasional' => 0, 'Internasional' => 0],
+    'IA' => ['Nasional' => 0, 'Internasional' => 0],
   ];
 
   // Mengisi array dengan hasil query
   while($row = mysqli_fetch_array($query)){
-    $data[$row['negara']] = $row['jumlah'];
+    $jenis = $row['jenis_kerjasama'];
+    $kategori = $row['kategori'];
+    $data[$jenis][$kategori] = (int)$row['jumlah'];
   }
 
   // Encode data ke format JSON untuk digunakan di JavaScript
