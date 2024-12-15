@@ -55,38 +55,73 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     <i class="fas fa-home me-2"></i> <span class="menu-text">Home</span>
   </a>
 
+
+    <?php
+        if ($level == 'superadmin' || $level == 'admin') :  
+    ?>
   
-   <!-- menu daftar mitra -->
-  <a href="index.php?p=dataMitra" class="menu-item text-white d-flex align-items-center mb-2">
-  <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mitra</span>
-  </a>
+        <!-- menu daftar mitra -->
+        <a href="index.php?p=dataMitra" class="menu-item text-white d-flex align-items-center mb-2">
+        <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mitra</span>
+        </a>
 
-  <!-- menu data mouo moa -->
-  <a href="index.php?p=dataMouMoa" class="menu-item text-white d-flex align-items-center mb-2">
-  <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mou/Moa</span>
-  </a>
+        <!-- menu data mouo moa -->
+        <a href="index.php?p=dataMouMoa" class="menu-item text-white d-flex align-items-center mb-2">
+        <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mou/Moa</span>
+        </a>
 
-  
+        
 
-  <!-- menu data kegiatan -->
-  <a href="index.php?p=dataKegiatan" class="menu-item text-white d-flex align-items-center mb-2">
-  <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Kegiatan</span>
-  </a>
+        <!-- menu data kegiatan -->
+        <a href="index.php?p=dataKegiatan" class="menu-item text-white d-flex align-items-center mb-2">
+        <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Kegiatan</span>
+        </a>
 
-  <!-- menu daftar usulan kerjasama -->
-  <a href="index.php?p=daftarUsulan" class="menu-item text-white d-flex align-items-center mb-2">
-    <i class="fas fa-list me-2"></i> <span class="menu-text">Daftar Usulan Kerja Sama</span>
-  </a>
+        <!-- menu daftar usulan kerjasama -->
+        <a href="index.php?p=daftarUsulan" class="menu-item text-white d-flex align-items-center mb-2">
+          <i class="fas fa-list me-2"></i> <span class="menu-text">Daftar Usulan Kerja Sama</span>
+        </a>
+
+     <?php
+          endif;
+     ?>
 
 
-  <!-- form usulan kerjasama -->
-  <a href="index.php?p=formUsulan" class="menu-item text-white d-flex align-items-center mb-4">
-    <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Pengajuan Kerja Sama</span>
-  </a>
+    <?php
+        if($level == 'mitra'):
+    ?>
+      <!-- form usulan kerjasama -->
+      <a href="index.php?p=formUsulan" class="menu-item text-white d-flex align-items-center mb-4">
+        <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Pengajuan Kerja Sama</span>
+      </a>
 
-  <a href="index.php?p=user" class="menu-item text-white d-flex align-items-center mb-4">
-    <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Tabel User</span>
-  </a>
+    <?php
+        endif;
+    ?>
+
+
+    <?php
+        if($level == 'superadmin'):
+    ?>
+      <a href="index.php?p=user" class="menu-item text-white d-flex align-items-center mb-4">
+        <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Tabel User</span>
+      </a>
+
+    <?php
+        endif;
+    ?>
+
+
+    <?php
+        if($level == 'jurusan'):
+    ?>
+      <a href="index.php?p=daftarMitra" class="menu-item text-white d-flex align-items-center mb-4">
+        <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Daftar Mitrar</span>
+      </a>
+
+    <?php
+        endif;
+    ?>
 
   <hr style="border-color: rgba(255, 255, 255, 5.2); margin-top: 200px;">
 
@@ -145,9 +180,11 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
           if ($page == "formUsulan") include "view/mitra/form_pengajuan.php";
           if ($page == "daftarUsulan") include "view/superadmin/daftar_usulan.php";
 
-        } elseif ($_SESSION['level_user'] == 'jurusan') {
+        } elseif ($level == 'jurusan') {
+          $page = isset($_GET['p']) ? $_GET['p'] : "home";
           if ($page == "home") include "home.php";
           if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
+          if ($page == "daftarMitra") include "view/jurusan/daftar_mitra.php";
 
         }
         ?>
@@ -234,6 +271,20 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     $(document).ready(function () {
         // Inisialisasi DataTable pada tabel daftar usulan
         $('#daftar-dokumen').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Inisialisasi DataTable pada tabel daftar usulan
+        $('#daftar-mitra').DataTable({
             "paging": true,
             "searching": true,
             "ordering": true,

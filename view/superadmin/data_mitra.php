@@ -6,57 +6,57 @@
 
         <div class="container">
                 <h2>Data Mitra</h2>
-                <a href="?p=dataMitra&aksi=input" class="btn btn-primary mb-2">Tambah Data Mitra</a>
-                <table id="tabel-mitra" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Instansi</th>
-                            <th>Email Instansi</th>
-                            <th>Bidang Usaha</th>
-                            <th>Nomor Telphone</th>
-                            <th>Alamat Instansi</th>
-                            <th>kota</th>
-                            <th>Provinsi</th>
-                            <th>Negara</th>
-                            <th>Website</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <?php
-                            include ("../sikerma/database/koneksi.php");
-                        
-                            $no = 1;
-                            $ambil = mysqli_query($conn, "SELECT * FROM tb_mitra");
-                            while ($dataMitra = mysqli_fetch_array($ambil)) :
-                       ?>
+                <div class="table-responsive"> 
+                        <a href="?p=dataMitra&aksi=input" class="btn btn-primary mb-2">Tambah Data Mitra</a>
+                        <table id="tabel-mitra" class="table table-bordered table-striped ">
+                        <thead>
                                 <tr>
-                                    <td><?= $no ?></td>
-                                    <td><?= $dataMitra['nama_instansi']?></td>
-                                    <td><?= $dataMitra['email_instansi']?></td>
-                                    <td><?= $dataMitra['bidang_usaha']?></td>
-                                    <td><?= $dataMitra['no_telp']?></td>
-                                    <td><?= $dataMitra['alamat_instansi']?></td>
-                                    <td><?= $dataMitra['kota']?></td>
-                                    <td><?= $dataMitra['provinsi']?></td>
-                                    <td><?= $dataMitra['negara']?></td>
-                                    <td><?= $dataMitra['website']?></td>
-                                    <td class="text-nowrap">
-                                        <a href="../../index.php?p=dataMitra&aksi=edit&id_edit=<?= $dataMitra['id_mitra'] ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
-                                        <a href="/view/superadmin/proses_data_mitra.php?proses=delete&id_hapus=<?= $dataMitra['id_mitra'] ?>"
-                                                class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
-                                                class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
+                                <th>No</th>
+                                <th>Nama Instansi</th>
+                                <th>Email Instansi</th>
+                                <th>Bidang Usaha</th>
+                                <th>Nomor Telphone</th>
+                                <th>Alamat Instansi</th>
+                                <th>kota</th>
+                                <th>Provinsi</th>
+                                <th>Website</th>
+                                <th>Aksi</th>
                                 </tr>
-                             <?php
-                                $no++;
-                                endwhile;
-                             ?>
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                                <?php
+                                include ("../sikerma/database/koneksi.php");
+                                
+                                $no = 1;
+                                $ambil = mysqli_query($conn, "SELECT * FROM tb_mitra");
+                                while ($dataMitra = mysqli_fetch_array($ambil)) :
+                        ?>
+                                        <tr>
+                                        <td><?= $no ?></td>
+                                        <td><?= $dataMitra['nama_instansi']?></td>
+                                        <td><?= $dataMitra['email_instansi']?></td>
+                                        <td><?= $dataMitra['bidang_usaha']?></td>
+                                        <td><?= $dataMitra['no_telp']?></td>
+                                        <td><?= $dataMitra['alamat_instansi']?></td>
+                                        <td><?= $dataMitra['kota']?></td>
+                                        <td><?= $dataMitra['provinsi']?></td>
+                                        <td><?= $dataMitra['website']?></td>
+                                        <td class="text-nowrap">
+                                                <a href="../../index.php?p=dataMitra&aksi=edit&id_edit=<?= $dataMitra['id_mitra'] ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                                <a href="/view/superadmin/proses_data_mitra.php?proses=delete&id_hapus=<?= $dataMitra['id_mitra'] ?>"
+                                                        class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                                        class="bi bi-trash"></i>
+                                                </a>
+                                        </td>
+                                        </tr>
+                                <?php
+                                        $no++;
+                                        endwhile;
+                                ?>
+                        </tbody>
+                        </table>
+                </div>
         </div>
         
         <?php
@@ -108,12 +108,6 @@
                                 <div class="mb-3">
                                 <label for="provinsi" class="form-label">Provinsi</label>
                                 <input type="text" name="provinsi" id="provinsi" class="form-control" required>
-                                </div>
-
-                                <!-- Negara -->
-                                <div class="mb-3">
-                                <label for="negara" class="form-label">Negara</label>
-                                <input type="text" name="negara" id="negara" class="form-control">
                                 </div>
 
                                 <!-- Website -->
@@ -184,12 +178,6 @@
                                 <div class="mb-3">
                                         <label for="provinsi" class="form-label">Provinsi</label>
                                         <input type="text" name="provinsi" id="provinsi" class="form-control" value="<?=$dataMitra['provinsi'] ?>" required>
-                                </div>
-
-                                <!-- Negara -->
-                                <div class="mb-3">
-                                        <label for="negara" class="form-label">Negara</label>
-                                        <input type="text" name="negara" id="negara" class="form-control" value="<?=$dataMitra['negara'] ?>">
                                 </div>
 
                                 <!-- Website -->

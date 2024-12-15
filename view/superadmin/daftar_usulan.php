@@ -49,7 +49,7 @@
                                         <a href="/upload/documents/<?= htmlspecialchars($daftarUsulan['dokumen']); ?>" target="_blank">Lihat</a>
                                     </td>
                                     <td><?= htmlspecialchars($daftarUsulan['status_permohonan']); ?></td>
-                                    <td class="action-buttons text-nowrap">
+                                    <td class="action-buttons text-nowarp">
                                         <div class="row">
                                             <div class="col-12">
                                                 <?php

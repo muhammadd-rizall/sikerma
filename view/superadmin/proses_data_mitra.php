@@ -10,7 +10,6 @@
                                                         alamat_instansi,
                                                         kota,
                                                         provinsi,
-                                                        negara,
                                                         website) 
                                                         VALUES('$_POST[nama_instansi]',
                                                         '$_POST[email_instansi]',
@@ -19,7 +18,6 @@
                                                         '$_POST[alamat_instansi]',
                                                         '$_POST[kota]',
                                                         '$_POST[provinsi]',
-                                                        '$_POST[negara]',
                                                         '$_POST[website]')");
             if($sql) {
                 echo  "<script>window.location='../../../index.php?p=dataMitra'</script>";
@@ -41,7 +39,6 @@
                                         alamat_instansi = '$_POST[alamat_instansi]',
                                         kota = '$_POST[kota]',
                                         provinsi = '$_POST[provinsi]',
-                                        negara = '$_POST[negara]',
                                         website = '$_POST[website]'
                                         WHERE id_mitra = '$_POST[id_mitra]'");
         
