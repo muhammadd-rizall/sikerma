@@ -7,9 +7,13 @@ switch ($aksi):
     case "list":
         // Query untuk mengambil data dari tabel `tb_mitra`
         $sql = "SELECT tb_mou_moa.no_mou_moa, tb_mitra.nama_instansi, tb_mou_moa.jenis_kerjasama, tb_mou_moa.topik_kerjasama, 
-        tb_mou_moa.jangka_waktu, tb_mou_moa.awal_kerjasama, tb_mou_moa.akhir_kerjasama, tb_mou_moa.jurusan_terkait, tb_mou_moa.keterangan   
-        FROM tb_mou_moa JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra";
+        tb_mou_moa.jangka_waktu, tb_mou_moa.awal_kerjasama, tb_mou_moa.akhir_kerjasama, tb_mou_moa.jurusan_terkait, 
+        tb_mou_moa.keterangan FROM tb_mou_moa JOIN tb_mitra  ON tb_mou_moa.id_mitra = tb_mitra.id_mitra ";
+
+
         $result = $conn->query($sql);
+
+        var_dump($result);
         
 ?>
 

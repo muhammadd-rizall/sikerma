@@ -1,10 +1,47 @@
+<?php
+// Sertakan file koneksi database
+include "database/koneksi.php";
+
+// Cek koneksi database
+if (!$conn) {
+    die("Koneksi database gagal: " . mysqli_connect_error());
+}
+
+// Query untuk mengambil jumlah berdasarkan jenis kerjasama
+$sql = "SELECT jenis_kerjasama from tb_mou_moa";
+$query = mysqli_query($conn, $sql);
+
+// Menyiapkan array default
+$data = [
+    'MOA' => 0,
+    'MOU' => 0,
+    'IA' => 0
+];
+
+// Mengisi array dengan hasil query
+if ($query) {
+    while ($row = mysqli_fetch_assoc($query)) {
+        $jenis = $row['jenis_kerjasama'];
+        $jumlah = (int) $row['jumlah'];
+        if (array_key_exists($jenis, $data)) {
+            $data[$jenis] = $jumlah;
+        }
+    }
+}
+
+
+
+// Encode data ke format JSON
+$data_json = json_encode($data);
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grafik Statistik Kerjasama</title>
-  <!-- Tambahkan Bootstrap CSS -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -12,7 +49,7 @@
   <div class="container my-5">
     <h1 class="text-center mb-4">Statistik Kerjasama</h1>
     <div class="row justify-content-center">
-      <!-- Card untuk grafik -->
+      <!-- Card untuk grafik MoA -->
       <div class="col-lg-4 mb-4">
         <div class="card">
           <div class="card-body">
@@ -21,6 +58,7 @@
           </div>
         </div>
       </div>
+      <!-- Card untuk grafik MoU -->
       <div class="col-lg-4 mb-4">
         <div class="card">
           <div class="card-body">
@@ -29,6 +67,7 @@
           </div>
         </div>
       </div>
+      <!-- Card untuk grafik IA -->
       <div class="col-lg-4 mb-4">
         <div class="card">
           <div class="card-body">
@@ -40,49 +79,18 @@
     </div>
   </div>
 
-  <!-- PHP untuk mendapatkan data dari database -->
-  <?php
-  include "database/koneksi.php";
-
-  // Query untuk mengambil data jumlah berdasarkan jenis kerjasama
-  $sql = "SELECT mou_moa.jenis_kerjasama, 
-       CASE  
-           WHEN mitra.negara = 'Indonesia' THEN 'Nasional' 
-           ELSE 'Internasional' 
-       END AS kategori,
-       COUNT(*) AS jumlah 
-FROM tb_mou_moa AS mou_moa 
-JOIN tb_mitra AS mitra ON mou_moa.id_mitra = mitra.id_mitra 
-GROUP BY mou_moa.jenis_kerjasama, kategori;
-";
-  $query = mysqli_query($conn, $sql);
-
-  // Menyiapkan array untuk data
-  $data = [
-     'MoU' => ['Nasional' => 0, 'Internasional' => 0],
-    'MoA' => ['Nasional' => 0, 'Internasional' => 0],
-    'IA' => ['Nasional' => 0, 'Internasional' => 0],
-  ];
-
-  // Mengisi array dengan hasil query
-  while($row = mysqli_fetch_array($query)){
-    $jenis = $row['jenis_kerjasama'];
-    $kategori = $row['kategori'];
-    $data[$jenis][$kategori] = (int)$row['jumlah'];
-  }
-
-  // Encode data ke format JSON untuk digunakan di JavaScript
-  $data_json = json_encode($data);
-  ?>
-
-  <!-- Script untuk membuat grafik -->
+  <!-- Debugging Data dari PHP -->
   <script>
-    // Ambil data dari PHP
+    // Data dari PHP
     const data = <?php echo $data_json; ?>;
+    console.log('Data dari PHP:', data);
 
-    // Data untuk setiap jenis kerjasama
+    // Data untuk grafik
     const labels = Object.keys(data);
     const values = Object.values(data);
+
+    console.log('Labels:', labels);
+    console.log('Values:', values);
 
     // Warna untuk grafik
     const colors = [
@@ -98,16 +106,17 @@ GROUP BY mou_moa.jenis_kerjasama, kategori;
     ];
 
     // Fungsi untuk membuat grafik
-    function createChart(ctxId, chartType) {
+    function createChart(ctxId, chartType, labelName) {
       const ctx = document.getElementById(ctxId).getContext('2d');
       new Chart(ctx, {
         type: chartType,
         data: {
-          labels: labels,
+          labels: [labelName],
           datasets: [{
-            data: values,
-            backgroundColor: colors,
-            borderColor: borderColors,
+            label: labelName,
+            data: [data[labelName]],
+            backgroundColor: colors[labels.indexOf(labelName)],
+            borderColor: borderColors[labels.indexOf(labelName)],
             borderWidth: 1
           }]
         },
@@ -124,9 +133,9 @@ GROUP BY mou_moa.jenis_kerjasama, kategori;
     }
 
     // Membuat grafik MoA, MoU, dan IA
-    createChart('grafikMoA', 'doughnut');
-    createChart('grafikMoU', 'pie');
-    createChart('grafikIA', 'bar');
+    createChart('grafikMoA', 'doughnut', 'MoA');
+    createChart('grafikMoU', 'pie', 'MoU');
+    createChart('grafikIA', 'bar', 'IA');
   </script>
 </body>
 </html>

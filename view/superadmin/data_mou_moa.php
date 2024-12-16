@@ -45,10 +45,19 @@ switch ($aksi):
                                             <td><?= $dataMouMoa['jurusan_terkait'] ?></td>
                                             <td><?= $dataMouMoa['keterangan'] ?></td>
                                             <td>
-                                                <a href="/upload/documents/<?php echo htmlspecialchars($dataMouMoa['file_dokumen']); ?>"
-                                                    target="_blank">Lihat</a>
+                                                <?php
+                                                $fileDokumen = $dataMouMoa['file_dokumen'];
 
+                                                // Cek apakah tautan berasal dari Google Drive
+                                                if (strpos($fileDokumen, 'drive.google.com') !== false): ?>
+                                                    <!-- Tampilkan tombol untuk membuka di Google Drive -->
+                                                    <a href="<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary" >Lihat Dokumen</a>
+                                                <?php else: ?>
+                                                    <!-- Tampilkan tombol untuk dokumen lokal -->
+                                                    <a href="/upload/documents/<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary">Lihat Dokumen</a>
+                                                <?php endif; ?>
                                             </td>
+
                                             <td class="text-nowrap">
                                                 <a href="../../index.php?p=dataMouMoa&aksi=edit&id_edit=<?= $dataMouMoa['id_mou_moa'] ?>" class="btn btn-warning">Edit</a>
                                                 <a href="/view/superadmin/proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataMouMoa['id_mou_moa'] ?>"
