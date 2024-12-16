@@ -294,6 +294,6 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
             }
         });
     });
-</script>
+
 </body>
 </html>

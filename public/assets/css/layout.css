@@ -136,3 +136,21 @@ body {
     font-size: 1.2rem;
   }
 }
+
+/* DataTable styling */
+.dataTables_wrapper {
+  margin-top: 20px;
+}
+
+table.dataTable {
+  width: 100% !important;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table.dataTable th,
+table.dataTable td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
