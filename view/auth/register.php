@@ -3,7 +3,7 @@
     session_start();
 
     if (isset($_POST["username"])) {
-      include "../../database/koneksi.php";
+        include "../../database/koneksi.php";
 
         // Mengambil data dari form
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
@@ -11,9 +11,12 @@
         $email = mysqli_real_escape_string($conn, $_POST["email"]);
         $password = md5(mysqli_real_escape_string($conn, $_POST["password"]));
 
+        // Level default sebagai 'mitra'
+        $level = 'mitra';
 
         // Query untuk menyimpan data ke tabel tb_user
-        $query = "INSERT INTO tb_user (username, nama, email, password) VALUES ('$username', '$nama', '$email', '$password')";
+        $query = "INSERT INTO tb_user (username, nama, email, password, level_user) 
+                  VALUES ('$username', '$nama', '$email', '$password', '$level')";
 
         // Eksekusi query dan cek apakah berhasil
         if (mysqli_query($conn, $query)) {
@@ -35,12 +38,13 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Registrasi Gagal!',
-                    text: 'Terjadi kesalahan saat menyimpan data.',
+                    text: 'Terjadi kesalahan saat menyimpan data. Coba lagi.',
                 });
             </script>";
         }
     }
 ?>
+
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">

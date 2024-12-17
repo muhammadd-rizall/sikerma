@@ -53,14 +53,6 @@ foreach ($years as $year) {
     $ia_per_year[$year] = $ia_per_year[$year] ?? 0;
 }
 
-// Debugging: Cek apakah data tahun dan jumlah per tahun sudah benar
-// echo '<pre>';
-//  var_dump($years);          // Menampilkan tahun-tahun yang diambil
-// var_dump($mou_per_year);   // Menampilkan data MOU per tahun
-// var_dump($moa_per_year);   // Menampilkan data MOA per tahun
-// var_dump($ia_per_year);    // Menampilkan data IA per tahun
-// echo '</pre>';
-// exit;
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +68,6 @@ foreach ($years as $year) {
             justify-content: space-between;
             gap: 20px;
             flex-wrap: wrap;
-            margin-top: 50px;
         }
         .card {
             background-color: #0e2c4b;

@@ -95,6 +95,11 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Pengajuan Kerja Sama</span>
       </a>
 
+      <!-- proses usulan -->
+      <a href="index.php?p=prosesUsulan" class="menu-item text-white d-flex align-items-center mb-4">
+        <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Proses Usulan</span>
+      </a>
+
     <?php
         endif;
     ?>
@@ -177,7 +182,6 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
           if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
           if ($page == "dataMitra") include "view/superadmin/data_mitra.php";
           if ($page == "dataKegiatan") include "view/superadmin/data_kegiatan.php";
-          if ($page == "formUsulan") include "view/mitra/form_pengajuan.php";
           if ($page == "daftarUsulan") include "view/superadmin/daftar_usulan.php";
 
         } elseif ($level == 'jurusan') {
@@ -185,6 +189,13 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
           if ($page == "home") include "home.php";
           if ($page == "dataMouMoa") include "view/superadmin/data_mou_moa.php";
           if ($page == "daftarMitra") include "view/jurusan/daftar_mitra.php";
+
+        }
+         elseif ($level == 'mitra') {
+          $page = isset($_GET['p']) ? $_GET['p'] : "home";
+          if ($page == "home") include "home.php";
+          if ($page == "formUsulan") include "view/mitra/form_pengajuan.php";
+          if ($page == "prosesUsulan") include "view/mitra/proses_usulan.php";
 
         }
         ?>
