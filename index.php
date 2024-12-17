@@ -62,7 +62,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   
         <!-- menu daftar mitra -->
         <a href="index.php?p=dataMitra" class="menu-item text-white d-flex align-items-center mb-2">
-        <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Mitra</span>
+        <i class="fa fa-handshake"></i> <span class="menu-text">Data Mitra</span>
         </a>
 
         <!-- menu data mouo moa -->
@@ -74,12 +74,12 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
 
         <!-- menu data kegiatan -->
         <a href="index.php?p=dataKegiatan" class="menu-item text-white d-flex align-items-center mb-2">
-        <i class="bi bi-file-earmark-fill"></i> <span class="menu-text">Data Kegiatan</span>
+        <i class="fa fa-clipboard-list"></i> <span class="menu-text">Data Kegiatan</span>
         </a>
 
         <!-- menu daftar usulan kerjasama -->
         <a href="index.php?p=daftarUsulan" class="menu-item text-white d-flex align-items-center mb-2">
-          <i class="fas fa-list me-2"></i> <span class="menu-text">Daftar Usulan Kerja Sama</span>
+        <i class="fa fa-paper-plane"></i> <span class="menu-text">Daftar Usulan Kerja Sama</span>
         </a>
 
      <?php
@@ -109,7 +109,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         if($level == 'superadmin'):
     ?>
       <a href="index.php?p=user" class="menu-item text-white d-flex align-items-center mb-4">
-        <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Tabel User</span>
+      <i class="fa fa-id-badge"></i> <span class="menu-text">Tabel User</span>
       </a>
 
     <?php
@@ -121,7 +121,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         if($level == 'jurusan'):
     ?>
       <a href="index.php?p=daftarMitra" class="menu-item text-white d-flex align-items-center mb-4">
-        <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Daftar Mitrar</span>
+      <i class="fa fa-user-tie"></i> <span class="menu-text">Daftar Mitrar</span>
       </a>
 
     <?php
@@ -305,6 +305,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
             }
         });
     });
+  </script>
 
 </body>
 </html>
