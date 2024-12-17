@@ -11,6 +11,8 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link rel="stylesheet" href="../../public/assets/css/layout.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <title>simkerma PNP</title>
 </head>
 <body>
@@ -162,9 +164,10 @@
                                 <td><?php echo $row['akhir_kerjasama'] ?? '-'; ?></td>
                                 <td><?php echo $row['keterangan'] ?? '-'; ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal<?php echo $no; ?>">
-                                        Detail
-                                    </button>
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detailModal<?php echo $no; ?>">
+                                <i class="fa fa-circle-info fa-2x"></i>
+                                </button>
+
                                 </td>
                             </tr>
                             <div class="modal fade" id="detailModal<?php echo $no; ?>" tabindex="-1">
@@ -184,7 +187,7 @@
                                             <p><strong>Dokumentasi:</strong> <?php echo $row['dokumentasi']; ?></p>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                            <button type="button" class="btn-tutup" data-bs-dismiss="modal">Tutup</button>
                                         </div>
                                     </div>
                                 </div>
@@ -216,18 +219,18 @@
                 }],
             },
             options: {
-                responsive: true, // Grafik tetap responsif
-                maintainAspectRatio: false, // Nonaktifkan aspek rasio bawaan
+                responsive: true, 
+                maintainAspectRatio: false, 
                 layout: {
-                    padding: 10, // Berikan padding untuk tampilan lebih rapi
+                    padding: 10, 
                 },
                 plugins: {
                     legend: {
-                        display: true, // Tampilkan legenda jika diperlukan
-                        position: 'top', // Atur posisi legenda di bawah
+                        display: true, 
+                        position: 'top', 
                     },
                     tooltip: {
-                        enabled: true, // Aktifkan tooltip
+                        enabled: true, 
                     },
                 },
                 elements: {

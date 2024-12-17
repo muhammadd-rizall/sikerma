@@ -154,8 +154,8 @@ body {
 }
 
 .table th {
-    background-color: #007bff;
-    color: #ffffff;
+    background-color: #ff7e5f;
+    color: black;
     text-transform: uppercase;
     font-weight: bold;
 }
@@ -169,28 +169,35 @@ body {
 }
 
 /* Button Styling */
-.btn-info {
-    background-color: #17a2b8;
-    color: #ffffff;
+.btn {
+    color: #ff7e5f;
     border: none;
-    padding: 8px 12px;
+    padding: 12px 12px;
     font-size: 14px;
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
 }
 
-.btn-info:hover {
-    background-color: #138496;
+.btn:hover {
+    color: #feb47b;
 }
 
+.btn-tutup {
+  background-color: #ff7e5f;
+  color: black;
+}
+
+.btn-tutup:hover {
+  background-color: #feb47b;
+}
 /* Modal Styling */
 .modal-content {
     border-radius: 8px;
 }
 
 .modal-header {
-    background-color: #007bff;
+    background-color: #ff7e5f;
     color: #ffffff;
     border-bottom: 1px solid #dee2e6;
 }
@@ -225,16 +232,19 @@ body {
 
 /* Card Styling */
 .card {
-  background-color: #0e2c4b;
-  color: white;
+  background-color: #F8FAFC;
+  color: #ff7e5f;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 20px;
   padding: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   margin: 10px;
   flex: 1;
   width: 300px;
   transition: all 0.3s ease;
+  border-color: #ff7e5f;
+  border-width: 3px;
+  
 }
 
 .card:hover {
