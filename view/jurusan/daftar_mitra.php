@@ -13,7 +13,6 @@ switch ($aksi):
 
         $result = $conn->query($sql);
 
-        var_dump($result);
         
 ?>
 
