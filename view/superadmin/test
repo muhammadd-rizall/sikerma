@@ -1,0 +1,104 @@
+<?php
+include "../../database/koneksi.php"; // Sesuaikan path ke file koneksi
+
+// Ambil parameter dari URL
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+$id_usulan = isset($_GET['id_progres']) ? $_GET['id_progres'] : (isset($_GET['id_reject']) ? $_GET['id_reject'] : (isset($_GET['id_approve']) ? $_GET['id_approve'] : ''));
+
+// Fungsi untuk memperbarui status berdasarkan aksi
+function updateStatus($conn, $id, $status) {
+    $sql = "UPDATE tb_usulan_kerjasama SET status_permohonan = ? WHERE id_usulan = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $status, $id);
+
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getUsulanDetails($conn, $id) {
+    $sql = "SELECT nama_instansi, email FROM tb_usulan_kerjasama WHERE id_usulan = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc(); // Mengembalikan data sebagai array asosiatif
+}
+
+switch ($action) {
+    case 'progress':
+        // Ambil data nama_instansi dan email berdasarkan id_usulan
+        $usulanDetails = getUsulanDetails($conn, $id_usulan);
+
+        if ($usulanDetails && updateStatus($conn, $id_usulan, 'In Progress')) {
+            $nama_instansi = urlencode($usulanDetails['nama_instansi']); // Encode untuk URL
+            $email = urlencode($usulanDetails['email']); // Encode untuk URL
+            header("Location: /view/superadmin/email.php?id_usulan=$id_usulan&status_permohonan=In+Progress&nama_instansi=$nama_instansi&email=$email");
+            exit; // Pastikan untuk menghentikan eksekusi setelah header
+        } else {
+            echo "<script>alert('Gagal memperbarui status'); window.history.back();</script>";
+        }
+        break;
+
+    case 'approve':
+         // Ambil data nama_instansi dan email berdasarkan id_usulan
+         $usulanDetails = getUsulanDetails($conn, $id_usulan);
+        if ($usulanDetails && updateStatus($conn, $id_usulan, 'Approve')) {
+            $nama_instansi = urlencode($usulanDetails['nama_instansi']); // Encode untuk URL
+            $email = urlencode($usulanDetails['email']); // Encode untuk URL
+            header("Location: /view/superadmin/email.php?id_usulan=$id_usulan&status_permohonan=Approve&nama_instansi=$nama_instansi&email=$email");
+            exit; // Pastikan untuk menghentikan eksekusi setelah header
+        } else {
+            echo "<script>alert('Gagal memperbarui status'); window.history.back();</script>";
+        }
+        break;
+
+    case 'reject':
+         // Ambil data nama_instansi dan email berdasarkan id_usulan
+         $usulanDetails = getUsulanDetails($conn, $id_usulan);
+        if ($usulanDetails && updateStatus($conn, $id_usulan, 'Rejected')) {
+            $nama_instansi = urlencode($usulanDetails['nama_instansi']); // Encode untuk URL
+            $email = urlencode($usulanDetails['email']); // Encode untuk URL
+            header("Location: /view/superadmin/email.php?id_usulan=$id_usulan&status_permohonan=Rejected&nama_instansi=$nama_instansi&email=$email");
+            exit; // Pastikan untuk menghentikan eksekusi setelah header
+        } else {
+            echo "<script>alert('Gagal memperbarui status'); window.history.back();</script>";
+        }
+        break;
+
+    default:
+        echo "Aksi tidak valid.";
+        break;
+}
+
+// Penghapusan data
+if (isset($_GET['proses']) && $_GET['proses'] == 'delete') {
+    // Cek apakah parameter id_hapus ada
+    if (isset($_GET['id_hapus']) && !empty($_GET['id_hapus'])) {
+        $id_hapus = $_GET['id_hapus'];
+
+        // Mengecek apakah ID ada dalam database
+        $query = "SELECT id_usulan FROM tb_usulan_kerjasama WHERE id_usulan = '$id_hapus'";
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) == 0) {
+            echo "ID tidak ditemukan.";
+            exit;
+        }
+
+        // Melakukan penghapusan data
+        $hapus = mysqli_query($conn, "DELETE FROM tb_usulan_kerjasama WHERE id_usulan = '$id_hapus'");
+
+        if ($hapus) {
+            echo "<script>alert('Berhasil menghapus data');</script>";
+            echo  "<script>window.location='../../../index.php?p=daftarUsulan'</script>";
+        } else {
+            echo "<script>alert('Gagal menghapus data');</script>";
+        }
+    } else {
+        echo "ID tidak valid.";
+    }
+}
+?>
