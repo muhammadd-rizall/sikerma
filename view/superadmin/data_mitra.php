@@ -7,7 +7,7 @@
         <div class="container">
                 <h2>Data Mitra</h2>
                 <div class="table-responsive"> 
-                        <a href="?p=dataMitra&aksi=input" class="btn btn-primary mb-2">Tambah Data Mitra</a>
+                        <a href="?p=dataMitra&aksi=input" class="btn-add mt-4 mb-4"><i class="fa-sharp fa-solid fa-plus"></i> Data Mitra</a>
                         <table id="tabel-mitra" class="table table-bordered table-striped ">
                         <thead>
                                 <tr>

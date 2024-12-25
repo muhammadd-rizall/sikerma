@@ -1,37 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<?php
-session_start();
-
-if (isset($_POST["username"])) {
-    include "../../database/koneksi.php";
-    $username = $_POST["username"];
-    $password = md5($_POST["password"]); // Menggunakan md5 untuk enkripsi password
-    $level_user = $_POST["level_user"] ?? null;
-
-    // Query untuk mencari username dan password
-    $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' AND password = '$password'");
-
-    // Mengecek apakah data ditemukan
-    if (mysqli_num_rows($query) == 1) {
-        $row = mysqli_fetch_assoc($query); // Mengambil data pengguna
-        $_SESSION['login'] = true; 
-        $_SESSION['user'] = $username;
-        $_SESSION['level_user'] = $row['level_user']; // Menyimpan level_user dari database
-        $_SESSION['pw'] = $password; // Menyimpan password untuk referensi, meskipun tidak terlalu aman
-
-        // Redireksi ke halaman dashboard atau halaman yang sesuai
-        header("Location: /index.php");
-        exit();
-    } else {
-        echo "<script>alert('Login Gagal')</script>"; // Menampilkan pesan jika login gagal
-    }
-}
-?>
-
-
-
-
-
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -41,6 +7,8 @@ if (isset($_POST["username"])) {
     <title>Login Page</title>
 
     <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menambahkan Font Awesome untuk ikon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
       body {
         background: linear-gradient(0deg, #ff7e5f, #feb47b, #765285);
@@ -77,9 +45,64 @@ if (isset($_POST["username"])) {
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         transform: scale(1.05);
       }
+      .btn-back {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 20px; /* Ukuran font ikon */
+        padding: 0;
+        margin-top: 10px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .btn-back:hover {
+        color: #feb47b; /* Efek warna saat hover */
+      }
     </style>
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <?php
+    session_start();
+
+    if (isset($_POST["username"])) {
+        include "../../database/koneksi.php";
+        $username = $_POST["username"];
+        $password = md5($_POST["password"]); // Menggunakan md5 untuk enkripsi password
+        $level_user = $_POST["level_user"] ?? null;
+
+        // Query untuk mencari username dan password
+        $query = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' AND password = '$password'");
+
+        // Mengecek apakah data ditemukan
+        if (mysqli_num_rows($query) == 1) {
+            $row = mysqli_fetch_assoc($query); // Mengambil data pengguna
+            $_SESSION['login'] = true; 
+            $_SESSION['user'] = $username;
+            $_SESSION['level_user'] = $row['level_user']; // Menyimpan level_user dari database
+            $_SESSION['pw'] = $password; // Menyimpan password untuk referensi, meskipun tidak terlalu aman
+            $_SESSION['id_user'] = $row['id_user'];
+
+            // Redireksi ke halaman dashboard atau halaman yang sesuai
+            header("Location: /index.php");
+            exit();
+        } else {
+            // Menampilkan SweetAlert2 jika login gagal
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Gagal',
+                    text: 'Username atau Password yang Anda masukkan salah!',
+                    showConfirmButton: true
+                });
+            </script>";
+        } 
+    }
+    ?>
+
+
+
     <main class="form-signin w-100 m-auto">
       <div class="card" style="max-width: 400px; margin: auto;">
         <div class="card-body p-4">
@@ -102,9 +125,13 @@ if (isset($_POST["username"])) {
               <a href="../auth/register.php" class="text-decoration-none">Sign Up</a>
             </p>
           </form>
+          <!-- Tombol Kembali dengan Ikon -->
+          <a href="../general/landing_page.php" class="text-decoration-none"><button class="btn-back" onclick="javascript:history.back()">
+            <i class="fas fa-arrow-left text-warning"></i> Kembali
+          </button></a>
         </div>
       </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

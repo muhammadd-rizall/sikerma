@@ -10,14 +10,111 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <link rel="stylesheet" href="../../public/assets/css/layout.css">
+    <link rel="stylesheet" href="/public/assets/css/layout.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <title>simkerma PNP</title>
+
+    <style>
+    .test {
+        background-image: url(/public/assets/img/download.jpg);
+        background-color: rgba(255, 165, 0, 0.5);
+        background-size: cover;
+        background-position: center center;
+        background-blend-mode: multiply; /* atau overlay, screen, dsb. */
+    }
+    .navbar {
+        position: fixed;
+        top: 0;
+        z-index: 1030; /* Pastikan navbar tetap di atas elemen lainnya */
+        background-color: rgba(0, 0, 0, 0.8); /* Opsional: buat background semi-transparan */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opsional: tambahkan bayangan */
+    }
+    
+   /* Gaya untuk overlay popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Transparansi hitam */
+  display: none; /* Awalnya tersembunyi */
+  z-index: 1000; /* Pastikan di atas elemen lainnya */
+}
+
+/* Gaya untuk kontainer popup */
+.popup-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* Lebar default untuk layar kecil */
+  max-width: 600px; /* Lebar lebih besar untuk layar besar */
+  background: #fff; /* Warna latar belakang */
+  padding: 30px; /* Padding lebih besar */
+  border-radius: 12px; /* Tepi bulat */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Shadow tegas */
+  z-index: 1001;
+  overflow-y: auto; /* Scroll jika konten terlalu tinggi */
+  max-height: 85vh; /* Batas tinggi */
+}
+
+/* Tombol tutup */
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem; /* Ukuran lebih besar */
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-close:hover {
+  color: #ff5a5a; /* Warna saat hover */
+}
+
+/* Judul popup */
+.popup-content h3 {
+  margin: 0 0 20px;
+  font-size: 2rem; /* Ukuran lebih besar */
+  color: #333;
+  text-align: center;
+}
+
+/* Konten popup */
+.popup-content p {
+  margin: 15px 0;
+  line-height: 1.8;
+  font-size: 1.2rem; /* Ukuran font lebih besar */
+  color: #555;
+}
+
+/* Link kontak */
+.popup-content a {
+  color:rgb(231, 117, 4);
+  text-decoration: none;
+  font-weight: bold; /* Teks lebih menonjol */
+}
+
+.popup-content a:hover {
+  text-decoration: underline;
+}
+
+
+    
+
+   
+
+    </style>
+    
 </head>
 <body>
  <!-- Navbar -->
  <header class="header-area overlay">
+ 
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
                 <a href="#" class="navbar-brand">Simkerma PNP</a>
@@ -26,20 +123,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="main-nav">
                     <ul class="navbar-nav ms-auto">
-                        <li><a href="#" class="nav-item nav-link active">Statistik</a></li>
-                        <li><a href="#" class="nav-item nav-link">Kerja Sama</a></li>
-                        <li><a href="#" class="nav-item nav-link">Kontak</a></li>
-                        <li><a href="#" class="nav-item nav-link">Form Pengajuan</a></li>
-                        <li><a href="../auth/login.php" class="nav-item nav-link">Login</a></li>
+                        <li><a href="#chart-section" class="nav-item nav-link active">Statistik</a></li>
+                        <li><a href="#table-section" class="nav-item nav-link">Kerja Sama</a></li>
+                        <li><a href="#footer" class="nav-item nav-link">Kontak</a></li>
+                        <li><a href="#" class="nav-item nav-link">Login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="banner text-center py-5">
+        <div class="banner text-center py-5 test">
             <img src="../../public/assets/img/pnp.png" alt="PNP Logo" class="logopoli">
             <h1>Sistem Informasi Kerjasama</h1>
             <h1>Politeknik Negeri Padang</h1>
-            <a href="../auth/login.php" class="btn btn-primary mt-3"><i class="bi bi-box-arrow-in-right"></i> Masuk</a>
+            <a href="../auth/login.php" class="btn btn-primary mt-3"></i> Mulai Sekarang</a>
         </div>
     </header>
 
@@ -86,7 +182,7 @@
         ?>
 
         <!-- Kartu Statistik -->
-        <div class="container d-flex flex-wrap justify-content-center">
+        <div class="container d-flex flex-wrap justify-content-center" id="card-section">
             <?php foreach ($dataCounts as $key => $count): ?>
                 <div class="card">
                     <h3><?php echo $key; ?></h3>
@@ -97,7 +193,7 @@
         </div>
 
         <!-- chart -->
-        <div class="container mt-5">
+        <div class="container mt-5" id="chart-section">
             <h2 class="text-chart">Grafik Statistik Jumlah Kerjasama dan Data 5 Tahun Terakhir</h2>
 
             <div class="row d-flex align-items-center">
@@ -115,7 +211,7 @@
 
 
         <!-- Tabel Data Kerjasama -->
-        <div class="container mt-5">
+        <div class="container mt-5" id="table-section">
             <h2 class="text-chart">Daftar Dokumen Kerja Sama Politeknik Negeri Padang</h2>
             <table id="dokumen-daftar" class="table table-bordered table-striped">
                 <thead>
@@ -328,13 +424,13 @@ new Chart(chartPerYearCtx, {
 
     </main>
 
-    <footer class="bg-dark text-light py-3 mt-5">
+    <footer class="bg-dark text-light py-3 mt-5"id="footer">
         <div class="container text-center">
             <p class="mb-1">&copy; <?php echo date("Y"); ?> Politeknik Negeri Padang</p>
             <p class="small">
                 <a href="#" class="text-light text-decoration-none">Kebijakan Privasi</a> | 
                 <a href="#" class="text-light text-decoration-none">Syarat & Ketentuan</a> | 
-                <a href="mailto:contact@pnp.ac.id" class="text-light text-decoration-none">Hubungi Kami</a>
+                <a href="#" class="text-light text-decoration-none"  onclick ="openPopup()">Hubungi Kami</a>
             </p>
             <div>
                 <a href="https://www.instagram.com" target="_blank" class="text-light mx-2">
@@ -343,10 +439,38 @@ new Chart(chartPerYearCtx, {
             </div>
         </div>
     </footer>
+   <!-- Popup -->
+<div class="popup-overlay" id="popupKontak">
+  <div class="popup-content">
+    <button class="popup-close" onclick="closePopup()">×</button>
+    <h3>Kontak Kami</h3>
+    <p><strong>Email:</strong> <a href="mailto:contact@pnp.ac.id">contact@pnp.ac.id</a></p>
+    
+    <p><strong>Telepon:</strong> (0751) 123456</p>
+    <p><strong>Alamat:</strong> Jl. Kampus Limau Manis, Padang</p>
+    <p><strong>Website:</strong> <a href="https://www.pnp.ac.id/">www.pnp.id</a></p>
+    <p><strong>Instagram:</strong> 
+      <a href="https://www.instagram.com/politekniknegeripadang_pnp/?hl=id" target="_blank">@pnp_official</a>
+    </p>
+  </div>
+</div>
+
+
 
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+ function openPopup() {
+  document.getElementById('popupKontak').style.display = 'block';
+}
+
+function closePopup() {
+  document.getElementById('popupKontak').style.display = 'none';
+}
+
+</script>
+
 </body>
 </html>

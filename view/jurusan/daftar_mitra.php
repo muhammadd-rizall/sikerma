@@ -8,7 +8,7 @@ switch ($aksi):
         // Query untuk mengambil data dari tabel `tb_mitra`
         $sql = "SELECT tb_mou_moa.no_mou_moa, tb_mitra.nama_instansi, tb_mou_moa.jenis_kerjasama, tb_mou_moa.topik_kerjasama, 
         tb_mou_moa.jangka_waktu, tb_mou_moa.awal_kerjasama, tb_mou_moa.akhir_kerjasama, tb_mou_moa.jurusan_terkait, 
-        tb_mou_moa.keterangan FROM tb_mou_moa JOIN tb_mitra  ON tb_mou_moa.id_mitra = tb_mitra.id_mitra ";
+        tb_mou_moa.keterangan, tb_mou_moa.file_dokumen FROM tb_mou_moa JOIN tb_mitra  ON tb_mou_moa.id_mitra = tb_mitra.id_mitra ";
 
 
         $result = $conn->query($sql);
@@ -32,6 +32,7 @@ switch ($aksi):
                 <th>Akhir Kerjasama</th>
                 <th>Jurusan Terkait</th>
                 <th>Status</th>
+                <th>file dokumen</th>
                 <th>Download</th>
             </tr>
         </thead>
@@ -52,9 +53,24 @@ switch ($aksi):
                     <td><?= htmlspecialchars($daftarMitra['akhir_kerjasama']); ?></td>
                     <td><?= htmlspecialchars($daftarMitra['jurusan_terkait']); ?></td>
                     <td><?= htmlspecialchars($daftarMitra['keterangan']); ?></td>
+                    <td>
+                                <?php
+                                    $fileDokumen = $daftarMitra['file_dokumen'];
+
+                                        // Cek apakah tautan berasal dari Google Drive
+                                     if (strpos($fileDokumen, 'drive.google.com') !== false): ?>
+                                    <!-- Tampilkan tombol untuk membuka di Google Drive -->
+                                    <a href="<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary" ><i class="fa fa-eye"></i></a>
+                                    <?php else: ?>
+                                    <!-- Tampilkan tombol untuk dokumen lokal -->
+                                     <a href="/upload/documents/<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary" Download><i class="fa fa-eye"></i></a>
+                                    <?php endif; ?>
+                        </td>
+
                     <td class="text-nowrap">
-                        <a href="/view/jurusan/download_pdf.php?id=<?= htmlspecialchars($daftarMitra['no_mou_moa']); ?>" class="btn btn-success btn-sm">Download PDF</a>
+                        <a href="/view/jurusan/download_pdf.php?id=<?= htmlspecialchars($daftarMitra['no_mou_moa']); ?>" class="btn btn-success btn-sm"><i class="fa-solid fa-cloud-arrow-down"></i></a>
                     </td>
+                    
 
 
                 </tr>

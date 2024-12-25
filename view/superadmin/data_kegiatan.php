@@ -5,9 +5,9 @@
 ?>
 
 
-                <div class="container"></div>
-                        <h2 class="">Tabel Kegiatan</h2>
-                        <a href="?p=dataKegiatan&aksi=input" class="btn btn-primary mb-3 mt-10">Tambah Kegiatan</a>
+                
+                        <h2 class="mt-3">Tabel Kegiatan</h2>
+                        <a href="?p=dataKegiatan&aksi=input" class="btn-add mt-4 mb-4"><i class="fa-sharp fa-solid fa-plus"></i> Kegiatan</a>
                         <table id="tabel-kegiatan" class="table table-bordered table-striped">
                                 <thead>
                                         <tr>
@@ -45,7 +45,7 @@
                                     ?>
                             </tbody>
                         </table>
-                    </div>
+                    
 
     <?php
         break;

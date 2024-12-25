@@ -5,7 +5,7 @@
 ?>
 
         <h2>Tabel Users</h2>
-        <a href="?p=user&aksi=input" class="btn btn-primary mb-2">Tambah User</a>
+        <a href="?p=user&aksi=input" class="btn-add mt-4 mb-4"><i class="fa-sharp fa-solid fa-plus"></i> User</a>
         <table id="tabel-user" class="table table-bordered table-striped">
                 <thead>
                         <tr>

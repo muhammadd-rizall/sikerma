@@ -70,15 +70,34 @@ foreach ($years as $year) {
             flex-wrap: wrap;
         }
         .card {
-            background-color: #0e2c4b;
-            color: white;
+            background-color: #F8FAFC;
+            color: #ff7e5f;
             text-align: center;
-            border-radius: 8px;
+            border-radius: 20px;
             padding: 20px;
-            width: 300px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            margin: 10px;
             flex: 1;
-            box-sizing: border-box;
-        }
+            width: 300px;
+            transition: all 0.3s ease;
+            border-color: #ff7e5f;
+            border-width: 3px;
+            
+            }
+
+            .card:hover {
+            transform: translateY(-5px);
+            }
+
+            .card h3 {
+            margin: 10px 0;
+            font-size: 2.2rem;
+            }
+
+            .card .number {
+            font-size: 3rem;
+            font-weight: bold;
+            }
         .container-chart {
             display: flex;
             justify-content: space-between;

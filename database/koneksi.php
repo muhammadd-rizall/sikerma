@@ -3,7 +3,7 @@
         $host = "localhost";
         $user = "root";
         $pass = "";
-        $db   = "coba8";
+        $db   = "coba7";
 
         $conn = mysqli_connect( $host, $user, $pass, $db );
 
@@ -12,11 +12,11 @@
         }
         
 
-        if ($conn) {
-            echo "Koneksi database berhasil.";
-        } else {
-            die("Koneksi database gagal.");
-        }
+        // if ($conn) {
+        //     echo "Koneksi database berhasil.";
+        // } else {
+        //     die("Koneksi database gagal.");
+        // }
 
         
 

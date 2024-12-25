@@ -21,15 +21,17 @@ function updateStatus($conn, $id, $status) {
 switch ($action) {
     case 'progress':
         if (updateStatus($conn, $id_usulan, 'In Progress')) {
-            echo "<script>alert('Status berhasil diperbarui ke In Progress'); window.location='../../../index.php?p=daftarUsulan';</script>";
+            header("Location: /view/superadmin/email.php?id_usulan=$id_usulan&status_permohonan=In+Progress");
+            exit; // Pastikan untuk menghentikan eksekusi setelah header
         } else {
             echo "<script>alert('Gagal memperbarui status'); window.history.back();</script>";
         }
         break;
 
     case 'approve':
-        if (updateStatus($conn, $id_usulan, 'Approved')) {
-            echo "<script>alert('Status berhasil diperbarui ke Approved'); window.location='../../../index.php?p=daftarUsulan';</script>";
+        if (updateStatus($conn, $id_usulan, 'Approve')) {
+            header("Location: /view/superadmin/email.php?id_usulan=$id_usulan&status_permohonan=Approve");
+            exit; // Pastikan untuk menghentikan eksekusi setelah header
         } else {
             echo "<script>alert('Gagal memperbarui status'); window.history.back();</script>";
         }
@@ -37,7 +39,8 @@ switch ($action) {
 
     case 'reject':
         if (updateStatus($conn, $id_usulan, 'Rejected')) {
-            echo "<script>alert('Status berhasil diperbarui ke Rejected'); window.location='../../../index.php?p=daftarUsulan';</script>";
+            header("Location: /view/superadmin/email.php?id_usulan=$id_usulan&status_permohonan=Rejected");
+            exit; // Pastikan untuk menghentikan eksekusi setelah header
         } else {
             echo "<script>alert('Gagal memperbarui status'); window.history.back();</script>";
         }

@@ -36,6 +36,81 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
 
   
   <style>
+      /* Gaya untuk overlay popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Transparansi hitam */
+  display: none; /* Awalnya tersembunyi */
+  z-index: 1000; /* Pastikan di atas elemen lainnya */
+}
+
+/* Gaya untuk kontainer popup */
+.popup-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* Lebar default untuk layar kecil */
+  max-width: 600px; /* Lebar lebih besar untuk layar besar */
+  background: #fff; /* Warna latar belakang */
+  padding: 30px; /* Padding lebih besar */
+  border-radius: 12px; /* Tepi bulat */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Shadow tegas */
+  z-index: 1001;
+  overflow-y: auto; /* Scroll jika konten terlalu tinggi */
+  max-height: 85vh; /* Batas tinggi */
+}
+
+/* Tombol tutup */
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem; /* Ukuran lebih besar */
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-close:hover {
+  color: #ff5a5a; /* Warna saat hover */
+}
+
+/* Judul popup */
+.popup-content h3 {
+  margin: 0 0 20px;
+  font-size: 2rem; /* Ukuran lebih besar */
+  color: #333;
+  text-align: center;
+}
+
+/* Konten popup */
+.popup-content p {
+  margin: 15px 0;
+  line-height: 1.8;
+  font-size: 1.2rem; /* Ukuran font lebih besar */
+  color: #555;
+}
+
+/* Link kontak */
+.popup-content a {
+  color:rgb(231, 117, 4);
+  text-decoration: none;
+  font-weight: bold; /* Teks lebih menonjol */
+}
+
+.popup-content a:hover {
+  text-decoration: underline;
+}
+
+
+    
+
 
   </style>
 </head>
@@ -133,7 +208,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
   <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
     <i class="fas fa-envelope me-2"></i> <span class="menu-text">Message</span>
   </a>
-  <a href="#" class="menu-item text-white d-flex align-items-center mb-2">
+  <a href="#" class="menu-item text-white d-flex align-items-center mb-2 "  onclick ="openPopup()">
     <i class="fas fa-phone-alt me-2"></i> <span class="menu-text">Contact Us</span>
   </a>
   <a href="#" class="menu-item text-white d-flex align-items-center">
@@ -306,6 +381,46 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         });
     });
   </script>
+<script>
+    $(document).ready(function () {
+        // Inisialisasi DataTable pada tabel daftar usulan
+        $('#tabel-user').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+            }
+        });
+    });
+  </script>
+    <!-- Popup -->
+<div class="popup-overlay" id="popupKontak">
+  <div class="popup-content">
+    <button class="popup-close" onclick="closePopup()">×</button>
+    <h3>Kontak Kami</h3>
+    <p><strong>Email:</strong> <a href="mailto:contact@pnp.ac.id">contact@pnp.ac.id</a></p>
+    <p><strong>Telepon:</strong> (0751) 123456</p>
+    <p><strong>Alamat:</strong> Jl. Kampus Limau Manis, Padang</p>
+    <p><strong>Website:</strong> <a href="https://www.pnp.ac.id/">www.pnp.id</a></p>
+    <p><strong>Instagram:</strong> 
+      <a href="https://www.instagram.com/politekniknegeripadang_pnp/?hl=id" target="_blank">@pnp_official</a>
+    </p>
+  </div>
+</div>
+<script>
+ function openPopup() {
+  document.getElementById('popupKontak').style.display = 'block';
+}
+
+function closePopup() {
+  document.getElementById('popupKontak').style.display = 'none';
+}
+
+</script>
+
+  
 
 </body>
 </html>

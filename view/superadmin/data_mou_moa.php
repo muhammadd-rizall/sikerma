@@ -4,8 +4,8 @@ switch ($aksi):
     case "list":
         ?>
                 
-                    <h2>Data Mou/Moa</h2>
-                            <a href="?p=dataMouMoa&aksi=input" class="btn btn-primary mb-2">Tambah Data Mou/Moa</a>
+                    <h2 class="mt-3">Data Mou/Moa</h2>
+                            <a href="?p=dataMouMoa&aksi=input" class="btn-add mt-4 mb-4"><i class="fa-sharp fa-solid fa-plus"></i> Data MOU/MOA</a>
                             <table id="tabel-mou-moa" class="table table-bordered table-striped mt-5">
                                 <thead>
                                     <tr>
@@ -51,15 +51,15 @@ switch ($aksi):
                                                 // Cek apakah tautan berasal dari Google Drive
                                                 if (strpos($fileDokumen, 'drive.google.com') !== false): ?>
                                                     <!-- Tampilkan tombol untuk membuka di Google Drive -->
-                                                    <a href="<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary" >Lihat Dokumen</a>
+                                                    <a href="<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary" ><i class="fa fa-eye"></i></a>
                                                 <?php else: ?>
                                                     <!-- Tampilkan tombol untuk dokumen lokal -->
-                                                    <a href="/upload/documents/<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary">Lihat Dokumen</a>
+                                                    <a href="/upload/documents/<?= htmlspecialchars($fileDokumen); ?>" target="_blank" class="btn btn-sm btn-primary" Download><i class="fa fa-eye"></i></a>
                                                 <?php endif; ?>
                                             </td>
 
                                             <td class="text-nowrap">
-                                                <a href="../../index.php?p=dataMouMoa&aksi=edit&id_edit=<?= $dataMouMoa['id_mou_moa'] ?>" class="btn btn-warning">Edit</a>
+                                                <a href="../../index.php?p=dataMouMoa&aksi=edit&id_edit=<?= $dataMouMoa['id_mou_moa'] ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
                                                 <a href="/view/superadmin/proses_data_mou_moa.php?proses=delete&id_hapus=<?= $dataMouMoa['id_mou_moa'] ?>"
                                                     class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
                                                     class="bi bi-trash"></i></a>

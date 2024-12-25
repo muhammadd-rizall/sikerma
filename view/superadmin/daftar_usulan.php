@@ -1,5 +1,6 @@
 <?php
-    include"../sikerma/database/koneksi.php";
+    include "../sikerma/database/koneksi.php";
+
 
     $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
 
@@ -46,35 +47,46 @@
                                     <td><?= htmlspecialchars($daftarUsulan['email']); ?></td>
                                     <td><?= htmlspecialchars($daftarUsulan['alamat']); ?></td>
                                     <td>
-                                        <a href="/upload/documents/<?= htmlspecialchars($daftarUsulan['dokumen']); ?>" target="_blank">Lihat</a>
+                                        <a href="/upload/documents/<?= htmlspecialchars($daftarUsulan['dokumen']); ?>" target="_blank" Download><i class="fa fa-eye"></i></a>
                                     </td>
                                     <td><?= htmlspecialchars($daftarUsulan['status_permohonan']); ?></td>
+
                                     <td class="text-nowrap">
                                         <div class="row">
                                             <div class="col-12">
-                                                <?php
-                                                if ($daftarUsulan['status_permohonan'] == 'Pending') {
-                                                    ?>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_progres=<?= $daftarUsulan['id_usulan']; ?>&action=progress" class="btn btn-warning"><i class="bi bi-arrow-right-square"></i></a>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_reject=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger"><i class="bi bi-x-lg"></i></a>
                                                     <?php
-                                                } elseif ($daftarUsulan['status_permohonan'] == 'In Progress') {
+                                                    if ($daftarUsulan['status_permohonan'] == 'Pending') {
+                                                        ?>
+                                                        <a href="/view/superadmin/proses_daftar_usulan.php?id_progres=<?= $daftarUsulan['id_usulan']; ?>&action=progress" class="btn btn-warning">
+                                                                <i class="bi bi-arrow-right-square"></i>
+                                                        </a>
+                                                        <a href="/view/superadmin/proses_daftar_usulan.php?id_reject=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger">
+                                                                <i class="bi bi-x-lg"></i>
+                                                        </a>
+                                                        <?php
+                                                    } elseif ($daftarUsulan['status_permohonan'] == 'In Progress') {
+                                                        ?>
+                                                        <a href="/view/superadmin/proses_daftar_usulan.php?id_approve=<?= $daftarUsulan['id_usulan']; ?>&action=approve" class="btn btn-success">
+                                                                <i class="bi bi-check-lg"></i>
+                                                        </a>
+                                                        <a href="/view/superadmin/proses_daftar_usulan.php?id_reject=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger">
+                                                                <i class="bi bi-x-lg"></i>
+                                                        </a>
+                                                        <?php
+                                                    } elseif ($daftarUsulan['status_permohonan'] == 'Approved') {
+                                                        ?>
+                                                        <span class="badge badge-success">Approved</span>
+                                                        <?php
+                                                    }
                                                     ?>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_approve=<?= $daftarUsulan['id_usulan']; ?>&action=approve" class="btn btn-success"><i class="bi bi-check-lg"></i></a>
-                                                    <a href="/view/superadmin/proses_daftar_usulan.php?id_reject=<?= $daftarUsulan['id_usulan']; ?>&action=reject" class="btn btn-danger"><i class="bi bi-x-lg"></i></a>
-                                                    <?php
-                                                } elseif ($daftarUsulan['status_permohonan'] == 'Approved') {
-                                                    ?>
-                                                    <span class="badge badge-success">Approved</span>
-                                                    <?php
-                                                }
-                                                ?>
-                                                <a href="/view/superadmin/proses_daftar_usulan.php?proses=delete&id_hapus=<?= $daftarUsulan['id_usulan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')">
-                                                    <i class="bi bi-trash"></i>
-                                                </a>
+                                                    
+                                                    <a href="/view/superadmin/proses_daftar_usulan.php?proses=delete&id_hapus=<?= $daftarUsulan['id_usulan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')">
+                                                        <i class="bi bi-trash"></i> Hapus
+                                                    </a>
                                             </div>
                                         </div>
                                     </td>
+
 
                                 </tr>
                                 <?php

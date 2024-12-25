@@ -116,16 +116,16 @@ table.dataTable th {
 }
 
 table.dataTable tr:hover {
-  background-color: #f5f5f5; /* Efek hover saat menyorot baris */
+  background-color: #f5f5f5; 
 }
 
 table.dataTable td {
-  transition: all 0.3s ease; /* Memberikan transisi pada semua elemen td */
+  transition: all 0.3s ease; 
 }
 
 table.dataTable td:hover {
-  background-color: white; /* Efek saat hover pada data sel */
-  border-color: #feb47b; /* Mengubah warna border pada hover */
+  background-color: white;
+  border-color: #feb47b;
 }
 
 
@@ -150,3 +150,21 @@ table.dataTable td:hover {
 .content.collapsed {
   margin-left: 70px;
 }
+
+.btn-add {
+  display: inline-block;
+  background-color: #ff7e5f; 
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border-radius: 20px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  text-decoration: none; /* Menghilangkan garis bawah */
+}
+
+.btn-add:hover {
+  background-color: #feb47b; /* Warna latar belakang saat hover */
+}
+

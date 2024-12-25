@@ -1,12 +1,14 @@
 <?php
-    include"../sikerma/database/koneksi.php";
+    include "../sikerma/database/koneksi.php";
 
     $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
+   
+    $user_id = $_SESSION['id_user'];
 
     switch ($aksi):
         case "list":
         // Query untuk mengambil data dari tabel `tb_usulan_kerjasama`
-        $sql = "SELECT * FROM tb_usulan_kerjasama ORDER BY id_usulan DESC";
+        $sql = "SELECT * FROM tb_usulan_kerjasama WHERE id_user = $user_id ORDER BY id_usulan DESC";
         $result = $conn->query($sql);
     ?>
 
