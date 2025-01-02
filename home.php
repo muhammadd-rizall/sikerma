@@ -88,38 +88,24 @@
 </head>
 
 <body>
-    <!-- Kartu Statistik -->
-    <div class="container d-flex flex-wrap justify-content-center" id="card-section">
-        <?php foreach ($dataCounts as $key => $count): ?>
-            <div class="card">
-                <h3><?php echo $key; ?></h3>
-                <p><?php echo $key === 'MOU' ? 'Memorandum of Understanding' : ($key === 'MOA' ? 'Memorandum of Agreement' : 'Implementation Agreement'); ?>
-                </p>
-                <div class="number"><?php echo $count; ?></div>
-            </div>
-        <?php endforeach; ?>
-    </div>
 
-    <!-- chart -->
-    <div class="container" id="chart-section">
-        <h2 class="text-chart">Grafik Statistik Jumlah Kerjasama dan Data 5 Tahun Terakhir</h2>
-
-        <div class="row d-flex align-items-center">
-            <!-- Chart Bar di Kiri -->
-            <div class="col-md-6">
-                <canvas id="chartTotal" style="width: 100%; height: 300px;"></canvas>
-            </div>
-
-            <!-- Chart Doughnut di Kanan -->
-            <div class="col-md-6 d-flex justify-content-center">
-                <canvas id="chartPerYear" style="width: 100%; height: 300px;"></canvas>
-            </div>
-        </div>
-    </div>
-
-
-    
     <?php
+    if ($level == 'jurusan' || $level == 'mitra'):
+      ?>
+        <!-- Kartu Statistik -->
+        <div class="container d-flex flex-wrap justify-content-center" id="card-section">
+            <?php foreach ($dataCounts as $key => $count): ?>
+                <div class="card">
+                    <h3><?php echo $key; ?></h3>
+                    <p><?php echo $key === 'MOU' ? 'Memorandum of Understanding' : ($key === 'MOA' ? 'Memorandum of Agreement' : 'Implementation Agreement'); ?></p>
+                    <div class="number"><?php echo $count; ?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif;?> 
+
+
+<?php
     if ($level == 'superadmin' || $level == 'admin'):
       ?>
 
@@ -147,6 +133,27 @@
         </div>
 
     <?php endif;?>
+
+    <!-- chart -->
+    <div class="container" id="chart-section">
+        <h2 class="text-chart">Grafik Statistik Jumlah Kerjasama dan Data 5 Tahun Terakhir</h2>
+
+        <div class="row d-flex align-items-center">
+            <!-- Chart Bar di Kiri -->
+            <div class="col-md-6">
+                <canvas id="chartTotal" style="width: 100%; height: 300px;"></canvas>
+            </div>
+
+            <!-- Chart Doughnut di Kanan -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <canvas id="chartPerYear" style="width: 100%; height: 300px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
 
 
 
