@@ -1,0 +1,73 @@
+/* Card Styling */
+.card {
+  background-color: #F8FAFC;
+  color: #ff7e5f;
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  flex: 1;
+  width: 300px;
+  transition: all 0.3s ease;
+  border-color: #ff7e5f;
+  border-width: 3px;
+  
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin: 10px 0;
+  font-size: 1.5rem;
+}
+
+.card .number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+/* chart */
+
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 300px; 
+  height: 300px; 
+
+}
+
+.container-chart {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+}
+
+/* Gaya untuk judul h2 */
+.text-chart {
+  font-size: 1.2rem; 
+  font-weight: 700; 
+  text-align: center;
+  color: #351C4D; 
+  margin-bottom: 20px; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+}
+
+/* Efek tambahan opsional */
+.text-chart::after {
+  content: '';
+  display: block;
+  width: 80px; 
+  height: 4px; 
+  background-color: #f28e2b; 
+  margin: 10px auto 0; 
+  border-radius: 2px; 
+}

@@ -21,14 +21,14 @@
         background-color: rgba(255, 165, 0, 0.5);
         background-size: cover;
         background-position: center center;
-        background-blend-mode: multiply; /* atau overlay, screen, dsb. */
+        background-blend-mode: multiply; 
     }
     .navbar {
         position: fixed;
         top: 0;
-        z-index: 1030; /* Pastikan navbar tetap di atas elemen lainnya */
-        background-color: rgba(0, 0, 0, 0.8); /* Opsional: buat background semi-transparan */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opsional: tambahkan bayangan */
+        z-index: 1030; 
+        background-color: rgba(0, 0, 0, 0.8); 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     }
     
    /* Gaya untuk overlay popup */
@@ -38,9 +38,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Transparansi hitam */
-  display: none; /* Awalnya tersembunyi */
-  z-index: 1000; /* Pastikan di atas elemen lainnya */
+  background: rgba(0, 0, 0, 0.7); 
+  display: none; 
+  z-index: 1000; 
 }
 
 /* Gaya untuk kontainer popup */
@@ -49,15 +49,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%; /* Lebar default untuk layar kecil */
-  max-width: 600px; /* Lebar lebih besar untuk layar besar */
-  background: #fff; /* Warna latar belakang */
-  padding: 30px; /* Padding lebih besar */
-  border-radius: 12px; /* Tepi bulat */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Shadow tegas */
+  width: 90%; 
+  max-width: 600px; 
+  background: #fff; 
+  padding: 30px; 
+  border-radius: 12px; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); 
   z-index: 1001;
-  overflow-y: auto; /* Scroll jika konten terlalu tinggi */
-  max-height: 85vh; /* Batas tinggi */
+  overflow-y: auto; 
+  max-height: 85vh; 
 }
 
 /* Tombol tutup */
@@ -67,19 +67,19 @@
   right: 15px;
   background: transparent;
   border: none;
-  font-size: 1.8rem; /* Ukuran lebih besar */
+  font-size: 1.8rem;
   cursor: pointer;
   color: #333;
 }
 
 .popup-close:hover {
-  color: #ff5a5a; /* Warna saat hover */
+  color: #ff5a5a; 
 }
 
 /* Judul popup */
 .popup-content h3 {
   margin: 0 0 20px;
-  font-size: 2rem; /* Ukuran lebih besar */
+  font-size: 2rem; 
   color: #333;
   text-align: center;
 }
@@ -88,7 +88,7 @@
 .popup-content p {
   margin: 15px 0;
   line-height: 1.8;
-  font-size: 1.2rem; /* Ukuran font lebih besar */
+  font-size: 1.2rem; 
   color: #555;
 }
 
@@ -96,7 +96,7 @@
 .popup-content a {
   color:rgb(231, 117, 4);
   text-decoration: none;
-  font-weight: bold; /* Teks lebih menonjol */
+  font-weight: bold; 
 }
 
 .popup-content a:hover {
@@ -157,7 +157,7 @@
         }
 
         // Query untuk jumlah per tahun berdasarkan jenis dokumen
-        $query_year = "SELECT YEAR(STR_TO_DATE(awal_kerjasama, '%d-%m-%Y')) AS Tahun, jenis_kerjasama, COUNT(*) AS jumlah 
+        $query_year = "SELECT YEAR(awal_kerjasama) AS Tahun, jenis_kerjasama, COUNT(*) AS jumlah 
                         FROM tb_mou_moa 
                         GROUP BY Tahun, jenis_kerjasama 
                         ORDER BY Tahun ASC";

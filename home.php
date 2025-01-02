@@ -1,214 +1,282 @@
 <?php
-include 'database/koneksi.php';
 
-// Query untuk menghitung jumlah MOU, MOA, dan IA
-$query_mou = "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'MOU'";
-$query_moa = "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'MOA'";
-$query_ia  = "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'IA'";
+   
 
-// Menjalankan query dan mengambil hasilnya
-$result_mou = $conn->query($query_mou)->fetch_assoc();
-$result_moa = $conn->query($query_moa)->fetch_assoc();
-$result_ia  = $conn->query($query_ia)->fetch_assoc();
+        include 'database/koneksi.php';
 
-// Ambil hasil jumlah untuk masing-masing
-$jumlah_mou = $result_mou['jumlah'] ?? 0;
-$jumlah_moa = $result_moa['jumlah'] ?? 0;
-$jumlah_ia  = $result_ia['jumlah'] ?? 0;
+        // Query untuk menghitung jumlah MOU, MOA, dan IA
+        $queries = [
+            'MOU' => "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'MOU'",
+            'MOA' => "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'MOA'",
+            'IA' => "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'IA'",
+        ];
 
-// Query untuk jumlah per tahun berdasarkan jenis dokumen
-$query_year = "SELECT YEAR(STR_TO_DATE(awal_kerjasama, '%d-%m-%Y')) AS Tahun, jenis_kerjasama, COUNT(*) AS jumlah 
-               FROM tb_mou_moa 
-               GROUP BY YEAR(STR_TO_DATE(awal_kerjasama, '%d-%m-%Y')), jenis_kerjasama 
-               ORDER BY YEAR(STR_TO_DATE(awal_kerjasama, '%d-%m-%Y')) ASC";
+        $dataCounts = [];
+        foreach ($queries as $key => $query) {
+            $result = $conn->query($query);
+            $dataCounts[$key] = $result ? $result->fetch_assoc()['jumlah'] : 0;
+        }
 
-// Menjalankan query dan mengambil hasilnya
-$result_year = $conn->query($query_year);
+        // Query untuk jumlah per tahun berdasarkan jenis dokumen
+        $query_year = "SELECT YEAR(awal_kerjasama) AS Tahun, jenis_kerjasama, COUNT(*) AS jumlah 
+                            FROM tb_mou_moa 
+                            GROUP BY Tahun, jenis_kerjasama 
+                            ORDER BY Tahun ASC";
 
-// Menyiapkan data untuk chart per tahun
-$years = [];
-$mou_per_year = [];
-$moa_per_year = [];
-$ia_per_year = [];
+        $result_year = $conn->query($query_year);
+        $years = [];
+        $chartData = ['MOU' => [], 'MOA' => [], 'IA' => []];
 
-// Mengambil data dari hasil query dan mengelompokkan berdasarkan jenis dokumen per tahun
-while ($row = $result_year->fetch_assoc()) {
-    if ($row['jenis_kerjasama'] == 'MOU') {
-        $mou_per_year[$row['Tahun']] = $row['jumlah'];
-    } elseif ($row['jenis_kerjasama'] == 'MOA') {
-        $moa_per_year[$row['Tahun']] = $row['jumlah'];
-    } elseif ($row['jenis_kerjasama'] == 'IA') {
-        $ia_per_year[$row['Tahun']] = $row['jumlah'];
-    }
-    $years[] = $row['Tahun'];
-}
+        while ($row = $result_year->fetch_assoc()) {
+            $year = $row['Tahun'];
+            $type = $row['jenis_kerjasama'];
+            $years[] = $year;
+            $chartData[$type][$year] = $row['jumlah'];
+        }
 
-// Menghapus duplikat tahun
-$years = array_values(array_unique($years)); 
+        $years = array_values(array_unique($years));
+        foreach ($years as $year) {
+            foreach (['MOU', 'MOA', 'IA'] as $type) {
+                $chartData[$type][$year] = $chartData[$type][$year] ?? 0;
+            }
+        }
 
-// Pastikan setiap tahun ada dalam setiap kategori, jika tidak ada beri nilai 0
-foreach ($years as $year) {
-    $mou_per_year[$year] = $mou_per_year[$year] ?? 0;
-    $moa_per_year[$year] = $moa_per_year[$year] ?? 0;
-    $ia_per_year[$year] = $ia_per_year[$year] ?? 0;
-}
+
+        // Query untuk daftar usulan yang masuk
+        $news_baru = "SELECT COUNT(*) AS jumlah FROM tb_usulan_kerjasama";
+        $result_news = $conn->query($news_baru);
+        $row_news = $result_news->fetch_assoc();
+        $jumlah_news_baru = $row_news['jumlah'];
+
+        // Query untuk MOU/MOA yang akan berakhir (30 hari ke depan)
+        $news_akan = "SELECT COUNT(*) AS jumlah FROM tb_mou_moa 
+                    WHERE akhir_kerjasama BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)";
+        $result_akan = $conn->query($news_akan);
+        $row_akan = $result_akan->fetch_assoc();
+        $jumlah_news_akan = $row_akan['jumlah'];
+
+        // Query untuk MOU/MOA yang telah berakhir
+        $news_telah = "SELECT COUNT(*) AS jumlah FROM tb_mou_moa 
+                    WHERE akhir_kerjasama < CURDATE()";
+        $result_telah = $conn->query($news_telah);
+        $row_telah = $result_telah->fetch_assoc();
+        $jumlah_news_telah = $row_telah['jumlah'];
+
+
+
+        // Cek apakah user sudah login
+        if (!isset($_SESSION['login'])) {
+            header("Location: home.php");
+            exit;
+        }
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistik</title>
+    <link rel="stylesheet" href="public/assets/css/styleH.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .card {
-            background-color: #F8FAFC;
-            color: #ff7e5f;
-            text-align: center;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            margin: 10px;
-            flex: 1;
-            width: 300px;
-            transition: all 0.3s ease;
-            border-color: #ff7e5f;
-            border-width: 3px;
-            
-            }
 
-            .card:hover {
-            transform: translateY(-5px);
-            }
-
-            .card h3 {
-            margin: 10px 0;
-            font-size: 2.2rem;
-            }
-
-            .card .number {
-            font-size: 3rem;
-            font-weight: bold;
-            }
-        .container-chart {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .chart-container {
-            flex: 0.5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 500px;
-            max-height: 400px;
-        }
-        canvas {
-            width: 100% !important;
-            height: 100% !important;
-        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="card">
-            <h3>MOU</h3>
-            <p>Memorandum of Understanding</p>
-            <div class="number"><?php echo $jumlah_mou; ?></div>
-        </div>
-        <div class="card">
-            <h3>MOA</h3>
-            <p>Memorandum of Agreements</p>
-            <div class="number"><?php echo $jumlah_moa; ?></div>
-        </div>
-        <div class="card">
-            <h3>IA</h3>
-            <p>Implementation Agreement</p>
-            <div class="number"><?php echo $jumlah_ia; ?></div>
+    <!-- Kartu Statistik -->
+    <div class="container d-flex flex-wrap justify-content-center" id="card-section">
+        <?php foreach ($dataCounts as $key => $count): ?>
+            <div class="card">
+                <h3><?php echo $key; ?></h3>
+                <p><?php echo $key === 'MOU' ? 'Memorandum of Understanding' : ($key === 'MOA' ? 'Memorandum of Agreement' : 'Implementation Agreement'); ?>
+                </p>
+                <div class="number"><?php echo $count; ?></div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- chart -->
+    <div class="container" id="chart-section">
+        <h2 class="text-chart">Grafik Statistik Jumlah Kerjasama dan Data 5 Tahun Terakhir</h2>
+
+        <div class="row d-flex align-items-center">
+            <!-- Chart Bar di Kiri -->
+            <div class="col-md-6">
+                <canvas id="chartTotal" style="width: 100%; height: 300px;"></canvas>
+            </div>
+
+            <!-- Chart Doughnut di Kanan -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <canvas id="chartPerYear" style="width: 100%; height: 300px;"></canvas>
+            </div>
         </div>
     </div>
 
-    <!-- Container untuk Chart Sejajar -->
-    <div class="container-chart">
-        <div class="chart-container">
-            <canvas id="chartTotal"></canvas>
+
+    
+    <?php
+    if ($level == 'superadmin' || $level == 'admin'):
+      ?>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="card text-center shadow-sm p-3">
+                        <h3 class="text-primary">Masuk</h3>
+                        <p>Jumlah: <?php echo $jumlah_news_baru; ?></p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card text-center shadow-sm p-3">
+                        <h3 class="text-warning">Akan Berakhir</h3>
+                        <p>Jumlah: <?php echo $jumlah_news_akan; ?></p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card text-center shadow-sm p-3">
+                        <h3 class="text-danger">Telah Berakhir</h3>
+                        <p>Jumlah: <?php echo $jumlah_news_telah; ?></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="chart-container">
-            <canvas id="chartPerYear"></canvas>
-        </div>
-    </div>
+
+    <?php endif;?>
+
+
+
 
     <script>
-        const jumlahMOU = <?php echo $jumlah_mou; ?>;
-        const jumlahMOA = <?php echo $jumlah_moa; ?>;
-        const jumlahIA = <?php echo $jumlah_ia; ?>;
-
+        const dataCounts = <?php echo json_encode($dataCounts); ?>;
         const years = <?php echo json_encode($years); ?>;
-        const mouPerYear = <?php echo json_encode($mou_per_year); ?>;
-        const moaPerYear = <?php echo json_encode($moa_per_year); ?>;
-        const iaPerYear = <?php echo json_encode($ia_per_year); ?>;
+        const chartData = <?php echo json_encode($chartData); ?>;
 
-        // Pie Chart Total MOU, MOA, IA
-        new Chart(document.getElementById('chartTotal'), {
+        // Data untuk grafik total
+        const chartTotalCtx = document.getElementById('chartTotal').getContext('2d');
+
+        new Chart(chartTotalCtx, {
             type: 'doughnut',
             data: {
-                labels: ['MOU', 'MOA', 'IA'],
+                labels: Object.keys(dataCounts),
                 datasets: [{
-                    data: [jumlahMOU, jumlahMOA, jumlahIA],
-                    backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
-                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-                    borderWidth: 1
-                }]
+                    label: 'Total Dokumen',
+                    data: Object.values(dataCounts),
+                    backgroundColor: ['#4e79a7', '#f28e2b', '#76b7b2'],
+                }],
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
-            }
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 10,
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    tooltip: {
+                        enabled: true,
+                    },
+                },
+                elements: {
+                    arc: {
+                        borderWidth: 2, // Atur ketebalan garis batas
+                    },
+                },
+            },
         });
 
-        // Line Chart Data per Tahun
-        new Chart(document.getElementById('chartPerYear'), {
-            type: 'bar',
+
+
+
+        // Data untuk grafik per tahun
+        const chartPerYearCtx = document.getElementById('chartPerYear').getContext('2d');
+
+        new Chart(chartPerYearCtx, {
+            type: 'line',
             data: {
-                labels: years,
+                labels: years, // Label pada sumbu x (tahun)
                 datasets: [
                     {
                         label: 'MOU',
-                        data: years.map(year => mouPerYear[year] || 0),
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 2
+                        data: years.map(year => chartData.MOU[year]),
+                        borderColor: '#4e79a7',
+                        backgroundColor: '#4e79a7',
+                        borderWidth: 1, // Garis tepi bar
+                        barThickness: 35, // Lebar batang
                     },
                     {
                         label: 'MOA',
-                        data: years.map(year => moaPerYear[year] || 0),
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 2
+                        data: years.map(year => chartData.MOA[year]),
+                        borderColor: '#f28e2b',
+                        backgroundColor: '#f28e2b',
+                        borderWidth: 1,
+                        barThickness: 35,
                     },
                     {
                         label: 'IA',
-                        data: years.map(year => iaPerYear[year] || 0),
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 2
-                    }
-                ]
+                        data: years.map(year => chartData.IA[year]),
+                        borderColor: '#76b7b2',
+                        backgroundColor: '#76b7b2',
+                        borderWidth: 1,
+                        barThickness: 35,
+                    },
+                ],
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
-            }
+                maintainAspectRatio: false, // Memungkinkan chart menyesuaikan tinggi/lebar
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15, // Ukuran kotak warna legenda
+                            font: { size: 14 }, // Ukuran font legenda
+                        },
+                    },
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tahun',
+                            color: '#333',
+                            font: { size: 14, weight: 'bold' },
+                        },
+                        ticks: { font: { size: 12 } },
+                    },
+                    y: {
+                        beginAtZero: true, // Memastikan skala dimulai dari 0
+                        title: {
+                            display: true,
+                            text: 'Jumlah Dokumen',
+                            color: '#333',
+                            font: { size: 14, weight: 'bold' },
+                        },
+                        ticks: { stepSize: 1, font: { size: 12 } },
+                    },
+                },
+                animation: {
+                    duration: 1500, // Durasi animasi saat render
+                    easing: 'easeOutBounce', // Jenis animasi
+                },
+            },
         });
+
+
+
+
     </script>
+
+
+
+
 </body>
+
 </html>
