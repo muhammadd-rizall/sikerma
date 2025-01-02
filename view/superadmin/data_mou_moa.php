@@ -211,7 +211,7 @@ switch ($aksi):
                         <input type="file" name="file_dokumen" id="file_dokumen" class="form-control" accept=".pdf,.doc,.docx,.xls,.xlsx" required>
                     </div>
 
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" class="btn-submit">Submit</button>
                 </form>
             </div>
 
@@ -375,7 +375,7 @@ switch ($aksi):
                     </div>
 
 
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" class="btn-submit">Submit</button>
                 </form>
             </div>
 

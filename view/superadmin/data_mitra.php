@@ -117,7 +117,7 @@
                                 </div>
 
                                 <!-- Submit -->
-                                <button type="submit"  name="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit"  name="submit" class="btn-submit">Submit</button>
                         </form>
                 </div>
 
@@ -187,7 +187,7 @@
                                 </div>
 
                                 <!-- Submit -->
-                                <button type="submit"  name="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit"  name="submit" class="btn-submit">Submit</button>
                         </form>
                 </div>
         <?php

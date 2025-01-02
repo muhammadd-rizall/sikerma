@@ -1,0 +1,436 @@
+/* Reset default margin and padding */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Gaya untuk overlay popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); 
+  display: none; 
+  z-index: 1000; 
+}
+
+/* Gaya untuk kontainer popup */
+.popup-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; 
+  max-width: 600px; 
+  background: #fff; 
+  padding: 30px; 
+  border-radius: 12px; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); 
+  z-index: 1001;
+  overflow-y: auto; 
+  max-height: 85vh; 
+}
+
+/* Tombol tutup */
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem; /* Ukuran lebih besar */
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-close:hover {
+  color: #ff5a5a; /* Warna saat hover */
+}
+
+/* Judul popup */
+.popup-content h3 {
+  margin: 0 0 20px;
+  font-size: 2rem; /* Ukuran lebih besar */
+  color: #333;
+  text-align: center;
+}
+
+/* Konten popup */
+.popup-content p {
+  margin: 15px 0;
+  line-height: 1.8;
+  font-size: 1.2rem; /* Ukuran font lebih besar */
+  color: #555;
+}
+
+/* Link kontak */
+.popup-content a {
+  color:rgb(231, 117, 4);
+  text-decoration: none;
+  font-weight: bold; /* Teks lebih menonjol */
+}
+
+.popup-content a:hover {
+  text-decoration: underline;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(0, #ff7e5f, #feb47b);
+  color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto; /* Menggunakan auto agar scrollbar muncul hanya saat diperlukan */
+  padding: 20px 0;
+  box-sizing: border-box;
+  z-index: 1000;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Menyembunyikan scrollbar di Chrome, Edge, dan Safari */
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: center; /* Menyelaraskan logo ke tengah */
+}
+
+.sidebar .logo-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sidebar .logo-text {
+  margin-left: 10px;
+  text-align: center; /* Menyelaraskan teks logo ke tengah */
+}
+
+.sidebar .logo-text h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.sidebar .logo-text p {
+  margin: 0;
+  font-size: 10px;
+}
+
+/* Styling for menu items */
+.sidebar .menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #ddd;
+  font-size: 16px;
+  transition: background 0.3s;
+  justify-content: start;
+}
+
+.sidebar .menu-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.sidebar .menu-item i {
+  margin-right: 10px;
+}
+
+/* Sidebar hidden */
+.sidebar.hidden {
+  transform: translateX(-100%); 
+  transition: transform 0.3s ease;
+}
+
+/* Sidebar default (ditampilkan) */
+.sidebar {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Konten utama saat sidebar tersembunyi */
+.content {
+  transition: margin-left 0.3s ease;
+}
+
+
+/* Main content */
+.content {
+  margin-left: 250px; 
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: white;
+  padding: 10px 20px;
+  border-bottom: 2px solid #ddd;
+}
+
+.navbar .btn-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+
+.navbar .btn-outline-danger {
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 10px 0;
+  }
+
+  .sidebar .logo {
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .sidebar .logo-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .sidebar .logo-text h3 {
+    font-size: 16px;
+  }
+
+  .sidebar .logo-text p {
+    font-size: 9px;
+  }
+
+  .sidebar .menu-item {
+    justify-content: center;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .content {
+    margin-left: 0; 
+    padding: 10px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .sidebar .logo-text h3 {
+    font-size: 14px;
+  }
+
+  .sidebar .logo-text p {
+    font-size: 8px;
+  }
+
+  .sidebar .menu-item {
+    font-size: 12px;
+  }
+
+  .content {
+    padding: 5px;
+  }
+}
+
+/* Gaya dasar tombol */
+#toggleSidebar {
+  background-color: #ff7e5f; 
+  border: none; 
+  color: white;
+  font-size: 15px; 
+  padding: 10px 12px; 
+  border-radius: 10%; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efek hover */
+#toggleSidebar:hover {
+  background-color: #feb47b; 
+  transform: scale(1.1); 
+}
+
+/* Efek saat tombol ditekan */
+#toggleSidebar:active {
+  background-color: #765285; 
+  transform: scale(0.95); 
+}
+
+/* Tambahan margin untuk elemen lain */
+#toggleSidebar.me-2 {
+  margin-right: 8px; 
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+  #toggleSidebar {
+    font-size: 16px; 
+    padding: 8px 10px; 
+  }
+}
+
+
+/* DataTable Styling */
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.dataTables_wrapper {
+  margin-top: 20px;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #333;
+  width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table.dataTable th, 
+table.dataTable td {
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
+table.dataTable th {
+  background-color: #ff7e5f;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table.dataTable tr {
+  transition: background-color 0.3s ease;
+}
+
+table.dataTable tr:hover {
+  background-color: #fdf2e9;
+}
+
+table.dataTable td {
+  transition: all 0.3s ease;
+}
+
+
+
+/* Pagination Styling */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background-color: #ff7e5f !important;
+  color: white !important;
+  border: none;
+  padding: 8px 12px;
+  margin: 2px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s;
+  cursor: pointer;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #feb47b !important;
+  transform: scale(1.05);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #feb47b  !important;
+  font-weight: bold;
+}
+
+/* Search and Length Dropdown */
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #ddd ;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+  border-color: #ff7e5f;
+}
+
+.dataTables_wrapper .dataTables_length select {
+  border: 1px solid #ddd !important;
+  border-radius: 4px;
+  padding: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.dataTables_wrapper .dataTables_length select:focus {
+  border-color: #ff7e5f !important;
+}
+
+
+
+
+
+
+.btn-add {
+  display: inline-block;
+  background-color: #ff7e5f; 
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border-radius: 20px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  text-decoration: none; 
+}
+
+.btn-add:hover {
+  background-color: #feb47b; 
+}
+
+.btn-submit{
+  display: inline-block;
+  background-color: #ff7e5f; 
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  font-size: 13px; 
+  border-radius: 10px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  text-decoration: none; 
+}
+
+.btn-submit:hover {
+  background-color: #feb47b; 
+}

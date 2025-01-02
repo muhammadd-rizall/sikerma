@@ -89,7 +89,7 @@
                         </div>
 
                     
-                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="submit" class="btn-submit">Submit</button>
                 </form>
 
            </div>
@@ -144,7 +144,7 @@
                         <label for="dokumentasi">Dokumentasi</label>
                         <input type="file" class="form-control-file" id="dokumentasi" accept="image/*" name="dokumentasi" <?= $dataKegiatan['dokumentasi'] ?> multiple required>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary">submit</button>
+                    <button type="submit" name="submit" class="btn-submit">submit</button>
                 </form>
         </div>
 

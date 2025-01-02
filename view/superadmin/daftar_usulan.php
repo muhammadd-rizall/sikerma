@@ -81,7 +81,7 @@
                                                     ?>
                                                     
                                                     <a href="/view/superadmin/proses_daftar_usulan.php?proses=delete&id_hapus=<?= $daftarUsulan['id_usulan'] ?>" class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')">
-                                                        <i class="bi bi-trash"></i> Hapus
+                                                        <i class="bi bi-trash"></i> 
                                                     </a>
                                             </div>
                                         </div>
