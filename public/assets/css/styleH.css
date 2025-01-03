@@ -24,6 +24,9 @@
   font-size: 1.5rem;
 }
 
+.card p{
+    font-size: 1.2rem;
+}
 .card .number {
   font-size: 1.5rem;
   font-weight: bold;
@@ -70,4 +73,121 @@
   background-color: #f28e2b; 
   margin: 10px auto 0; 
   border-radius: 2px; 
+}
+
+.btn {
+    color: #ff7e5f;
+    border: none;
+    padding: 12px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    color: #feb47b;
+}
+
+/* Style untuk modal */
+
+.modal-dialog {
+    max-width: 90%; 
+    margin: 1.75rem auto; 
+}
+.modal-content {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    
+}
+
+.modal-header {
+
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-header .btn-close {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+/* Style untuk tabel dalam modal */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table td {
+    text-align: center;
+}
+
+.table thead th {
+    background-color: #f28e2b;
+    color: white;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/* Style untuk modal body */
+.modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+/* Styling untuk button-close */
+.btn-close {
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-dialog {
+        max-width: 100%;
+        margin: 1.75rem auto;
+    }
+
+    .modal-header h5 {
+        font-size: 1rem;
+    }
+
+    .table th,
+    .table td {
+        font-size: 0.875rem;
+    }
 }

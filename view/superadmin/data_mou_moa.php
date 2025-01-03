@@ -195,14 +195,7 @@ switch ($aksi):
                     <!-- keterangan -->
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
-                        <select name="keterangan" class="form-control" required>
-                            <option value="">Pilih Keterangan</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Tidak Aktif">Tidak Aktif</option>
-                            <option value="Kadaluarsa">Kadaluarsa</option>
-                            <option value="Diperpanjang">Di Perpanjang</option>
-                            <option value="Dalam Perpanjangan">Dalam Perpanjangan</option>
-                        </select>
+                       
                     </div>
 
                     <!-- upload dokumen -->

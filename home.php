@@ -105,34 +105,195 @@
     <?php endif;?> 
 
 
-<?php
-    if ($level == 'superadmin' || $level == 'admin'):
-      ?>
+    <?php
+if ($level == 'superadmin' || $level == 'admin'):
+?>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="card text-center shadow-sm p-3">
-                        <h3 class="text-primary">Masuk</h3>
-                        <p>Jumlah: <?php echo $jumlah_news_baru; ?></p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="card text-center shadow-sm p-3">
-                        <h3 class="text-warning">Akan Berakhir</h3>
-                        <p>Jumlah: <?php echo $jumlah_news_akan; ?></p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="card text-center shadow-sm p-3">
-                        <h3 class="text-danger">Telah Berakhir</h3>
-                        <p>Jumlah: <?php echo $jumlah_news_telah; ?></p>
-                    </div>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <div class="card text-center shadow-sm p-3">
+                <h3 class="text-primary">Masuk</h3>
+                <p> <?php echo $jumlah_news_baru; ?></p>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalMasuk">
+                    <i class="fa fa-circle-info fa-2x"></i>
+                </button>
             </div>
         </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card text-center shadow-sm p-3">
+                <h3 class="text-warning">Akan Berakhir</h3>
+                <p> <?php echo $jumlah_news_akan; ?></p>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalAkanBerakhir">
+                    <i class="fa fa-circle-info fa-2x"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card text-center shadow-sm p-3">
+                <h3 class="text-danger">Telah Berakhir</h3>
+                <p> <?php echo $jumlah_news_telah; ?></p>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalTelahBerakhir">
+                    <i class="fa fa-circle-info fa-2x"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <?php endif;?>
+
+
+<!-- Modal untuk Data Masuk -->
+<div class="modal fade" id="modalMasuk" tabindex="-1" aria-labelledby="modalMasukLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalMasukLabel">Data Masuk</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Instansi</th>
+                            <th>Nama Pemjabat</th>
+                            <th>Nama Jabatan</th>
+                            <th>Nama Kontak Person</th>
+                            <th>Nomor Kontak </th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query_masuk = "SELECT * FROM tb_usulan_kerjasama";
+                        $result_masuk = $conn->query($query_masuk);
+                        $no = 1;
+                        while ($row = $result_masuk->fetch_assoc()) {
+                            echo "<tr>
+                                <td>{$no}</td>
+                                <td>{$row['nama_instansi']}</td>
+                                <td>{$row['nama_penjabat']}</td>
+                                <td>{$row['nama_jabatan']}</td>
+                                <td>{$row['nama_kontak_person']}</td>
+                                <td>{$row['nomor_kontak']}</td>
+                                <td>{$row['email']}</td>
+                                <td>{$row['alamat']}</td>
+                            </tr>";
+                            $no++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal untuk Data Akan Berakhir -->
+<div class="modal fade" id="modalAkanBerakhir" tabindex="-1" aria-labelledby="modalAkanBerakhirLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAkanBerakhirLabel">Data Akan Berakhir</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Instansi</th>
+                            <th>Jenis Kerjasama</th>
+                            <th>Judul Kerjasama</th>
+                            <th>Awal Kerjasama</th>
+                            <th>Akhir Kerjasama</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query_akan_berakhir = "SELECT tb_mitra.nama_instansi,tb_mou_moa.jenis_kerjasama,tb_mou_moa.topik_kerjasama,tb_mou_moa.awal_kerjasama,tb_mou_moa.akhir_kerjasama,tb_mou_moa.keterangan
+                        FROM tb_mou_moa JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra
+                        WHERE tb_mou_moa.akhir_kerjasama BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)";
+                        $result_akan_berakhir = $conn->query($query_akan_berakhir);
+                        $no = 1;
+                        while ($row = $result_akan_berakhir->fetch_assoc()) {
+                            echo "<tr>
+                                <td>{$no}</td>
+                                <td>{$row['nama_instansi']}</td>
+                                <td>{$row['jenis_kerjasama']}</td>
+                                <td>{$row['topik_kerjasama']}</td>
+                                <td>{$row['awal_kerjasama']}</td>
+                                <td>{$row['akhir_kerjasama']}</td>
+                                <td>{$row['keterangan']}</td>
+                            </tr>";
+                            $no++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal untuk Data Telah Berakhir -->
+<div class="modal fade" id="modalTelahBerakhir" tabindex="-1" aria-labelledby="modalTelahBerakhirLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTelahBerakhirLabel">Data Telah Berakhir</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                        <th>No</th>
+                            <th>Nama Instansi</th>
+                            <th>Jenis Kerjasama</th>
+                            <th>Judul Kerjasama</th>
+                            <th>Awal Kerjasama</th>
+                            <th>Akhir Kerjasama</th>
+                            <th>Status</th>                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query_telah_berakhir = "SELECT tb_mitra.nama_instansi,tb_mou_moa.jenis_kerjasama,tb_mou_moa.topik_kerjasama,tb_mou_moa.awal_kerjasama,tb_mou_moa.akhir_kerjasama,tb_mou_moa.keterangan
+                        FROM tb_mou_moa JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra
+                        WHERE tb_mou_moa.akhir_kerjasama < CURDATE()";
+                        $result_telah_berakhir = $conn->query($query_telah_berakhir);
+                        $no = 1;
+                        while ($row = $result_telah_berakhir->fetch_assoc()) {
+                            echo "<tr>
+                                <td>{$no}</td>
+                                <td>{$row['nama_instansi']}</td>
+                                <td>{$row['jenis_kerjasama']}</td>
+                                <td>{$row['topik_kerjasama']}</td>
+                                <td>{$row['awal_kerjasama']}</td>
+                                <td>{$row['akhir_kerjasama']}</td>
+                                <td>{$row['keterangan']}</td>
+                            </tr>";
+                            $no++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php endif; ?>
+
+
+
+
+
+
 
     <!-- chart -->
     <div class="container" id="chart-section">
@@ -277,9 +438,9 @@
         });
 
 
-
-
     </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
