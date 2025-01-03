@@ -15,11 +15,6 @@
 
     <title>simkerma PNP</title>
 
-    <style>
-    
-
-    </style>
-    
 </head>
 <body>
  <!-- Navbar -->
