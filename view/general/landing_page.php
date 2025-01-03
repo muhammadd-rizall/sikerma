@@ -15,6 +15,8 @@
 
     <title>simkerma PNP</title>
 
+   
+    
 </head>
 <body>
  <!-- Navbar -->
@@ -354,8 +356,14 @@ new Chart(chartPerYearCtx, {
                 <a href="#" class="text-light text-decoration-none"  onclick ="openPopup()">Hubungi Kami</a>
             </p>
             <div>
+                <a href="https://www.youtube.com/@pnpbroadcast" target="_blank" class="text-light mx-2">
+                    <i class="bi bi-youtube"></i>
+                </a>
                 <a href="https://www.instagram.com" target="_blank" class="text-light mx-2">
                     <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/pnp.ac.id" target="_blank" class="text-light mx-2">
+                    <i class="bi bi-facebook"></i>
                 </a>
             </div>
         </div>
