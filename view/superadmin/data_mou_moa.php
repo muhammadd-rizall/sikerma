@@ -33,6 +33,18 @@ switch ($aksi):
                                     $no = 1;
                                     $ambil = mysqli_query($conn, "SELECT * FROM tb_mou_moa");
                                     while ($dataMouMoa = mysqli_fetch_array($ambil)):
+                                        $awalKerjasama = $dataMouMoa['awal_kerjasama'];
+                                        $akhirKerjasama = $dataMouMoa['akhir_kerjasama'];
+                                        $today = date('Y-m-d');
+
+                                        // Menentukan status aktif atau tidak aktif
+                                        if ($today >= $awalKerjasama && $today <= $akhirKerjasama) {
+                                            $status = "Aktif";
+                                        } else {
+                                            $status = "Tidak Aktif";
+                                        }
+
+                                        $statusColor = ($status === "Aktif") ? "text-success" : "text-danger";
                                         ?>
                                         <tr>
                                             <td><?= $no ?></td>
@@ -43,7 +55,7 @@ switch ($aksi):
                                             <td><?= $dataMouMoa['awal_kerjasama'] ?></td>
                                             <td><?= $dataMouMoa['akhir_kerjasama'] ?></td>
                                             <td><?= $dataMouMoa['jurusan_terkait'] ?></td>
-                                            <td><?= $dataMouMoa['keterangan'] ?></td>
+                                            <td class="<?= $statusColor ?>"><?= $status ?></td>
                                             <td>
                                                 <?php
                                                 $fileDokumen = $dataMouMoa['file_dokumen'];
@@ -195,7 +207,7 @@ switch ($aksi):
                     <!-- keterangan -->
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
-                       
+                        <input type="text" Nama="keterangan" id="keterangan" class="form-control" placeholder="otomatis" readonly>
                     </div>
 
                     <!-- upload dokumen -->
@@ -343,22 +355,9 @@ switch ($aksi):
                      </div>
                      
 
-                    <!-- keterangan -->
-                    <div class="mb-3">
+                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
-                        <select name="keterangan" class="form-control" required>
-                                <option value="">Pilih Keterangan</option>
-                                <?php
-                                        $pilihan = ["Aktif", "Tidak Aktif", "Kadaluarsa", "Di Perpanjang","Dalam Perpanjangan"];
-                                        $selected_pil = isset($dataMouMoa['keterangan']) ? $dataMouMoa['keterangan'] : '';
-
-                                        foreach ($pilihan as $pil) {
-                                        $selected = ($pil === $selected_pil) ? "selected" : "";
-
-                                        echo "<option value='" . htmlspecialchars($pil) . "' $selected>" . htmlspecialchars($pil) . "</option>";
-                                        }
-                                            ?>
-                            </select>
+                        <input type="text" Nama="keterangan" id="keterangan" class="form-control" placeholder="otomatis" readonly>
                     </div>
 
                     <!-- upload dokumen -->

@@ -214,12 +214,25 @@ if ($level == 'superadmin' || $level == 'admin'):
                     </thead>
                     <tbody>
                         <?php
-                        $query_akan_berakhir = "SELECT tb_mitra.nama_instansi,tb_mou_moa.jenis_kerjasama,tb_mou_moa.topik_kerjasama,tb_mou_moa.awal_kerjasama,tb_mou_moa.akhir_kerjasama,tb_mou_moa.keterangan
+                        $query_akan_berakhir = "SELECT tb_mitra.nama_instansi,tb_mou_moa.jenis_kerjasama,tb_mou_moa.topik_kerjasama,tb_mou_moa.awal_kerjasama,tb_mou_moa.akhir_kerjasama
                         FROM tb_mou_moa JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra
                         WHERE tb_mou_moa.akhir_kerjasama BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)";
                         $result_akan_berakhir = $conn->query($query_akan_berakhir);
                         $no = 1;
-                        while ($row = $result_akan_berakhir->fetch_assoc()) {
+                        if ($result_akan_berakhir && $result_akan_berakhir->num_rows > 0):
+                            while ($row = $result_akan_berakhir->fetch_assoc()) {
+                                $awalKerjasama = $row['awal_kerjasama'];
+                                $akhirKerjasama = $row['akhir_kerjasama'];
+                                $today = date('Y-m-d');
+                    
+                                // Menentukan status aktif atau tidak aktif
+                                if ($today >= $awalKerjasama && $today <= $akhirKerjasama) {
+                                    $status = "Aktif";
+                                } else {
+                                    $status = "Tidak Aktif";
+                                }
+
+                                    $statusColor = ($status === "Aktif") ? "text-success" : "text-danger";
                             echo "<tr>
                                 <td>{$no}</td>
                                 <td>{$row['nama_instansi']}</td>
@@ -227,10 +240,11 @@ if ($level == 'superadmin' || $level == 'admin'):
                                 <td>{$row['topik_kerjasama']}</td>
                                 <td>{$row['awal_kerjasama']}</td>
                                 <td>{$row['akhir_kerjasama']}</td>
-                                <td>{$row['keterangan']}</td>
+                                <td class='{$statusColor}'>{$status}</td>
                             </tr>";
                             $no++;
                         }
+                        endif;
                         ?>
                     </tbody>
                 </table>
@@ -262,12 +276,25 @@ if ($level == 'superadmin' || $level == 'admin'):
                     </thead>
                     <tbody>
                         <?php
-                        $query_telah_berakhir = "SELECT tb_mitra.nama_instansi,tb_mou_moa.jenis_kerjasama,tb_mou_moa.topik_kerjasama,tb_mou_moa.awal_kerjasama,tb_mou_moa.akhir_kerjasama,tb_mou_moa.keterangan
+                        $query_telah_berakhir = "SELECT tb_mitra.nama_instansi,tb_mou_moa.jenis_kerjasama,tb_mou_moa.topik_kerjasama,tb_mou_moa.awal_kerjasama,tb_mou_moa.akhir_kerjasama
                         FROM tb_mou_moa JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra
                         WHERE tb_mou_moa.akhir_kerjasama < CURDATE()";
                         $result_telah_berakhir = $conn->query($query_telah_berakhir);
                         $no = 1;
-                        while ($row = $result_telah_berakhir->fetch_assoc()) {
+                        if ($result_telah_berakhir && $result_telah_berakhir->num_rows > 0):
+                            while ($row = $result_telah_berakhir->fetch_assoc()) {
+                                $awalKerjasama = $row['awal_kerjasama'];
+                                $akhirKerjasama = $row['akhir_kerjasama'];
+                                $today = date('Y-m-d');
+                    
+                                // Menentukan status aktif atau tidak aktif
+                                if ($today >= $awalKerjasama && $today <= $akhirKerjasama) {
+                                    $status = "Aktif";
+                                } else {
+                                    $status = "Tidak Aktif";
+                                }
+
+                                    $statusColor = ($status === "Aktif") ? "text-success" : "text-danger";
                             echo "<tr>
                                 <td>{$no}</td>
                                 <td>{$row['nama_instansi']}</td>
@@ -275,10 +302,11 @@ if ($level == 'superadmin' || $level == 'admin'):
                                 <td>{$row['topik_kerjasama']}</td>
                                 <td>{$row['awal_kerjasama']}</td>
                                 <td>{$row['akhir_kerjasama']}</td>
-                                <td>{$row['keterangan']}</td>
+                                <td class='{$statusColor}'>{$status}</td>
                             </tr>";
                             $no++;
                         }
+                        endif;
                         ?>
                     </tbody>
                 </table>

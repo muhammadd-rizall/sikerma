@@ -29,9 +29,9 @@
 
            $sql = mysqli_query($conn, "INSERT INTO tb_mou_moa (
             no_mou_moa, jenis_kerjasama, jangka_waktu, awal_kerjasama, 
-            akhir_kerjasama, keterangan, jurusan_terkait, topik_kerjasama, file_dokumen, id_mitra) 
+            akhir_kerjasama, jurusan_terkait, topik_kerjasama, file_dokumen, id_mitra) 
             VALUES (
-                '$_POST[no_mou_moa]', '$_POST[jenis_kerjasama]', '$_POST[jangka_waktu]', '$_POST[awal_kerjasama]', '$_POST[akhir_kerjasama]', '$_POST[keterangan]', '$jurusan_terkait', '$_POST[topik_kerjasama]', '$file_dokumen', '$_POST[id_mitra]'
+                '$_POST[no_mou_moa]', '$_POST[jenis_kerjasama]', '$_POST[jangka_waktu]', '$_POST[awal_kerjasama]', '$_POST[akhir_kerjasama]', '$jurusan_terkait', '$_POST[topik_kerjasama]', '$file_dokumen', '$_POST[id_mitra]'
             )");
         
              if($sql) {
@@ -84,7 +84,6 @@
             jangka_waktu = '$_POST[jangka_waktu]',
             awal_kerjasama = '$_POST[awal_kerjasama]',
             akhir_kerjasama = '$_POST[akhir_kerjasama]',
-            keterangan = '$_POST[keterangan]',
             jurusan_terkait = '$joined_jurusan',
             topik_kerjasama = '$_POST[topik_kerjasama]',
             file_dokumen = '$file_dokumen',

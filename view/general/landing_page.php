@@ -137,71 +137,87 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $sql = "SELECT 
-                                tb_mitra.nama_instansi,
-                                tb_mou_moa.jenis_kerjasama,
-                                tb_mou_moa.topik_kerjasama,
-                                tb_mou_moa.awal_kerjasama,
-                                tb_mou_moa.akhir_kerjasama,
-                                tb_mou_moa.keterangan,
-                                tb_kegiatan_kerjasama.kegiatan,
-                                tb_kegiatan_kerjasama.deskripsi_kegiatan,
-                                tb_kegiatan_kerjasama.dokumentasi
-                            FROM 
-                                tb_mou_moa
-                            JOIN 
-                                tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra
-                            LEFT JOIN 
-                                tb_kegiatan_kerjasama ON tb_mou_moa.id_mou_moa = tb_kegiatan_kerjasama.id_mou_moa
-                            ORDER BY 
-                                tb_mou_moa.id_mou_moa ASC";
+                <?php
+                            $sql = "SELECT 
+                                        tb_mitra.nama_instansi,
+                                        tb_mou_moa.jenis_kerjasama,
+                                        tb_mou_moa.topik_kerjasama,
+                                        tb_mou_moa.awal_kerjasama,
+                                        tb_mou_moa.akhir_kerjasama,
+                                        tb_kegiatan_kerjasama.kegiatan,
+                                        tb_kegiatan_kerjasama.deskripsi_kegiatan,
+                                        tb_kegiatan_kerjasama.dokumentasi
+                                    FROM 
+                                        tb_mou_moa
+                                    JOIN 
+                                        tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra
+                                    LEFT JOIN 
+                                        tb_kegiatan_kerjasama ON tb_mou_moa.id_mou_moa = tb_kegiatan_kerjasama.id_mou_moa
+                                    ORDER BY 
+                                        tb_mou_moa.id_mou_moa ASC";
 
-                    $result = $conn->query($sql);
-                    $no = 1;
-                    if ($result && $result->num_rows > 0):
-                        while ($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $row['nama_instansi'] ?? '-'; ?></td>
-                                <td><?php echo $row['jenis_kerjasama'] ?? '-'; ?></td>
-                                <td><?php echo $row['topik_kerjasama'] ?? '-'; ?></td>
-                                <td><?php echo $row['awal_kerjasama'] ?? '-'; ?></td>
-                                <td><?php echo $row['akhir_kerjasama'] ?? '-'; ?></td>
-                                <td><?php echo $row['keterangan'] ?? '-'; ?></td>
-                                <td>
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detailModal<?php echo $no; ?>">
-                                <i class="fa fa-circle-info fa-2x"></i>
-                                </button>
+                            $result = $conn->query($sql);
+                            $no = 1;
+                            if ($result && $result->num_rows > 0):
+                                while ($row = $result->fetch_assoc()):
+                                    $awalKerjasama = $row['awal_kerjasama'];
+                                    $akhirKerjasama = $row['akhir_kerjasama'];
+                                    $today = date('Y-m-d');
 
-                                </td>
-                            </tr>
-                            <div class="modal fade" id="detailModal<?php echo $no; ?>" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Detail Kerjasama</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p><strong>Instansi:</strong> <?php echo $row['nama_instansi']; ?></p>
-                                            <p><strong>Jenis Kerjasama:</strong> <?php echo $row['jenis_kerjasama']; ?></p>
-                                            <p><strong>Judul Kerjasama:</strong> <?php echo $row['topik_kerjasama']; ?></p>
-                                            <p><strong>Status:</strong> <?php echo $row['keterangan']; ?></p>
-                                            <p><strong>Kegiatan:</strong> <?php echo $row['kegiatan']; ?></p>
-                                            <p><strong>Deskripsi:</strong> <?php echo $row['deskripsi_kegiatan']; ?></p>
-                                            <p><strong>Dokumentasi:</strong> <?php echo $row['dokumentasi']; ?></p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn-tutup" data-bs-dismiss="modal">Tutup</button>
+                                    // Menentukan status aktif atau tidak aktif
+                                    if ($today >= $awalKerjasama && $today <= $akhirKerjasama) {
+                                        $status = "Aktif";
+                                    } else {
+                                        $status = "Tidak Aktif";
+                                    }
+
+                                    $statusColor = ($status === "Aktif") ? "text-success" : "text-danger";
+                        ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $row['nama_instansi'] ?? '-'; ?></td>
+                                        <td><?php echo $row['jenis_kerjasama'] ?? '-'; ?></td>
+                                        <td><?php echo $row['topik_kerjasama'] ?? '-'; ?></td>
+                                        <td><?php echo $row['awal_kerjasama'] ?? '-'; ?></td>
+                                        <td><?php echo $row['akhir_kerjasama'] ?? '-'; ?></td>
+                                        <td class="<?= $statusColor ?>"><?= $status ?></td>
+                                        <td>
+                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detailModal<?php echo $no; ?>">
+                                                <i class="fa fa-circle-info fa-2x"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Modal Detail Kerjasama -->
+                                    <div class="modal fade" id="detailModal<?php echo $no; ?>" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Detail Kerjasama</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p><strong>Instansi:</strong> <?php echo $row['nama_instansi']; ?></p>
+                                                    <p><strong>Jenis Kerjasama:</strong> <?php echo $row['jenis_kerjasama']; ?></p>
+                                                    <p><strong>Judul Kerjasama:</strong> <?php echo $row['topik_kerjasama']; ?></p>
+                                                    <p><strong>Status:</strong> <?php echo $status; ?></p> 
+                                                    <p><strong>Kegiatan:</strong> <?php echo $row['kegiatan']; ?></p>
+                                                    <p><strong>Deskripsi:</strong> <?php echo $row['deskripsi_kegiatan']; ?></p>
+                                                    <p><strong>Dokumentasi:</strong> <?php echo $row['dokumentasi']; ?></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn-tutup" data-bs-dismiss="modal">Tutup</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        <?php endwhile; 
-                    else: ?>
-                        <tr><td colspan="8" class="text-center">Tidak ada data.</td></tr>
-                    <?php endif; ?>
+                        <?php
+                                endwhile;
+                            else:
+                        ?>
+                                <tr><td colspan="8" class="text-center">Tidak ada data.</td></tr>
+                        <?php endif; ?>
+
                 </tbody>
             </table>
         </div>
