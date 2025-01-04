@@ -55,7 +55,7 @@
    ?>
 
                 <!-- form user -->
-                <div class="container">
+                <div class="mt-3">
                         <h2 class="text-center">Form Create Akun</h2>
                         
                         <form action="../view/superadmin/proses_acount.php?proses=insert" method="post">
@@ -110,7 +110,7 @@
         ?>
 
         <!-- edit user -->
-        <div class="container">
+        <div class="mt-3">
                         <h2 class="text-center"> Edit Akun</h2>
                         
                         <form action="../view/superadmin/proses_acount.php?proses=update" method="post">

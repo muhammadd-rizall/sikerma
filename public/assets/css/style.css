@@ -118,7 +118,8 @@ body, html {
 
 .sidebar .logo-text h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .sidebar .logo-text p {
@@ -397,6 +398,16 @@ table.dataTable td {
 }
 
 
+.dataTables_filter {
+  margin-bottom: 20px;
+}
+
+/* Pastikan input pencarian memiliki padding yang cukup */
+.dataTables_filter input {
+  padding: 5px;
+  width: 200px;
+}
+
 
 
 
@@ -433,4 +444,9 @@ table.dataTable td {
 
 .btn-submit:hover {
   background-color: #feb47b; 
+}
+
+.check {
+  display: inline-block;
+  margin-right: 20px; /* Atur jarak horizontal */
 }

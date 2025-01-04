@@ -13,7 +13,7 @@ switch ($aksi):
         $result = $conn->query($sql);
 ?>
 
-<div class="container">
+
     <h2>Daftar Mitra</h2>
     <a href="?p=daftarMitra&aksi=input" class=""></a>
     <table id="daftar-mitra" class="table table-bordered table-striped">
@@ -89,7 +89,7 @@ switch ($aksi):
 
         </tbody>
     </table>
-</div>
+
 
 <?php
         break;

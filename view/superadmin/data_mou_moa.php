@@ -96,7 +96,7 @@ switch ($aksi):
 
 
         <!-- form tambah data Mou/moa -->
-        <div class="container" >
+        <div class="mt-5" >
              <h2 class="text-center">Form Mou / Moa</h2>
                 <form action="../view/superadmin/proses_data_mou_moa.php?proses=insert" method="POST" enctype="multipart/form-data">
                     
@@ -109,17 +109,17 @@ switch ($aksi):
                     <!-- jenis kerjasama -->
                     <div class="mt-3 row">
                         <label for="jenis_kerjasama">Jenis Kerjasama</label>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="radio" name="jenis_kerjasama" id="mou" class="form-check-input"
                                     value="mou">
                                 <label for="mou" class="form-check-label">MOU</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="radio" name="jenis_kerjasama" id="MOA" class="form-check-input"
                                     value="MOA">
                                 <label for="MOA" class="form-check-label">MOA</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="radio" name="jenis_kerjasama" id="IA" class="form-check-input"
                                     value="IA">
                                 <label for="IA" class="form-check-label">IA</label>
@@ -165,40 +165,40 @@ switch ($aksi):
                     <!-- jurusan terkait -->
                     <div class="mt-3 row">
                         <label for="jurusan_terkait">Jurusan Terkait</label>
-                            <div class="form-check col-2">
+                            <div class="check col-2 ">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknologi-informasi" class="form-check-input"
                                     value="teknologi-informasi">
                                 <label for="teknologi-informasi" class="form-check-label">Teknologi Informasi</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2 ">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknik-mesin" class="form-check-input"
                                     value="teknik-mesin">
                                 <label for="teknik-mesin" class="form-check-label">Teknik Mesin</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknik-sipil" class="form-check-input"
                                     value="teknik-sipil">
                                 <label for="teknik-sipil" class="form-check-label">Teknik Sipil</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknik-elektro" class="form-check-input"
                                     value="teknik-elektro">
                                 <label for="teknik-elektro" class="form-check-label">Teknik Elektro</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="administrasi-niaga" class="form-check-input"
                                     value="administrasi-niaga">
                                 <label for="administrasi-niaga" class="form-check-label">Administrasi Niaga</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="akuntasi" class="form-check-input" value="akuntasi">
                                 <label for="akuntasi" class="form-check-label">Akuntansi</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="bahasa-inggris" class="form-check-input" value="bahasa-inggris">
                                 <label for="bahasa-inggris" class="form-check-label">bahasa-inggris</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="general" class="form-check-input" value="general">
                                 <label for="general" class="form-check-label">General</label>
                             </div>
@@ -238,7 +238,7 @@ switch ($aksi):
 
 
         <!-- edit data mou/moa -->
-        <div class="container mt-5">
+        <div class=" mt-5">
              <h2 class="text-center">EDIT FORM MOU/MOA</h2>
                 <form action="../view/superadmin/proses_data_mou_moa.php?proses=update" method="POST" enctype="multipart/form-data">
                    
@@ -255,17 +255,17 @@ switch ($aksi):
                     <!-- jenis kerjasama -->
                     <div class="mt-3 row">
                         <label for="jenis_kerjasama">Jenis Kerjasama</label>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="radio" name="jenis_kerjasama" id="MOU" class="form-check-input"
                                     value="MOU" <?= ($dataMouMoa['jenis_kerjasama'] == 'MOU') ? 'checked' : '' ?>>
                                 <label for="MOU" class="form-check-label">MOU</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="radio" name="jenis_kerjasama" id="MOA" class="form-check-input"
                                     value="MOA" <?= ($dataMouMoa['jenis_kerjasama'] == 'MOA') ? 'checked' : '' ?>>
                                 <label for="MOA" class="form-check-label">MOA</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="radio" name="jenis_kerjasama" id="IA" class="form-check-input"
                                     value="IA" <?= ($dataMouMoa['jenis_kerjasama'] == 'IA') ? 'checked' : '' ?>>
                                 <label for="IA" class="form-check-label">IA</label>
@@ -315,40 +315,40 @@ switch ($aksi):
                     <!-- jurusan terkait -->
                     <div class="mt-3 row">
                         <label for="jurusan_terkait">Jurusan Terkait</label>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknologi-informasi" class="form-check-input"
                                     value="teknologi informasi" <?php if (in_array("teknologi informasi", $jurusan_terkait)) echo "checked" ?>>
                                 <label for="teknologi-informasi" class="form-check-label">Teknologi Informasi</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknik-mesin" class="form-check-input"
                                     value="teknik mesin" <?php if (in_array("teknik mesin", $jurusan_terkait)) echo "checked" ?>>
                                 <label for="teknik-mesin" class="form-check-label">Teknik Mesin</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknik-sipil" class="form-check-input"
                                     value="teknik sipil" <?php if (in_array("teknik sipil", $jurusan_terkait)) echo "checked" ?>>
                                 <label for="teknik-sipil" class="form-check-label">Teknik Sipil</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="teknik-elektro" class="form-check-input"
                                     value="teknik elektro" <?php if (in_array("teknik elektro", $jurusan_terkait)) echo "checked" ?>>
                                 <label for="teknik-elektro" class="form-check-label">Teknik Elektro</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="administrasi-niaga" class="form-check-input"
                                     value="administrasi niaga" <?php if (in_array("administrasi niaga", $jurusan_terkait)) echo "checked" ?>>
                                 <label for="administrasi-niaga" class="form-check-label">Administrasi Niaga</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="akuntasi" class="form-check-input" value="akuntasi" <?php if (in_array("akuntasi", $jurusan_terkait)) echo "checked" ?>>
                                 <label for="akuntasi" class="form-check-label">Akuntansi</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="bahasa-inggris" class="form-check-input" value="bahasa inggris" <?php if (in_array("bahasa inggris", $jurusan_terkait)) echo "checked" ?>>
                                 <label for="bahasa-inggris" class="form-check-label">bahasa inggris</label>
                             </div>
-                            <div class="form-check col-2">
+                            <div class="check col-2">
                                 <input type="checkbox" name="jurusan_terkait[]" id="general" class="form-check-input" value="general" <?php if (in_array("general", $jurusan_terkait)) echo "checked" ?>> 
                                 <label for="general" class="form-check-label">General</label>
                             </div>

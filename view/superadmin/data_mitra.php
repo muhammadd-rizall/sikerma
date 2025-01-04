@@ -4,7 +4,7 @@
           case "list":  
 ?>
 
-        <div class="container">
+      
                 <h2>Data Mitra</h2>
                 <div class="table-responsive"> 
                         <a href="?p=dataMitra&aksi=input" class="btn-add mt-4 mb-4"><i class="fa-sharp fa-solid fa-plus"></i> Data Mitra</a>
@@ -57,7 +57,7 @@
                         </tbody>
                         </table>
                 </div>
-        </div>
+     
         
         <?php
         break;
@@ -65,7 +65,7 @@
         case "input":
         ?>
                 <!-- form data mitra -->
-                <div class="container mt-5">
+                <div class=" mt-5">
                         <h2 class="text-center">Form Data Mitra</h2>
                         <form action="../view/superadmin/proses_data_mitra.php?proses=insert" method="POST">
                                 <!-- Nama Instansi -->
@@ -131,7 +131,7 @@
         ?>
 
                 <!-- edit data mitra -->
-                <div class="container mt-5">
+                <div class=" mt-5">
                         <h2 class="text-center">Edit Data Mitra</h2>
                         <form action="../view/superadmin/proses_data_mitra.php?proses=update" method="POST">
 

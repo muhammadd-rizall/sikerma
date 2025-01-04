@@ -9,7 +9,7 @@
     
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="mt-5">
         
         <h1 class="text-center mb-4">Form Pengajuan Kerjasama</h1>
             <form action="view/mitra/proses_pengajuan.php" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>

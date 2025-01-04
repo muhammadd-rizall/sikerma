@@ -86,6 +86,8 @@
                 $chartData[$type][$year] = $chartData[$type][$year] ?? 0;
             }
         }
+
+      
         ?>
 
         <!-- Kartu Statistik -->
@@ -142,8 +144,7 @@
                                         tb_mou_moa.awal_kerjasama,
                                         tb_mou_moa.akhir_kerjasama,
                                         tb_kegiatan_kerjasama.kegiatan,
-                                        tb_kegiatan_kerjasama.deskripsi_kegiatan,
-                                        tb_kegiatan_kerjasama.dokumentasi
+                                        tb_kegiatan_kerjasama.deskripsi_kegiatan
                                     FROM 
                                         tb_mou_moa
                                     JOIN 
@@ -169,7 +170,7 @@
                                     }
 
                                     $statusColor = ($status === "Aktif") ? "text-success" : "text-danger";
-                        ?>
+                       ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $row['nama_instansi'] ?? '-'; ?></td>
@@ -200,7 +201,7 @@
                                                     <p><strong>Status:</strong> <?php echo $status; ?></p> 
                                                     <p><strong>Kegiatan:</strong> <?php echo $row['kegiatan']; ?></p>
                                                     <p><strong>Deskripsi:</strong> <?php echo $row['deskripsi_kegiatan']; ?></p>
-                                                    <p><strong>Dokumentasi:</strong> <?php echo $row['dokumentasi']; ?></p>
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn-tutup" data-bs-dismiss="modal">Tutup</button>

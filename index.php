@@ -257,11 +257,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-        }
-        
+        "info": true  
       });
     });
   </script>
@@ -272,10 +268,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-        }
+        "info": true
       });
     });
   </script>
@@ -286,10 +279,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-        }
+        "info": true
       });
     });
   </script>
@@ -300,10 +290,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-        }
+        "info": true
       });
     });
   </script>
@@ -314,10 +301,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-        }
+        "info": true
       });
     });
   </script>
@@ -328,10 +312,7 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-        }
+        "info": true
       });
     });
   </script>
@@ -342,10 +323,8 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-        }
+        "info": true
+    
       });
     });
   </script>

@@ -168,6 +168,17 @@ body {
     background-color: #e9ecef;
 }
 
+.dataTables_filter {
+  margin-bottom: 20px;
+}
+
+/* Pastikan input pencarian memiliki padding yang cukup */
+.dataTables_filter input {
+  padding: 5px;
+  width: 200px;
+}
+
+
 /* Button Styling */
 .btn {
     color: #ff7e5f;

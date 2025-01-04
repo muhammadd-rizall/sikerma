@@ -13,7 +13,7 @@
     ?>
 
 
-        <div class="container">
+      
                 <h2>Proses Usulan</h2>
                 <a href="?p=prosesUsulan&aksi=input" class=""></a>
                 <table id="daftar-usulan" class="table table-bordered table-striped">
@@ -59,7 +59,7 @@
                         ?>
                     </tbody>
                 </table>
-        </div>
+  
         
 
 <?php

@@ -12,7 +12,7 @@
     ?>
 
 
-        <div class="container">
+        
                 <h2>Daftar Usulan</h2>
                 <a href="?p=daftarUsulan&aksi=input" class=""></a>
                 <table id="daftar-usulan" class="table table-bordered table-striped">
@@ -96,7 +96,7 @@
                         ?>
                     </tbody>
                 </table>
-        </div>
+    
         
 
 <?php

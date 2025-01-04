@@ -93,7 +93,7 @@
     if ($level == 'jurusan' || $level == 'mitra'):
       ?>
         <!-- Kartu Statistik -->
-        <div class="container d-flex flex-wrap justify-content-center" id="card-section">
+        <div class=" d-flex flex-wrap justify-content-center" id="card-section">
             <?php foreach ($dataCounts as $key => $count): ?>
                 <div class="card">
                     <h3><?php echo $key; ?></h3>
@@ -109,7 +109,7 @@
 if ($level == 'superadmin' || $level == 'admin'):
 ?>
 
-<div class="container">
+<div class="">
     <div class="row">
         <div class="col-md-4 col-sm-6">
             <div class="card text-center shadow-sm p-3">
@@ -324,7 +324,7 @@ if ($level == 'superadmin' || $level == 'admin'):
 
 
     <!-- chart -->
-    <div class="container" id="chart-section">
+    <div class="" id="chart-section">
         <h2 class="text-chart">Grafik Statistik Jumlah Kerjasama dan Data 5 Tahun Terakhir</h2>
 
         <div class="row d-flex align-items-center">

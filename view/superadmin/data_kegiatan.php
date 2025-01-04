@@ -31,7 +31,7 @@
                                                 <td><?= $dataKegiatan['kegiatan'] ?></td>
                                                 <td><?= $dataKegiatan['deskripsi_kegiatan'] ?></td>
                                                 <td>
-                                                <a href="/upload/img/<?php echo htmlspecialchars($dataKegiatan['dokumentasi']); ?>" target="_blank" download>Lihat Gambar</a>
+                                                <a href="/upload/img/<?php echo htmlspecialchars($dataKegiatan['dokumentasi']); ?>" target="_blank" download><i class="fa fa-eye"></i></a>
                                                 </td>
                                                 <td class="text-nowrap">
                                                 <a href="../../index.php?p=dataKegiatan&aksi=edit&id_edit=<?= $dataKegiatan['id_kegiatan'] ?>" class="btn btn-warning">Edit</a>
@@ -55,7 +55,7 @@
             $kegiatanQuery = mysqli_query($conn, "SELECT tb_mou_moa.id_mou_moa, tb_mitra.nama_instansi, tb_mou_moa.jenis_kerjasama FROM tb_mou_moa JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra;");
     ?>          
             <!-- input kegiatan -->
-           <div class="container mt-5">
+           <div class=" mt-5">
                 <h2 class="text-center">form kegiatan</h2>
               <form action="../view/superadmin/proses_kegiatan.php?proses=insert" method="post" enctype="multipart/form-data">
 
@@ -108,7 +108,7 @@
         ?>
 
         <!-- edit kegiatan -->
-         <div class="container mt-5"></div>
+         <div class=" mt-5"></div>
                 <h2 class="text-center">Edit Kegiatan</h2>
                 <form action="../view/superadmin/proses_kegiatan.php?proses=update" method="post" enctype="multipart/form-data">
 
@@ -116,9 +116,9 @@
               <input type="number" name="id_kegiatan" id="id_kegiatan" class="form-control" value="<?=$dataKegiatan['id_kegiatan'] ?>" hidden>
 
                     <div class="mb-3">
-                            <label for="id_mou_moa">Pilih Mou/Moa/Ia</label>
+                            <label for="id_mou_moa">Pilih Nama instansi dan jenis kerjasamanya</label>
                             <select name="id_mou_moa" id="id_mou_moa" class="form-control" required>
-                                <option value="">--Pilih Mou/Moa/Ia--</option>
+                                <option value="">--Pilih--</option>
                                 <?php
                                     $kegiatanQuery = mysqli_query($conn, "SELECT tb_mou_moa.id_mou_moa, tb_mitra.nama_instansi, tb_mou_moa.jenis_kerjasama FROM tb_mou_moa JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra;");
                                      while ($kegiatan = mysqli_fetch_array($kegiatanQuery)): 
