@@ -93,12 +93,12 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     if ($level == 'mitra'):
       ?>
       <!-- form usulan kerjasama -->
-      <a href="index.php?p=formUsulan" class="menu-item text-white d-flex align-items-center mb-4">
+      <a href="index.php?p=formUsulan" class="menu-item text-white d-flex align-items-center mb-2">
         <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Pengajuan Kerja Sama</span>
       </a>
 
       <!-- proses usulan -->
-      <a href="index.php?p=prosesUsulan" class="menu-item text-white d-flex align-items-center mb-4">
+      <a href="index.php?p=prosesUsulan" class="menu-item text-white d-flex align-items-center mb-2">
         <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Proses Usulan</span>
       </a>
 

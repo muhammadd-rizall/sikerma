@@ -9,7 +9,7 @@
     <style>
       body {
         background: linear-gradient(0deg, #ff7e5f, #feb47b, #765285);
-        min-height: 100vh;
+        min-height: 120vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -112,7 +112,7 @@
 
             }
         ?>
-  <main class="form-signin w-100 m-auto">
+  <main class="form-signin w-50  m-auto">
       <div class="card" style="max-width: 400px; margin: auto;">
         <div class="card-body p-4">
           <div class="text-center mb-4">
