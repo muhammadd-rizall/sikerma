@@ -93,12 +93,12 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
     if ($level == 'mitra'):
       ?>
       <!-- form usulan kerjasama -->
-      <a href="index.php?p=formUsulan" class="menu-item text-white d-flex align-items-center mb-2">
+      <a href="index.php?p=formUsulan" class="menu-item text-white d-flex align-items-center mb-4">
         <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Pengajuan Kerja Sama</span>
       </a>
 
       <!-- proses usulan -->
-      <a href="index.php?p=prosesUsulan" class="menu-item text-white d-flex align-items-center mb-2">
+      <a href="index.php?p=prosesUsulan" class="menu-item text-white d-flex align-items-center mb-4">
         <i class="fas fa-file-alt me-2"></i> <span class="menu-text">Proses Usulan</span>
       </a>
 
@@ -181,7 +181,8 @@ $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'];
           include "view/superadmin/daftar_usulan.php";
         if ($page == "user")
           include "view/superadmin/create_acount.php";
-      } elseif ($_SESSION['level_user'] == 'admin') {
+      } elseif ($level == 'admin') {
+        $page = isset($_GET['p']) ? $_GET['p'] : "home";
         if ($page == "home")
           include "home.php";
         if ($page == "dataMouMoa")
