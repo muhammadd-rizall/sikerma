@@ -11,7 +11,7 @@
                         <table id="tabel-kegiatan" class="table table-bordered table-striped">
                                 <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th>Nooooo</th>
                                             <th>Kegiatan</th>
                                             <th>Deskripsi Kegiatan</th>
                                             <th>Dokumentasi</th>
