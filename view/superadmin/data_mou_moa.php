@@ -33,12 +33,12 @@ switch ($aksi):
                                     $no = 1;
                                     $ambil = mysqli_query($conn, "SELECT * FROM tb_mou_moa");
                                     while ($dataMouMoa = mysqli_fetch_array($ambil)):
-                                        $awalKerjasama = $dataMouMoa['awal_kerjasama'];
+                                    
                                         $akhirKerjasama = $dataMouMoa['akhir_kerjasama'];
                                         $today = date('Y-m-d');
 
                                         // Menentukan status aktif atau tidak aktif
-                                        if ($today >= $awalKerjasama && $today <= $akhirKerjasama) {
+                                        if ($today <= $akhirKerjasama) {
                                             $status = "Aktif";
                                         } else {
                                             $status = "Tidak Aktif";

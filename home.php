@@ -8,7 +8,10 @@
         $queries = [
             'MOU' => "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'MOU'",
             'MOA' => "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'MOA'",
-            'IA' => "SELECT COUNT(*) as jumlah FROM tb_mou_moa WHERE jenis_kerjasama = 'IA'",
+            'Total Kerjasama' => "SELECT 
+                            (SELECT COUNT(*) FROM tb_mou_moa WHERE jenis_kerjasama = 'MOU') + 
+                            (SELECT COUNT(*) FROM tb_mou_moa WHERE jenis_kerjasama = 'MOA') 
+                            as jumlah"
         ];
 
         $dataCounts = [];
@@ -18,14 +21,21 @@
         }
 
         // Query untuk jumlah per tahun berdasarkan jenis dokumen
-        $query_year = "SELECT YEAR(awal_kerjasama) AS Tahun, jenis_kerjasama, COUNT(*) AS jumlah 
-                            FROM tb_mou_moa 
-                            GROUP BY Tahun, jenis_kerjasama 
-                            ORDER BY Tahun ASC";
+        $currentYear = date('Y'); // Mendapatkan tahun saat ini
+        $fiveYearsAgo = $currentYear - 5; // Menghitung 5 tahun terakhir
+        
+        $query_year = "
+            SELECT YEAR(awal_kerjasama) AS Tahun, jenis_kerjasama, COUNT(*) AS jumlah 
+            FROM tb_mou_moa 
+            WHERE YEAR(awal_kerjasama) >= $fiveYearsAgo 
+            GROUP BY Tahun, jenis_kerjasama 
+            ORDER BY Tahun ASC
+        ";
+        
 
         $result_year = $conn->query($query_year);
         $years = [];
-        $chartData = ['MOU' => [], 'MOA' => [], 'IA' => []];
+        $chartData = ['MOU' => [], 'MOA' => []];
 
         while ($row = $result_year->fetch_assoc()) {
             $year = $row['Tahun'];
@@ -36,7 +46,7 @@
 
         $years = array_values(array_unique($years));
         foreach ($years as $year) {
-            foreach (['MOU', 'MOA', 'IA'] as $type) {
+            foreach (['MOU', 'MOA'] as $type) {
                 $chartData[$type][$year] = $chartData[$type][$year] ?? 0;
             }
         }
@@ -97,7 +107,7 @@
             <?php foreach ($dataCounts as $key => $count): ?>
                 <div class="card">
                     <h3><?php echo $key; ?></h3>
-                    <p><?php echo $key === 'MOU' ? 'Memorandum of Understanding' : ($key === 'MOA' ? 'Memorandum of Agreement' : 'Implementation Agreement'); ?></p>
+                    <p><?php echo $key === 'MOU' ? 'Memorandum of Understanding' : ($key === 'MOA' ? 'Memorandum of Agreement' : 'Total '); ?></p>
                     <div class="number"><?php echo $count; ?></div>
                 </div>
             <?php endforeach; ?>
@@ -221,12 +231,12 @@ if ($level == 'superadmin' || $level == 'admin'):
                         $no = 1;
                         if ($result_akan_berakhir && $result_akan_berakhir->num_rows > 0):
                             while ($row = $result_akan_berakhir->fetch_assoc()) {
-                                $awalKerjasama = $row['awal_kerjasama'];
+                              
                                 $akhirKerjasama = $row['akhir_kerjasama'];
                                 $today = date('Y-m-d');
                     
                                 // Menentukan status aktif atau tidak aktif
-                                if ($today >= $awalKerjasama && $today <= $akhirKerjasama) {
+                                if ($today <= $akhirKerjasama) {
                                     $status = "Aktif";
                                 } else {
                                     $status = "Tidak Aktif";
@@ -283,12 +293,12 @@ if ($level == 'superadmin' || $level == 'admin'):
                         $no = 1;
                         if ($result_telah_berakhir && $result_telah_berakhir->num_rows > 0):
                             while ($row = $result_telah_berakhir->fetch_assoc()) {
-                                $awalKerjasama = $row['awal_kerjasama'];
+                              
                                 $akhirKerjasama = $row['akhir_kerjasama'];
                                 $today = date('Y-m-d');
                     
                                 // Menentukan status aktif atau tidak aktif
-                                if ($today >= $awalKerjasama && $today <= $akhirKerjasama) {
+                                if ($today <= $akhirKerjasama) {
                                     $status = "Aktif";
                                 } else {
                                     $status = "Tidak Aktif";
@@ -356,37 +366,37 @@ if ($level == 'superadmin' || $level == 'admin'):
         const chartTotalCtx = document.getElementById('chartTotal').getContext('2d');
 
         new Chart(chartTotalCtx, {
-            type: 'doughnut',
-            data: {
-                labels: Object.keys(dataCounts),
-                datasets: [{
-                    label: 'Total Dokumen',
-                    data: Object.values(dataCounts),
-                    backgroundColor: ['#4e79a7', '#f28e2b', '#76b7b2'],
-                }],
+    type: 'doughnut',
+    data: {
+        labels: ['MOU', 'MOA'], // Hanya label untuk MOU dan MOA
+        datasets: [{
+            label: 'Total Dokumen',
+            data: [dataCounts['MOU'], dataCounts['MOA']], // Ambil data hanya untuk MOU dan MOA
+            backgroundColor: ['#4e79a7', '#f28e2b'], // Warna untuk MOU dan MOA
+        }],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+            padding: 10,
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                layout: {
-                    padding: 10,
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                    },
-                    tooltip: {
-                        enabled: true,
-                    },
-                },
-                elements: {
-                    arc: {
-                        borderWidth: 2, // Atur ketebalan garis batas
-                    },
-                },
+            tooltip: {
+                enabled: true,
             },
-        });
+        },
+        elements: {
+            arc: {
+                borderWidth: 2, // Atur ketebalan garis batas
+            },
+        },
+    },
+});
 
 
 
@@ -415,14 +425,7 @@ if ($level == 'superadmin' || $level == 'admin'):
                         borderWidth: 1,
                         barThickness: 35,
                     },
-                    {
-                        label: 'IA',
-                        data: years.map(year => chartData.IA[year]),
-                        borderColor: '#76b7b2',
-                        backgroundColor: '#76b7b2',
-                        borderWidth: 1,
-                        barThickness: 35,
-                    },
+                    
                 ],
             },
             options: {

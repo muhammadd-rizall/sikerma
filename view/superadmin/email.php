@@ -37,6 +37,10 @@ if (isset($_GET["id_usulan"]) && isset($_GET["status_permohonan"])) {
     $email = $usulanDetails["email"];
     $nama_jabatan = $usulanDetails['nama_jabatan']; // Pastikan kolom ini ada di tabel
     $nama_penjabat = $usulanDetails["nama_penjabat"];
+    $nama_kontak_person = $usulanDetails["nama_kontak_person"];
+    $nomor_kontak = $usulanDetails["nomor_kontak"];
+    $alamat = $usulanDetails["alamat"];
+    
     
     $mail = new PHPMailer(true);
     
@@ -54,10 +58,10 @@ if (isset($_GET["id_usulan"]) && isset($_GET["status_permohonan"])) {
         $mail->setFrom('katsurazura66@gmail.com'); // Ganti dengan email pengirim Anda
         $mail->addAddress($email); // Email penerima
 
-        // Konten email
+        // Konten email 
         $mail->isHTML(true);
-        $mail->Subject = "Status Permohonan: $nama_instansi";
-        $mail->Body    = "Status permohonan Anda: <b>$status_permohonan</b><br>Nama Jabatan: <b>$nama_jabatan</b><br>Nama Penjabat: <b>$nama_penjabat</b>";
+        $mail->Subject = "Status Permohonan: $nama_instansi telah diproses";
+        $mail->Body    = "Status permohonan Anda: <b>$status_permohonan</b><br>Nama Jabatan: <b>$nama_jabatan</b><br>Nama Kontak Person: <b>$nama_kontak_person</b><br>Nomor Kontak: <b>$nomor_kontak</b><br>Alamat: <b>$alamat</b>";
 
         // Kirim email
         $mail->send();

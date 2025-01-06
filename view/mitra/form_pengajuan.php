@@ -7,6 +7,24 @@
     <title>form Usulan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <style>
+        .btn-submit{
+            display: inline-block;
+            background-color: #ff7e5f; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            font-size: 13px; 
+            border-radius: 10px;
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+            text-decoration: none; 
+            }
+
+            .btn-submit:hover {
+            background-color: #feb47b; 
+            }
+    </style>
 </head>
 <body>
     <div class="mt-5">
@@ -60,7 +78,7 @@
                     <label>Dokumen (PDF):</label>
                     <input type="file" name="dokumen_usulan" class="form-control-file" accept=".pdf" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn-submit">Submit</button>
             </form>
     </div>
 

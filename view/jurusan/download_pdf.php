@@ -11,7 +11,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 if ($id) {
     $sql = "SELECT tb_mou_moa.no_mou_moa, tb_mitra.nama_instansi, tb_mou_moa.jenis_kerjasama, 
     tb_mou_moa.topik_kerjasama, tb_mou_moa.jangka_waktu, tb_mou_moa.awal_kerjasama, 
-    tb_mou_moa.akhir_kerjasama, tb_mou_moa.jurusan_terkait, tb_mou_moa.keterangan
+    tb_mou_moa.akhir_kerjasama, tb_mou_moa.jurusan_terkait
     FROM tb_mou_moa 
     JOIN tb_mitra ON tb_mou_moa.id_mitra = tb_mitra.id_mitra 
     WHERE tb_mou_moa.no_mou_moa = ?";
@@ -34,7 +34,7 @@ if ($id) {
         $html .= '<p><strong>Awal Kerjasama:</strong> ' . htmlspecialchars($data['awal_kerjasama']) . '</p>';
         $html .= '<p><strong>Akhir Kerjasama:</strong> ' . htmlspecialchars($data['akhir_kerjasama']) . '</p>';
         $html .= '<p><strong>Jurusan Terkait:</strong> ' . htmlspecialchars($data['jurusan_terkait']) . '</p>';
-        $html .= '<p><strong>Status:</strong> ' . htmlspecialchars($data['keterangan']) . '</p>';
+        
     } else {
         die("Data tidak ditemukan!");
     }
